@@ -35,7 +35,7 @@ menu:
         #   weight: 6
 
 params:
-    description: "This website hosts Xiaowei (Elliott) Zhang's research papers, talks, teaching experience, curriculum vitae, and contact information."
+    description: "This website hosts Xiaowei (Elliott) Zhang's research papers, talks, teaching experience, curriculum vitae, and contact information. "
     author: Xiaowei (Elliott) Zhang
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
