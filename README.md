@@ -91,7 +91,7 @@ This repository is licensed under the [MIT License](LICENSE.md).
 - [Yucheng Zhou's website](https://yuchengzhou.com) ([source code](https://github.com/YuchengZ-Fin/YuchengZ-Fin.github.io))
 - [Rui Sousa's website](https://ruiagmsousa.github.io) ([source code](https://github.com/ruiagmsousa/ruiagmsousa.github.io))
 - [Stefano Sangiovanni's website](https://ste-sangiovanni.github.io) ([source code](https://github.com/ste-sangiovanni/ste-sangiovanni.github.io))
-- [Seth Watts's website](https://www.sethbwatts.com) ([source code](https://github.com/sBwatts/hugo-website))
+<!-- - [Seth Watts's website](https://www.sethbwatts.com) ([source code](https://github.com/sBwatts/hugo-website)) -->
 - [Louise Demoor's website](https://louisedemoor.github.io/website/) ([source code](https://github.com/louisedemoor/website))
 - [Giwon Bahg's website](https://giwonbahg.github.io) ([source code](https://github.com/giwonbahg/giwonbahg.github.io))
 - [Diego Araujo's website](https://daliego.github.io/portfolio-case-studies) ([source code](https://github.com/Daliego/portfolio-case-studies))

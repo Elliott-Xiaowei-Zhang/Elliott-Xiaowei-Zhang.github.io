@@ -1,8 +1,10 @@
 ---
-title: "Profile"
+title: "Curriculum Vitae"
 description: "Profile"
+hidemeta: true
 ---
 
+---
 ##### Education
 
 **Tsinghua University**
@@ -16,4 +18,7 @@ description: "Profile"
 
 **Tianjin Unviersity**
 + B.B.A. in Electronic Commerce, 2017-2021
+
+
+
 

@@ -1,4 +1,5 @@
-{{- $scratch := newScratch }}
+<!-- 未将meta拆分如下 -->
+<!-- {{- $scratch := newScratch }}
 
 {{- if not .Date.IsZero -}}
 {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format "2006"))) }}
@@ -29,4 +30,53 @@
     <br>
     <span style="color: black;">{{ . | markdownify | safeHTML }}</span>
   {{- end -}}
-{{- end -}}
+{{- end -}} -->
+
+
+
+
+<!-- <div class="post-meta-custom"> -->
+<div class="post-meta-custom {{ if .IsPage }}meta-page-{{ .Kind }}{{ end }}">
+  {{- if not .Date.IsZero -}}
+    <span class="meta-item meta-date" title='{{ .Date }}'>
+      {{ .Date | time.Format "2006" }}  &nbsp;&middot;&nbsp;
+    </span>
+  {{- end }}
+
+  {{- if .Params.source -}}
+    <span class="meta-item meta-source">
+     {{ .Params.source | markdownify | plainify | safeHTML }}
+    </span>
+  {{- end -}}
+
+   {{- if .Params.level -}}
+    <span class="meta-level-tags">
+      {{- range $.Params.level -}}
+        <span class="level-tag-box" data-level="{{ . | plainify }}">{{ . }}</span>
+      {{- end -}}
+    </span>
+  {{- end -}}
+
+  {{- if (.Param "ShowReadingTime") -}}
+    <span class="meta-item meta-readtime">
+      &nbsp;&middot;&nbsp;{{ i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime) }}
+    </span>
+  {{- end }}
+
+  {{- if (.Param "ShowWordCount") -}}
+    <span class="meta-item meta-wordcount">
+      &nbsp;&middot;&nbsp;{{ i18n "words" .WordCount | default (printf "%d words" .WordCount) }}
+    </span>
+  {{- end }}
+
+  {{/* 第二部分：作者换行 */}}
+  {{- if not (.Param "hideAuthor") -}}
+    {{- with (partial "author.html" .) -}}
+      <div class="meta-author">
+        {{ . | markdownify | safeHTML }}
+      </div>
+    {{- end -}}
+  {{- end -}}
+</div>
+
+

@@ -1,5 +1,9 @@
 body {
-    font-family: "PT Sans"; letter-spacing: 0.25px;
+    /* font-family: "PT Sans"; letter-spacing: 0.25px; */
+    /* font-family: "Source Han Sans"; */
+    /* font-family: "Roboto"; */
+    /* font-family: "Google Sans"; letter-spacing: 0.05px; */
+    font-family: "SF Pro";
 }
 
 /* 针对 PaperMod 的特殊修复 */
@@ -14,7 +18,7 @@ body {
 }
 
 
-/* Paper status badges */
+/* Badge 1: Paper status */
 .paper-status {
     display: inline-block;
     padding: 3px 6px;
@@ -40,27 +44,34 @@ h1.post-title.entry-hint-parent {
     justify-content: space-between;
     align-items: flex-start;
 }
-
 .paper-status.published {
     background-color: #e8f5e9;
     color: #2e7d32;
 }
-
 .paper-status.forthcoming {
     background-color: #fff3e0;
     color: #e6a100;
 }
-
 .paper-status.working-paper {
     background-color: #e3f2fd;
     color: #1565c0;
 }
 
+
 /* Paper list improvements */
+.list .main {
+    max-width: 900px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
 .post-entry {
     margin-bottom: 1.5em;
     padding-bottom: 1.5em;
     /* border-bottom: 1px solid var(--tertiary); */
+    max-width: 1000px !important;
+    width: 850px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .post-entry:last-child {
@@ -82,7 +93,7 @@ h1.post-title.entry-hint-parent {
 .first-entry .entry-header h2, 
 .post-entry .entry-header h2 {
     /* color: #002aff !important; */
-    font-size: 20px;
+    font-size: 19px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -96,8 +107,8 @@ h1.post-title.entry-hint-parent {
 .entry-content {
     margin-left: 30px;
     margin-right: 30px;
-    color: #212121;
-    font-weight: 300;
+    color: #2b2b2b;
+    font-weight: 305;
 }
 
 
@@ -108,6 +119,7 @@ h1.post-title.entry-hint-parent {
     /* color: #002aff !important; */
     margin-left: 10px;
     margin-right: 10px;
+    font-size: 14px !important;
 }
 .first-entry:hover .entry-footer, 
 .post-entry:hover .entry-footer{
@@ -140,12 +152,31 @@ body .menu a:hover {
 
 
 
-/* 内页正文字号 */
+/* 内页字号 */
+.post-single .post-title{
+    font-size: 32px;
+}
 .post-meta {
-    font-size: 16px;
+    font-size: 15px;
 }
 .post-content {
-    font-size: 16px !important;
+    font-size: 15px !important;
+}
+
+
+
+/* 设置导航栏宽度和下阴影 */
+:root {
+    --header-height: 65px; /* 在这里调大数值，默认通常是 60px 左右 */
+}
+.header {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    background: var(--theme) !important;
+    z-index: 999 !important;
+    transition: all 0.3s ease;
+}
+.main {
+    margin-top: 5px;
 }
 
 
@@ -208,3 +239,192 @@ body .menu a:hover {
     font-weight: bold !important;
     text-decoration: underline !important;
 }
+
+
+
+
+
+
+
+/* Research Abstact 折叠*/ 
+.abstract-section {
+    position: relative;
+    z-index: 2; 
+    margin: 15px 0;
+}
+.abstract-section summary { /* 摘要标题 */
+    outline: none;
+    color: var(--linkgreen) !important; 
+    font-size: 14px !important;  
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    margin-left: 10px;
+}
+.abstract-section .entry-content {  /* 摘要内页 */
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+    font-size: 14px !important;
+    margin-top: 12px;
+    text-align: justify !important;
+    color: var(--secondary);
+}
+.abstract-container summary {
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.abstract-container summary::-webkit-details-marker {
+    display: none;
+}
+.abstract-container summary::before {
+    content: '▶';
+    display: inline-block;
+}
+.abstract-container[open] summary::before {
+    transform: rotate(90deg);
+}
+.abstract-content {
+    padding: 5px 15px;
+    border-left: 2px solid var(--secondary);
+    margin-bottom: 20px;
+}
+
+
+
+
+/* Badge 2: Journal level  */
+/* 确保方块容器有间距 */
+.meta-level-tags {
+    display: inline-flex !important;
+    gap: 6px !important;
+    margin-left: 10px !important;
+    vertical-align: middle !important;
+}
+
+/* 强制渲染彩色小方块 */
+.level-tag-box {
+    background: #3498db ; 
+    color: #ffffff;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 2px 6px;
+    border-radius: 8px;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1) !important;
+}
+span.level-tag-box[data-level*="UTD-24"] {
+    background-color: #e8f5e9;
+    /* border-color: #2e7d32;   */
+    color: #2e7d32;  
+}
+span.level-tag-box[data-level*="FT-50"] {     
+    background-color: #e3f2fd;
+    /* border-color: #1565c0; */
+    color: #1565c0;
+}
+span.level-tag-box[data-level*="AJG 4*"] {     
+    background-color: #fff3e0;
+    /* border-color: #e6a100; */
+    color: #e6a100;
+}
+span.level-tag-box[data-level*="AJG 4"] {     
+    background-color: #fff3e0;
+    /* border-color: #e6a100; */
+    color: #e6a100;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 重设meta格式 */
+/* .post-meta-custom {
+    font-size: 13px;
+    color: var(--secondary);
+}
+.meta-date {
+    font-weight: 400;
+    color: var(--primary);
+}
+.meta-source {
+    color: var(--linkgreen);
+    font-style: italic;
+}
+.meta-author {
+    font-weight: 400;
+    font-size: 14px;
+} */
+
+/* --- 通用基础样式 --- */
+.post-meta-custom .meta-item {
+    display: inline-block;
+}
+/* ================== 外页 (List/Home) 样式 ================== */
+.list .post-meta-custom  {
+    font-size: 14px;
+}
+.list .post-meta-custom .meta-date {
+    /* color: #999; */
+}
+.list .post-meta-custom .meta-source {
+    /* color: var(--linkgreen); */
+    color: var(--primary);
+    /* font-style: italic; */
+    font-weight: 500;
+}
+
+
+.first-entry:hover .meta-source,
+.post-entry:hover .meta-source,
+.first-entry:hover .meta-source *, 
+.post-entry:hover .meta-source * {
+    color: var(--linkgreen) !important;
+    cursor: pointer;
+}
+
+.list .post-meta-custom .meta-author,
+.list .post-meta-custom .meta-author a,
+.list .post-meta-custom .meta-author span {
+    margin-top: 3px;
+    font-size: 14px;
+    color: #11251c7f !important;    
+}
+.list .post-meta-custom .meta-author .special-author {
+    /* color: var(--linkgreen) !important; */
+    color: var(--primary) !important; 
+    font-weight: 700 !important;
+}
+
+/* ================== 内页 (Single Page) 样式 ================== */
+.main .post-single .post-meta-custom {
+    font-size: 14px;
+}
+.main .post-single .post-meta-custom .meta-date {
+    /* color: var(--primary);
+    font-weight: bold; */
+}
+.main .post-single .post-meta-custom .meta-source {
+    /* color: red; */
+    /* font-style: italic; */
+    font-weight: Bold;
+}
+.main .post-single .post-meta-custom .meta-author{
+    margin-top: 3px;
+    font-size: 14px;
+}
+

@@ -2,10 +2,11 @@
 title: "AI Orchestrator: How Recommendation Algorithms Shape Complementor Strategy and Market Equality" 
 date: "2026-03-04"
 tags: ["artificial intelligence","digital platform","market equality","platform orchestration","recommendation algorithm"]
-author: ["[Xiaowei (Elliott) Zhang](/MyHomepage)","[Siliang (Jack) Tong](https://dr.ntu.edu.sg/entities/person/Jack-Tong)","[Xueming Luo](https://www.fox.temple.edu/directory/xueming-luo-tuf35198)","[Zhijie Lin](https://www.sem.tsinghua.edu.cn/info/1210/31859.htm)","[Jing (Aaron) Li](https://neoma-bs.com/professors/li-jing)"]
+author: ["[<span class='special-author'>Xiaowei (Elliott) Zhang</span>](/MyHomepage)","[Siliang (Jack) Tong](https://dr.ntu.edu.sg/entities/person/Jack-Tong)","[Xueming Luo](https://www.fox.temple.edu/directory/xueming-luo-tuf35198)","[Zhijie Lin](https://www.sem.tsinghua.edu.cn/info/1210/31859.htm)","[Jing (Aaron) Li](https://neoma-bs.com/professors/li-jing)"]
 # author: "Xiaowei (Elliott) Zhang, Siliang (Jack) Tong, Xueming Luo, [Zhijie Lin](https://www.sem.tsinghua.edu.cn/info/1210/31859.htm), Jing (Aaron) Li" 
-source: "<b>Strategic Management Journal</b> (UTD-24)"
-status: "Forthcoming"
+source: "Strategic Management Journal"
+level: ["UTD-24","FT-50","AJG 4*"]
+status: "Published" #"Forthcoming"
 description: "This study investigates how AI recommendation algorithms shape complementor strategies and market equality on digital platforms. Using two quasi-natural experiments from a food-sharing platform, we examine impacts of sequential algorithmic upgrades: from a location-based baseline to popularity-based (PopRec) and then personalization-based (PersRec). Analyses of over 1.7 million observations reveal that PopRec drives complementors to concentrate on a few offerings, while PersRec encourages new product introduction; yet these strategic shifts come at the expense of one another. Furthermore, PopRec reduces revenues of superstars but boosts revenues for long-tail complementors, enhancing market equality. Conversely, PersRec exacerbates market inequality by asymmetrically benefiting superstars. By bridging platform orchestration and AI frontiers, this study demonstrates the strategic potential of AI in platform management while underscoring the importance of algorithmic accountability."
 summary:  "This study investigates how AI recommendation algorithms shape complementor strategies and market equality on digital platforms. Using two quasi-natural experiments from a food-sharing platform, we examine impacts of sequential algorithmic upgrades: from a location-based baseline to popularity-based (PopRec) and then personalization-based (PersRec). Analyses of over 1.7 million observations reveal that PopRec drives complementors to concentrate on a few offerings, while PersRec encourages new product introduction; yet these strategic shifts come at the expense of one another. Furthermore, PopRec reduces revenues of superstars but boosts revenues for long-tail complementors, enhancing market equality. Conversely, PersRec exacerbates market inequality by asymmetrically benefiting superstars. By bridging platform orchestration and AI frontiers, this study demonstrates the strategic potential of AI in platform management while underscoring the importance of algorithmic accountability."
 cover:
@@ -27,11 +28,17 @@ editPost:
 
 **Managerial Summary:** Digital platforms increasingly deploy AI recommendation algorithms to manage ecosystem performance. This study reveals that these algorithms also function as effective orchestration mechanisms, incentivizing and shaping complementor offering strategies at scale. We find that popularity-based algorithms incentivize complementors to specialize and concentrate on a few core product offerings, while personalization-based algorithms foster broader new product introduction. Our results demonstrate the vital strategic value of AI for managing platform ecosystems. Crucially, both algorithms present inherent trade-offs for complementor strategies and trigger unforeseen market dynamics. Platform owners must meticulously design and implement algorithmic systems, balancing ecosystem generativity with operational control and considering far-reaching market inequality implications.
 
-<!-- --- -->
+---
 
-<!-- ##### Figure 6: Some Uses For Olive Oil
+##### Figure 2: RDiT graphs for the strategic impacts
 
-![](paper1.png) -->
+<!-- ![](smj_strategy.png) -->
+<center><img src="smj_strategy.png" width="80%"></center>
+
+##### Figure 3: Lorenz curves for the revenue and order dispersion
+
+<!-- ![](smj_marketequality.jpg) -->
+<center><img src="smj_marketequality.jpg" width="80%"></center>
 
 ---
 

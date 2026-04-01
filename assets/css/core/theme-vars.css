@@ -14,12 +14,14 @@
     --gray: rgb(165, 165, 165);
     --content: rgb(30, 30, 30);
     --code-block-bg: rgb(28, 29, 33);
-    --code-bg: rgb(245, 245, 245);
+    --code-bg: rgb(247, 247, 247);
+    /* --code-bg:  rgb(252, 255, 254); */
     --border: rgb(238, 238, 238);
     --darkcolor: #6a7ba2;
     --lightcolor: #cbd1de;
     --linkblue: #002aff;
     --linkgreen: #005a2d;
+    --lightgreen: #fbfdfc;
     --semibold: 500;
     --homesize: 16px;
     --textsize: 18px;
@@ -47,6 +49,7 @@
 
 .list {
     background: var(--code-bg);
+    /* background: var(--lightgreen); */
 }
 
 .dark.list {
