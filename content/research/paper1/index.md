@@ -2,7 +2,7 @@
 title: "AI Orchestrator: How Recommendation Algorithms Shape Complementor Strategy and Market Equality" 
 date: "2026-03-04"
 tags: ["artificial intelligence","digital platform","market equality","platform orchestration","recommendation algorithm"]
-author: ["[<span class='special-author'>Xiaowei (Elliott) Zhang</span>](/MyHomepage)","[Siliang (Jack) Tong](https://dr.ntu.edu.sg/entities/person/Jack-Tong)","[Xueming Luo](https://www.fox.temple.edu/directory/xueming-luo-tuf35198)","[Zhijie Lin](https://www.sem.tsinghua.edu.cn/info/1210/31859.htm)","[Jing (Aaron) Li](https://neoma-bs.com/professors/li-jing)"]
+author: ["[<span class='special-author'>Xiaowei (Elliott) Zhang</span>](/.)","[Siliang (Jack) Tong](https://dr.ntu.edu.sg/entities/person/Jack-Tong)","[Xueming Luo](https://www.fox.temple.edu/directory/xueming-luo-tuf35198)","[Zhijie Lin](https://www.sem.tsinghua.edu.cn/info/1210/31859.htm)","[Jing (Aaron) Li](https://neoma-bs.com/professors/li-jing)"]
 # author: "Xiaowei (Elliott) Zhang, Siliang (Jack) Tong, Xueming Luo, [Zhijie Lin](https://www.sem.tsinghua.edu.cn/info/1210/31859.htm), Jing (Aaron) Li" 
 source: "Strategic Management Journal"
 level: ["UTD-24","FT-50","AJG 4*"]
