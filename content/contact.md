@@ -114,7 +114,8 @@ html:has(head link[rel="canonical"][href*="/contact"]) .ct-card{
 position: relative;
 border-radius: 16px;
 border: 1px solid var(--ct-line);
-background: #fbfdfc;
+/* background: #fbfdfc; */
+background: #ffffff !important;
 padding: 1.05rem 1.15rem;
 transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease;
 }
@@ -124,7 +125,8 @@ box-shadow: var(--ct-shadow);
 border-color: var(--linkgreen);
 }
 body.dark html:has(head link[rel="canonical"][href*="/contact"]) .ct-card{
-background: color-mix(in srgb, var(--ct-paper) 88%, black);
+/* background: color-mix(in srgb, var(--ct-paper) 88%, black); */
+background: #ffffff !important;
 }
 body.dark html:has(head link[rel="canonical"][href*="/contact"]) .ct-card:hover{
 border-color: var(--linkgreen);
@@ -135,7 +137,7 @@ html:has(head link[rel="canonical"][href*="/contact"]) .ct-label{
 display:flex;
 align-items:center;
 gap:.55rem;
-font-weight: 850;
+font-weight: 700;
 letter-spacing: .02em;
 color: var(--linkgreen);
 margin: 0 0 .6rem;
@@ -329,9 +331,9 @@ Interested in my work or looking to collaborate? Feel free to get in touch via e
   <div class="ct-row">
     <span class="ct-mono" id="ct-office">
         RM 431, Lihua Building<br>
-        School of Economics and Management <br>
+        School of Economics and Management,
         Tsinghua University<br>
-        30 Shuangqing Road  <br>
+        30 Shuangqing Road,  
         Haidian, Beijing, China
     </span>
     <!-- <button class="ct-copy" type="button" data-copy="#ct-office">Copy</button> -->

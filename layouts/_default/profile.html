@@ -1,0 +1,36 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+</header>
+
+{{- if .Content }}
+<div class="post-content">
+  {{ .Content }}
+</div>
+{{- end }}
+
+<!-- 循环渲染 Bio 块 -->
+{{- range .Params.blocks }}
+<article class="post-entry bio-block">
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+      {{- .title | markdownify }}
+    </h2>
+  </header>
+  
+  <div class="entry-content">
+    <p>{{ .content | markdownify }}</p>
+  </div>
+
+  {{- if .date }}
+  <footer class="entry-footer">
+    <span class="meta-item">{{ .date }}</span>
+  </footer>
+  {{- end }}
+  
+  <!-- 注意：这里绝对不添加 <a class="entry-link">，所以不可点击 -->
+</article>
+{{- end }}
+
+{{- end }}{{/* end main */}}

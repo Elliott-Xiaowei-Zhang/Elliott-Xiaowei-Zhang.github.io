@@ -1,14 +1,19 @@
 .buttons,
 .main .profile {
     display: flex;
-    justify-content: left;
+    justify-content: center; /* 核心修正：橫向居中 */
+    align-items: center;     /* 縱向居中 */
 }
 .main .profile {
     align-items: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
     min-height: calc(100vh - var(--footer-height) - (var(--gap) * 2));
     font-size: var(--homesize);
     line-height: var(--lineheight);
     padding: var(--gap);
+    text-align: justify;
 }
 
 .profile .profile_inner {
