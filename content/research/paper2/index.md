@@ -2,6 +2,7 @@
 title: "Follow Your Heart: The Role of Interest in the Sharing Economy" 
 date: "2025-02-13"
 tags: ["entrepreneurial passion","interest","innovation","market entry","market retention","positioning","sharing economy"]
+labels: ["Digital Platform", "Digital Entrepreneurship", "Sharing Economy"]
 author: ["[<span class='special-author'>Xiaowei (Elliott) Zhang</span>](/.)","[Zhijie Lin](https://www.sem.tsinghua.edu.cn/info/1210/31859.htm)","[Jing Wang](https://isom.hkust.edu.hk/faculty-and-staff/directory/jwang)","[Jason Chan](https://carlsonschool.umn.edu/faculty/jason-chan)"]
 source: "Working Paper"
 status: "Working Paper"

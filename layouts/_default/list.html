@@ -84,6 +84,16 @@
     {{- partial "post_meta.html" . -}}
   </footer>
   {{- end }}
+  {{- if .Params.labels }}
+  <div class="post-labels">
+    {{- range .Params.labels }}
+    <span class="post-label">
+        <span class="label-hole"></span> 
+        {{ . }}
+    </span>
+    {{- end }}
+  </div>
+  {{- end }}
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>
 {{- end }}

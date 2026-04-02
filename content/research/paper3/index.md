@@ -2,6 +2,7 @@
 title: "Helmsman of the Masses? Evaluate the Opinion Leadership of Large Language Models in the Werewolf Game" 
 date: "2024-03-04"
 tags: ["artificial intelligence", "large language models", "machine behavior", "opinion leadership", "werewolf"]
+labels: ["artificial intelligence", "machine behavior"]
 author: ["Silin Du","[<span class='special-author'>Xiaowei (Elliott) Zhang</span>](/.)"]
 source: "First Conference on Language Modeling (COLM '24)"
 status: "Published"

@@ -221,7 +221,8 @@ header.header {
 
 
 #menu .active {
-    color: #000 !important;
+    /* color: #000 !important; */
+    color: var(--linkgreen) !important;
     font-weight: 500;
     text-decoration: none !important;
     border-bottom: none !important; 
@@ -358,6 +359,11 @@ span.level-tag-box[data-level*="FMS-T1"] {
     /* border-color: #1565c0; */
     color: #1565c0;
 }
+span.level-tag-box[data-level*="NFSC-A"] {     
+    background-color: #fff3e0;
+    /* border-color: #e6a100; */
+    color: #e6a100;
+}
 
 
 
@@ -456,6 +462,70 @@ span.level-tag-box[data-level*="FMS-T1"] {
 }
 
 
+
+/* ================== */
+/* ================== */
+/* ================== */
+/* 外页labels */
+/* ================== */
+/* ================== */
+/* ================== */
+
+
+/* 标签容器布局 */
+.list .post-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+    margin-left: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    z-index: 5;
+}
+
+/* 标签样式 */
+.list .post-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: #fff; /* 纸质质感 */
+    color: #444;
+    padding: 4px 12px 4px 24px; /* 左侧留出圆孔位置 */
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    border-radius: 8px ; /* 模拟左侧稍圆的裁剪感 */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05); /* 阴影增加立体感 */
+    transition: transform 0.2s ease;
+    text-transform: capitalize;
+}
+
+.list .label-hole{
+    position: absolute;
+    left: 8px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--theme); /* 孔洞颜色随背景变化 */
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* 深色模式适配 */
+.dark .list .post-label {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 悬停效果 */
+.list .post-label:hover {
+    background: #005a2d;
+    border-color:  #005a2d;
+    color: white;
+    transform: translateY(-1px);
+}
 
 
 

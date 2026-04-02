@@ -71,7 +71,10 @@ hidemeta: true
     status="published"
     year="2022"
     source="Journal of Management Science (管理科学)"
-    level="FMS-T1"
+    volume="35"
+    issue="1"
+    pages="3-16"
+    level="FMS-T1;NFSC-A"
     author="Yi Wu, <span class='special-author'>Xiaowei Zhang</span>, Zhijie Lin"
     >}}
 {{</profile_paper_block>}}
@@ -82,7 +85,6 @@ hidemeta: true
 {{<profile_paper_block 
     title="Follow Your Heart: The Role of Interest in the Sharing Economy"
     location="Bangkok <span class='flag'>🇹🇭</span>"
-    year="2024"
     source="45th Internation Conference on Information Systems (ICIS 2024)"
     level=""
     author="<span class='special-author'>Xiaowei (Elliott) Zhang</span>, Zhijie Lin, Jing Wang, Jason Chan"
@@ -92,7 +94,6 @@ hidemeta: true
 {{<profile_paper_block 
     title="Helmsman of the Masses? Evaluate the Opinion Leadership of Large Language Models in the Werewolf Game"
     location="Philadelphia <span class='flag'>🇺🇸</span>"
-    year="2024"
     source="First Conference on Language Modeling (COLM 2024)"
     level=""
     author="Silin Du, <span class='special-author'>Xiaowei Zhang</span>"
@@ -102,7 +103,6 @@ hidemeta: true
 {{<profile_paper_block 
     title="All that Glitters is not Gold: Understanding the Impacts of Platform Recommendation Algorithm Changes on Complementors in the Sharing Economy"
     location="Hyderabad <span class='flag'>🇮🇳</span>"
-    year="2023"
     source="44th International Conference on Information Systems (ICIS 2023)"
     level=""
     author="Siliang (Jack) Tong, <span class='special-author'>Xiaowei (Elliott) Zhang</span>, Xueming Luo, Zhijie Lin, Jing (Aaron) Li"
@@ -111,9 +111,8 @@ hidemeta: true
 
 
 {{<profile_paper_block 
-    title="A Good Neighbor, A Found Treasure? Examining the Spatial Determinants on Airbnb Listings Prices. "
+    title="A Good Neighbor, A Found Treasure? Examining the Spatial Determinants on Airbnb Listings Prices"
     location="Hangzhou <span class='flag'>🇨🇳</span>"
-    year="2023"
     source="Third POMS International Conference in China (POMS-CN 2023)"
     level=""
     author="<span class='special-author'>Xiaowei (Elliott) Zhang</span>, Zhijie Lin"
@@ -123,7 +122,6 @@ hidemeta: true
 {{<profile_paper_block 
     title="No Change, No Growth? The Role of Competition in the Effectiveness of Airbnb Hosts’ Dynamic Strategies"
     location="Ningbo <span class='flag'>🇨🇳</span>"
-    year="2022"
     source="15th China Summer Workshop on Information Management (CSWIM 2022)"
     level=""
     author="<span class='special-author'>Xiaowei Zhang</span>, Zhijie Lin"
