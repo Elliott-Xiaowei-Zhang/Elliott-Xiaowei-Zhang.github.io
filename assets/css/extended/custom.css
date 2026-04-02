@@ -353,6 +353,11 @@ span.level-tag-box[data-level*="AJG 4"] {
     /* border-color: #e6a100; */
     color: #e6a100;
 }
+span.level-tag-box[data-level*="FMS-T1"] {     
+    background-color: #e3f2fd;
+    /* border-color: #1565c0; */
+    color: #1565c0;
+}
 
 
 
@@ -562,15 +567,146 @@ body:has(.profile-block-card){
     line-height: 1.5 !important; /* 稍微压缩行高 */
 }
 
-
-
-
 /* 图标微调 */
 .profile-location svg, .profile-date svg {
     flex-shrink: 0;
 }
 
 
+
+
+
+
+
+
+/* ================== */
+/* ================== */
+/* ================== */
+/* Profile Paper List */
+/* ================== */
+/* ================== */
+/* ================== */
+
+body:has(.profile-block-card){
+    background-color: var(--code-bg) !important;
+}
+
+.main {
+    max-width: 950px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 1. 基础卡片样式 */
+.paper-block-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 25px !important;
+    margin-bottom: 15px !important;
+    cursor: default !important; /* 禁用手型 */
+    border: 2px solid rgb(238, 238, 238) !important;
+}
+.paper-block-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-color: var(--linkgreen) !important;
+    border: 2px;
+    transition: border-color 0.3s ease;
+}
+
+/* 2. 第一行：标题与日期对齐 */
+.paper-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.paper-title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    /* text-transform: uppercase; */
+    margin: 0 0 3px 0 !important;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.paper-block-card:hover .paper-title {
+    color: var(--linkgreen) !important;
+    transition: color 0.3s ease; /* 增加平滑过渡，与你的 Paper 列表同步 */
+}
+
+
+
+/* 3. 状态标签 */
+
+/* 针对不在 h3 内部的 paper-status 进行补偿 */
+.paper-status-wrapper .paper-status {
+    font-size: 0.7rem !important; /* 直接指定一个固定的字号，不再受父元素影响 */
+    padding: 4px 8px;            /* 稍微加一点边距让它更好看 */
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* 4. 地点和日期样式 */
+.paper-location, .paper-year {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--secondary); /* 灰色 */
+}
+.flag {
+    font-size: 17px !important;
+}
+
+/* 5. 下方内容区 */
+.paper-body {
+    margin-top: 0px;
+}
+.paper-source {
+    color: var(--secondary);   
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.paper-author {
+    color: var(--secondary);   
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+.paper-author .special-author {
+    /* color: var(--linkgreen) !important; */
+    color: var(--primary) !important; 
+    font-weight: 700 !important;
+}
+
+.paper-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--primary);
+}
+.paper-desc ol, .paper-desc ul {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0px !important;
+}
+.paper-desc li {
+    margin-top: 1px !important;
+    margin-bottom: 0px !important;
+    line-height: 1.5 !important; /* 稍微压缩行高 */
+}
+.paper-year svg {
+    flex-shrink: 0;
+}
 
 
 
