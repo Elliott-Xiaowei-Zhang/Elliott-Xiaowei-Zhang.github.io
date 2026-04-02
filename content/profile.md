@@ -8,7 +8,7 @@ hidemeta: true
 
 {{<profile_block title="Tsinghua University" location="Beijing, China" date="2021-Present" sub="Ph.D. in Management Science and Engineering (Information Systems)">}}
 + Advisor: <a style="color:  var(--linkblue);" href="https://www.sem.tsinghua.edu.cn/info/1210/31859.htm"> Zhijie Lin</a>
-+ GPA: 3.93/4.00
++ GPA: 3.94/4.00
 {{</profile_block>}}
 
 {{<profile_block title="Hong Kong University of Science and Technology" date="2025-2026" location="Hong Kong SAR, China" sub="PG Visiting Student in Information Systems">}}
@@ -20,7 +20,7 @@ hidemeta: true
 
 {{<profile_block title="Tianjin Unviersity" date="2017-2021" location="Tianjin, China"  sub="B.B.A. in Electronic Commerce">}}
 + Advisor: <a style="color:  var(--linkblue);" href="https://come.tju.edu.cn/info/1089/3755.htm"> Yi Wu</a>
-+ GPA: 3.92/4.00
++ GPA: 3.92/4.00 (rank 1st for 4 consecutive years)
 {{</profile_block>}}
 
 
