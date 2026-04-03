@@ -82,4 +82,13 @@
     </div>
     {{- end -}}
     {{- end -}}
+
+    {{- if .Inner -}}
+    <div class="paper-footer">
+        <div class="meta-inner">
+            {{ .Inner | markdownify | safeHTML }}
+        </div>
+    </div>
+    {{- end -}}
+
 </article>

@@ -1,5 +1,7 @@
 ---
-title: "Service and Awards"
-description: "Service and Awards"
-layout: "archives"
+# title: "Service"
+description: "Service"
+hidemeta: true
+layout: "profile"
 ---
+

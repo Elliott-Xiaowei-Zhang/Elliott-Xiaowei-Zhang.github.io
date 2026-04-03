@@ -2,7 +2,12 @@
 # title: "Curriculum Vitae"
 description: "Profile"
 hidemeta: true
+layout: "profile"
 ---
+
+<div align="center" style="font-size: 32px; font-weight: bold;">
+    Curriculum Vitae
+</div>
 
 ## Education
 

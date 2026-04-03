@@ -30,16 +30,24 @@ editPost:
 **Managerial Summary:** Digital platforms increasingly deploy AI recommendation algorithms to manage ecosystem performance. This study reveals that these algorithms also function as effective orchestration mechanisms, incentivizing and shaping complementor offering strategies at scale. We find that popularity-based algorithms incentivize complementors to specialize and concentrate on a few core product offerings, while personalization-based algorithms foster broader new product introduction. Our results demonstrate the vital strategic value of AI for managing platform ecosystems. Crucially, both algorithms present inherent trade-offs for complementor strategies and trigger unforeseen market dynamics. Platform owners must meticulously design and implement algorithmic systems, balancing ecosystem generativity with operational control and considering far-reaching market inequality implications.
 
 ---
-
-##### Figure 2: RDiT graphs for the strategic impacts
-
-<!-- ![](smj_strategy.png) -->
+<!-- ##### Figure 2: RDiT graphs for the strategic impacts
 <center><img src="smj_strategy.png" width="80%"></center>
 
 ##### Figure 3: Lorenz curves for the revenue and order dispersion
+<center><img src="smj_marketequality.jpg" width="80%"></center> -->
 
-<!-- ![](smj_marketequality.jpg) -->
-<center><img src="smj_marketequality.jpg" width="80%"></center>
+<table style="width: 100%; border-collapse: collapse; border: none;">
+  <tr style="border: none;">
+    <td style="width: 50%; border: none; text-align: left;">
+      <h5>Figure 2: RDiT graphs for the strategic impacts</h5>
+      <img src="smj_strategy.png" width="100%">
+    </td>
+    <td style="width: 50%; border: none; text-align: left;">
+      <h5>Figure 3: Lorenz curves for market equality</h5>
+      <img src="smj_marketequality.jpg" width="100%">
+    </td>
+  </tr>
+</table>
 
 ---
 

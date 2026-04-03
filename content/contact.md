@@ -113,7 +113,7 @@ html:has(head link[rel="canonical"][href*="/contact"]) .ct-grid{ grid-template-c
 html:has(head link[rel="canonical"][href*="/contact"]) .ct-card{
 position: relative;
 border-radius: 16px;
-border: 1px solid var(--ct-line);
+border: 2px solid var(--ct-line);
 /* background: #fbfdfc; */
 background: #ffffff !important;
 padding: 1.05rem 1.15rem;
@@ -132,16 +132,21 @@ body.dark html:has(head link[rel="canonical"][href*="/contact"]) .ct-card:hover{
 border-color: var(--linkgreen);
 }
 
+
 /* Card header */
 html:has(head link[rel="canonical"][href*="/contact"]) .ct-label{
 display:flex;
 align-items:center;
 gap:.55rem;
-font-weight: 700;
+font-weight: 600;
 letter-spacing: .02em;
 color: var(--linkgreen);
 margin: 0 0 .6rem;
 }
+/* html:has(head link[rel="canonical"][href*="/contact"]) .ct-card:hover .ct-label{
+color: var(--linkgreen);
+} */
+
 body.dark html:has(head link[rel="canonical"][href*="/contact"]) .ct-label{
 color:#ddd8d8;
 }
@@ -169,6 +174,7 @@ overflow-wrap: anywhere;
 
 /* Copy button (tiny pill) */
 html:has(head link[rel="canonical"][href*="/contact"]) .ct-copy{
+margin-left: 10px;
 border: 1px solid var(--ct-line);
 background: transparent;
 color: inherit;
@@ -194,7 +200,7 @@ color: #ddd8d8;
 html:has(head link[rel="canonical"][href*="/contact"]) .ct-row{
 display:flex;
 align-items:center;
-gap:.7rem;
+gap:0.3rem;
 flex-wrap: wrap;
 }
 
@@ -202,7 +208,7 @@ flex-wrap: wrap;
 html:has(head link[rel="canonical"][href*="/contact"]) .ct-map{
 margin-top: 1.2rem;
 border-radius: 16px;
-border: 1px solid var(--ct-line);
+border: 2px solid var(--ct-line);
 overflow: hidden;
 background: color-mix(in srgb, var(--ct-paper) 92%, white);
 transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease;

@@ -1,5 +1,6 @@
 ---
-title: "Talks"
-description: "Talks given by Xiaowei Zhang"
-layout: "archives"
+# title: "Talks"
+description: "Talks"
+hidemeta: true
+layout: "profile"
 ---

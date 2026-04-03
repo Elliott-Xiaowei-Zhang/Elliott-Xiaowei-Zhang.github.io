@@ -6,6 +6,7 @@ body {
     font-family: "SF Pro", "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--code-bg) !important;
 }
 
 /* 针对 PaperMod 的特殊修复 */
@@ -865,4 +866,204 @@ body:has(.profile-block-card){
     font-size: 24px;
     font-weight: 800;
     margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+/* ================== */
+/* ================== */
+/* ================== */
+/*  Teaching List */
+/* ================== */
+/* ================== */
+/* ================== */
+
+body:has(.teaching-block-card){
+    background-color: var(--code-bg) !important;
+}
+
+.main {
+    max-width: 950px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 1. 基础卡片样式 */
+.teaching-block-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 25px !important;
+    margin-bottom: 15px !important;
+    cursor: default !important; /* 禁用手型 */
+    border: 2px solid rgb(238, 238, 238) !important;
+}
+.teaching-block-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-color: var(--linkgreen) !important;
+    border: 2px;
+    transition: border-color 0.3s ease;
+}
+
+/* 2. 第一行：标题与日期对齐 */
+.teaching-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.teaching-title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    /* text-transform: uppercase; */
+    margin: 0 0 3px 0 !important;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.teaching-block-card:hover .teaching-title {
+    color: var(--linkgreen) !important;
+    transition: color 0.3s ease; /* 增加平滑过渡，与你的 Paper 列表同步 */
+}
+
+
+
+/* 3. level */
+.teaching-level-wrapper .teaching-level {
+    font-size: 0.7rem !important; 
+    display: inline-block;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 3px 6px;
+    font-weight: 600;
+    border-radius: 8px;
+    /* margin-left: 8px; */
+    vertical-align: top;
+    /* text-transform: uppercase; */
+    letter-spacing: 0px;
+    /* white-space: nowrap; */
+    line-height: 1.2;
+    /* height: fit-content; */
+    /* align-self: flex-start; */
+}
+span.teaching-level[data-level*="BBA"] {
+    background-color: #e8f5e9;
+    /* border-color: #2e7d32;   */
+    color: #2e7d32;  
+}
+span.teaching-level[data-level*="Undergraduate"] {
+    background-color: #e8f5e9;
+    /* border-color: #2e7d32;   */
+    color: #2e7d32;  
+}
+span.teaching-level[data-level*="MBA"] {     
+    background-color: #e3f2fd;
+    /* border-color: #1565c0; */
+    color: #1565c0;
+}
+span.teaching-level[data-level*="PhD"] {     
+    background-color: #fff3e0;
+    /* border-color: #e6a100; */
+    color: #e6a100;
+}
+
+
+/* 4. language */
+.teaching-language-wrapper .teaching-language {
+    font-size: 0.7rem !important; 
+    display: inline-block;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 3px 6px;
+    font-weight: 600;
+    border-radius: 8px;
+    /* margin-left: 8px; */
+    vertical-align: top;
+    /* text-transform: uppercase; */
+    letter-spacing: 0px;
+    /* white-space: nowrap; */
+    line-height: 1.2;
+    /* height: fit-content; */
+    /* align-self: flex-start; */
+}
+.teaching-label-hole{
+    position: absolute;
+    left: 8px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--theme); /* 孔洞颜色随背景变化 */
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+span.teaching-language[data-level*="MOI: English"] {     
+    /* background-color: white;
+    border-color: var(--linkgreen);
+    border-style: solid;
+    border-width: 1px;
+    color: var(--linkgreen); */
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: #fff; /* 纸质质感 */
+    color: #444;
+    padding: 4px 12px 4px 24px; /* 左侧留出圆孔位置 */
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    border-radius: 8px ; /* 模拟左侧稍圆的裁剪感 */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05); /* 阴影增加立体感 */
+    transition: transform 0.2s ease;
+    text-transform: capitalize;
+}
+span.teaching-language:hover {     
+    /* background-color: var(--linkgreen); */
+    background-color: #4444441b;
+    /* border-color: var(--linkgreen); */
+    border-style: solid;
+    border-width: 1px;
+    /* color: white; */
+}
+
+
+/* 5. 地点和日期样式 */
+.teaching-location, .teaching-time {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--secondary); /* 灰色 */
+}
+
+/* 6. 下方内容区 */
+.teaching-body {
+    margin-top: 0px;
+}
+.teaching-meta {
+    color: var(--secondary);   
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.teaching-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--primary);
+}
+.teaching-desc ol, .teaching-desc ul {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0px !important;
+}
+.teaching-desc li {
+    margin-top: 1px !important;
+    margin-bottom: 0px !important;
+    line-height: 1.5 !important;
 }
