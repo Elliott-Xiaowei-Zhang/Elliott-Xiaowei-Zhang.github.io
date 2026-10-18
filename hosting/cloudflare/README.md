@@ -1,6 +1,6 @@
 # 可选：保留真实访客统计
 
-这里包含一个独立的 Cloudflare Worker 和 D1 统计后端，不依赖 Sites、Vinext 或原项目的部署工具。Worker 在同一域名下提供网页文件及 `/api/visitors`，从而继续使用匿名 HttpOnly cookie 去重，不依赖第三方 cookie。
+这里包含一个独立的 Cloudflare Worker 和 D1 统计后端，不依赖 Sites、Vinext 或原项目的部署工具。默认 GitHub Pages 版本已连接独立的 Sites 统计接口，无需执行本文件步骤。只有希望把网页和统计数据库迁移到自己的 Cloudflare 账号时，才使用下面的自托管方案。Worker 在同一域名下提供网页文件及 `/api/visitors`，使用主页自身 localStorage 中的随机浏览器 ID 去重，不依赖第三方 Cookie。
 
 ## 首次部署
 
@@ -44,10 +44,10 @@ npx wrangler dev --config hosting/cloudflare/wrangler.json
 
 ## 统计口径
 
-- 继承当前网站的后端逻辑：近似独立浏览器计数、匿名随机 ID、国家/地区汇总，不保存 IP、精确位置或账户信息。
-- 读取 Do Not Track / Global Privacy Control；识别到的爬虫不计数；只允许同源计数请求。
+- 近似独立浏览器计数、匿名随机 ID、国家/地区汇总，不保存 IP、精确位置或账户信息。
+- 读取 Do Not Track / Global Privacy Control；识别到的爬虫不计数；只允许已配置主页来源或同源计数请求，本地预览仅读取总数。
 - 国家/地区由 Cloudflare 边缘节点提供，浏览器不能通过请求正文指定位置。
 - 原 Sites 数据库的历史记录不包含在此文件夹中。新数据库从实际启用时开始计数，不能将原 Sites 的私有 API 直接用于 GitHub Pages。
-- 这里没有默认允许跨域的 API。若网页部署在 GitHub Pages、服务器部署在其他域名，需要额外设计跨域与去重方案；目前提供的是完整的同源部署方案。
+- 默认 GitHub Pages 版本使用公开的独立接口和受限跨域策略，不发送跨站 Cookie。运行 `--with-visitors` 会改用这个自托管 Worker 的同源接口和数据库。
 
 部署参数参考 [Cloudflare 官方文档](https://developers.cloudflare.com/workers/static-assets/binding/)。

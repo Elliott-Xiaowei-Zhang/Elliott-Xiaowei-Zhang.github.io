@@ -1,4 +1,5 @@
-import { visitorStatistics } from './site-settings.js';
+import { visitorStatistics } from './site-settings.js?v=20261018-visitor-api';
+import { visitorRequest } from './visitor-client.js?v=20261018-visitor-api';
 
 const container = document.querySelector('#visitor-map');
 const caption = document.querySelector('#visitor-map-caption');
@@ -87,12 +88,23 @@ async function loadStats() {
     return;
   }
   try {
-    // Both operations stay on this Site. The server only returns geographic totals.
     const optedOut = navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true;
-    const response = await fetch(new URL('./api/visitors', import.meta.url), { method: optedOut ? 'GET' : 'POST', headers: optedOut ? {} : { 'X-Visitor-Intent': 'count' }, credentials: 'same-origin', cache: 'no-store' });
+    const request = visitorRequest({ endpoint: visitorStatistics.endpoint,
+      baseUrl: import.meta.url, pageUrl: location.href, optedOut,
+      storage: { getItem: key => localStorage.getItem(key), setItem: (key, value) => localStorage.setItem(key, value) },
+      randomUUID: () => crypto.randomUUID() });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    let response;
+    try { response = await fetch(request.url, { ...request.options, signal: controller.signal }); }
+    finally { clearTimeout(timeout); }
     if (!response.ok) throw new Error('Unavailable');
     const result = await response.json();
-    if (!Number.isSafeInteger(result.total) || !Array.isArray(result.countries)) throw new Error('Invalid statistics');
+    if (!Number.isSafeInteger(result.total) || result.total < 0 || !Array.isArray(result.countries) ||
+        !result.countries.every(row => /^[A-Z]{2}$/.test(row.country) && Number.isSafeInteger(row.visitors) && row.visitors >= 0)) {
+      throw new Error('Invalid statistics');
+    }
+    document.querySelector('.visitor-details').hidden = false;
     stats = result; renderStats();
   } catch {
     totalNode.textContent = '—';

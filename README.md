@@ -10,8 +10,8 @@
 | `data.json` | 论文、ongoing projects、教育、课程、教学、奖项、talks、service |
 | `style.css` | 字体、颜色、字号、留白、移动端布局和鼠标悬停效果 |
 | `app.js` | 论文分类、自动计数、摘要展开、课程折叠、中英文题名切换等交互 |
-| `visitors.js` | 世界地图与访客统计展示 |
-| `site-settings.js` | 是否启用真实访客统计；静态版本默认关闭 |
+| `visitors.js` / `visitor-client.js` | 世界地图、跨域统计请求与匿名浏览器去重 |
+| `site-settings.js` | 已启用的独立统计接口地址 |
 | `assets/` | 彩色头像、Inter 字体及其许可证、世界地图数据及来源 |
 | `hosting/cloudflare/` | 可选的访客统计服务器、数据库建表文件和部署说明 |
 | `scripts/prepare-site.py` | 将网页资源整理到 `dist/`，用于自动部署 |
@@ -47,11 +47,17 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 ## 访客地图的区别
 
-地图图形已包含在本文件夹中。**GitHub Pages 只能托管静态文件，不能运行原网站的访客统计 API 或 D1 数据库。**因此，静态导出的访客数量显示为 `—`，不会显示虚构数据，也不会请求当前 Sites 的私有 API。原先 Sites 网站的统计和线上内容不受本次导出影响。
+GitHub Pages 版本已接入独立统计 API：`https://xiaowei-visitor-stats.aqua-plum-8641.chatgpt.site/api/visitors`。这个接口由 Sites 管理，网页继续部署在 GitHub Pages，无需 Cloudflare 账号或 GitHub secrets。
 
-如需真实人数和国家/地区统计，请按照 [Cloudflare 部署说明](hosting/cloudflare/README.md) 部署附带的服务器版本。该方案将同一套网页与统计 API 部署到同一个 Cloudflare Worker，并使用自己的 D1 数据库。现有 Sites 的历史访问数据不包含在导出中；新数据库从启用时开始计数。
+- `site-settings.js` 的 `enabled: true` 和 `endpoint` 控制统计；常规 GitHub Pages 工作流会保留这项配置，不再关闭统计。
+- 随机浏览器 ID 保存在主页自身的 localStorage，最长一年；刷新页面不会重复计数，不使用跨站 Cookie，不发送账户凭据。
+- API 只返回总人数及国家/地区汇总；国家/地区由服务器边缘节点提供，不记录 IP 地址、精确坐标、浏览器指纹或访问者账户。
+- Do Not Track / Global Privacy Control、可识别爬虫不计数；`localhost` 和 `127.0.0.1` 本地预览只读取线上总数，不污染正式计数。
+- 真实统计从这次接口启用后开始，不包含早先关闭统计期间的访问，也没有导入原 Sites 私有数据库的历史记录。
+- `hosting/visitor-service/` 保存接口契约、后端源代码和服务标识。完整可部署的 Sites 服务源码在旁边的 `xiaowei-visitor-service` 文件夹中。
+- 如将来改用自己的 Cloudflare 账号，可使用 [可选自托管说明](hosting/cloudflare/README.md)。该模式部署网页与 API 到同一 Worker，并使用自己的数据库。
 
-本次只生成本地文件，尚未向你的 GitHub 仓库提交、推送或发布。
+运行 `node --test tests/visitor-client.test.mjs` 可验证跨域请求、刷新去重和隐私选项。
 
 ## 来源与部署参考
 

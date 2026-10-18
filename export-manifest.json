@@ -3,6 +3,8 @@
   "source_commit": "42c07381b550cd597113fa5b5b70413beec526ee",
   "source_site": "https://xiaowei-zhang-academic.aqua-plum-8641.chatgpt.site/",
   "format": "editable-static-website",
-  "visitor_statistics": "optional Cloudflare Worker + D1; disabled in static GitHub Pages export",
-  "includes_visitor_database": false
+  "visitor_statistics": "Shared anonymous cross-origin API; first-party random browser ID; local previews are read-only",
+  "includes_visitor_database": false,
+  "visitor_statistics_api": "https://xiaowei-visitor-stats.aqua-plum-8641.chatgpt.site/api/visitors",
+  "visitor_statistics_updated_on": "2026-10-18"
 }
