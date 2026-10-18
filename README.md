@@ -15,6 +15,7 @@
 | `assets/` | 彩色头像、Inter 字体及其许可证、世界地图数据及来源 |
 | `hosting/cloudflare/` | 可选的访客统计服务器、数据库建表文件和部署说明 |
 | `scripts/prepare-site.py` | 将网页资源整理到 `dist/`，用于自动部署 |
+| `google*.html` | Google Search Console 验证文件；发布时原样复制到网站根目录 |
 
 Working papers 放在 `data.json` 的 `papers` 中，`type` 为 `working`；ongoing projects 放在 `ongoing_projects` 中。分类上的 `02+03` 会根据两组记录数量自动更新。课程和 ongoing projects 按数据中的顺序展示。
 
@@ -44,6 +45,8 @@ python3 -m http.server 8000 --bind 127.0.0.1
 2. **GitHub Actions：**上传时同时包含隐藏的 `.github/workflows/pages.yml`，在 Settings → Pages 中将 Source 设为 GitHub Actions。工作流会在 `main` 或 `master` 分支更新时整理网页文件并部署，也可手动运行。
 
 所有本地资源均已改为相对路径，因此也适用于 `https://用户名.github.io/仓库名/` 这种项目网站地址。
+
+Google Search Console 的 HTML 验证文件直接保存在仓库根目录。发布脚本会自动包含根目录的 `google*.html`，保留原文件名和内容，无需逐个修改脚本。验证成功后也应保留这些文件。
 
 ## 访客地图的区别
 

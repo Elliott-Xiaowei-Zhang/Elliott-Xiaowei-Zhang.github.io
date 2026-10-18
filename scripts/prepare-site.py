@@ -21,6 +21,10 @@ def main():
              "site-settings.js", "favicon.svg", ".nojekyll"]
     for name in files:
         shutil.copy2(root / name, output / name)
+    # Search Console verifies ownership at the original root URL and filename.
+    for verification_file in sorted(root.glob("google*.html")):
+        if verification_file.is_file() and not verification_file.is_symlink():
+            shutil.copy2(verification_file, output / verification_file.name)
     shutil.copytree(root / "assets", output / "assets",
                     ignore=shutil.ignore_patterns(".DS_Store", "._*"))
     if args.with_visitors:
