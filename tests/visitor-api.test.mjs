@@ -56,3 +56,12 @@ test('database errors remain explicit and retain the authorized CORS header',asy
   const r=await handleVisitorApi(request(),{prepare(){throw new Error('Unavailable');}});
   assert.equal(r.status,503); assert.equal(r.headers.get('Access-Control-Allow-Origin'),origin);
 });
+
+test('forwarded Cloudflare geography fills unknown records without increasing the count',async()=>{
+  const db=database();
+  assert.deepEqual((await (await handleVisitorApi(request({country:null}),db)).json()).countries,[{country:'ZZ',visitors:1}]);
+  const corrected=await (await handleVisitorApi(request({country:null,headers:{'CF-IPCountry':'CN'}}),db)).json();
+  assert.equal(corrected.total,1);
+  assert.deepEqual(corrected.countries,[{country:'CN',visitors:1}]);
+  assert.deepEqual((await (await handleVisitorApi(request({country:null,headers:{'CF-IPCountry':'HK'}}),db)).json()).countries,[{country:'CN',visitors:1}]);
+});

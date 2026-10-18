@@ -49,9 +49,10 @@ export async function handleVisitorApi(request: Request, db: D1Database): Promis
           Object.keys(body).some(key => key !== 'visitorId') || typeof body.visitorId !== 'string' || !uuid.test(body.visitorId)) {
         return json({ error: 'A random browser identifier is required' }, 400);
       }
-      const edgeCountry = String((request as Request & { cf?: { country?: string } }).cf?.country || '').toUpperCase();
+      // Sites dispatch may preserve Cloudflare's country header while reconstructing Request.cf.
+      const edgeCountry = String((request as Request & { cf?: { country?: string } }).cf?.country || request.headers.get('CF-IPCountry') || '').toUpperCase();
       const country = /^[A-Z]{2}$/.test(edgeCountry) && !['XX', 'T1'].includes(edgeCountry) ? edgeCountry : 'ZZ';
-      await db.prepare('INSERT OR IGNORE INTO visitors (id, country, first_seen) VALUES (?, ?, ?)')
+      await db.prepare(`INSERT INTO visitors (id, country, first_seen) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET country = excluded.country WHERE visitors.country = 'ZZ' AND excluded.country <> 'ZZ'`)
         .bind(body.visitorId.toLowerCase(), country, new Date().toISOString()).run();
     }
     const rows = await db.prepare('SELECT country, COUNT(*) AS visitors, MIN(first_seen) AS since FROM visitors GROUP BY country ORDER BY visitors DESC, country ASC')
