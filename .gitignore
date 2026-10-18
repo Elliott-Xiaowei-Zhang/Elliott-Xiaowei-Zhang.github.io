@@ -1,0 +1,11 @@
+.DS_Store
+._*
+/dist/
+/node_modules/
+/.wrangler/
+**/.wrangler/
+.env*
+.dev.vars*
+*.log
+__pycache__/
+*.pyc
