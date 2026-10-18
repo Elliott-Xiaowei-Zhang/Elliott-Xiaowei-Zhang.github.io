@@ -1,0 +1,825 @@
+{
+  "papers": [
+    {
+      "id": "paper-1",
+      "title": "AI Orchestrator: How Recommendation Algorithms Shape Complementor Strategy and Market Equality",
+      "authors": "Xiaowei (Elliott) Zhang, Siliang (Jack) Tong, Xueming Luo, Zhijie Lin, Jing (Aaron) Li",
+      "venue": "Strategic Management Journal",
+      "year": "2026",
+      "type": "journal",
+      "location": "",
+      "classification": "UTD-24;FT-50;AJG 4*",
+      "selected": true,
+      "topics": [
+        "platforms",
+        "ai"
+      ],
+      "overview": "Recommendation systems also shape the strategies of businesses on a platform. This study examines two sequential algorithm changes on a food-sharing platform using more than 1.7 million observations. Popularity-based recommendations encourage specialization and improve market equality; personalized recommendations encourage new product introduction while disproportionately benefiting superstar providers. The findings reveal trade-offs between complementor strategies and the distribution of market outcomes.",
+      "links": [
+        [
+          "Journal article",
+          "https://doi.org/10.1002/smj.70073"
+        ]
+      ],
+      "tags": [
+        "artificial intelligence",
+        "digital platform",
+        "market equality",
+        "platform orchestration",
+        "recommendation algorithm"
+      ],
+      "abstract": "**Research Summary:** This study investigates how AI recommendation algorithms shape complementor strategies and market equality on digital platforms. Using two quasi-natural experiments from a food-sharing platform, we examine impacts of sequential algorithmic upgrades: from a location-based baseline to popularity-based (PopRec) and then personalization-based (PersRec). Analyses of over 1.7 million observations reveal that PopRec drives complementors to concentrate on a few offerings, while PersRec encourages new product introduction; yet these strategic shifts come at the expense of one another. Furthermore, PopRec reduces revenues of superstars but boosts revenues for long-tail complementors, enhancing market equality. Conversely, PersRec exacerbates market inequality by asymmetrically benefiting superstars. By bridging platform orchestration and AI frontiers, this study demonstrates the strategic potential of AI in platform management while underscoring the importance of algorithmic accountability. \n\n**Managerial Summary:** Digital platforms increasingly deploy AI recommendation algorithms to manage ecosystem performance. This study reveals that these algorithms also function as effective orchestration mechanisms, incentivizing and shaping complementor offering strategies at scale. We find that popularity-based algorithms incentivize complementors to specialize and concentrate on a few core product offerings, while personalization-based algorithms foster broader new product introduction. Our results demonstrate the vital strategic value of AI for managing platform ecosystems. Crucially, both algorithms present inherent trade-offs for complementor strategies and trigger unforeseen market dynamics. Platform owners must meticulously design and implement algorithmic systems, balancing ecosystem generativity with operational control and considering far-reaching market inequality implications.",
+      "status": "Forthcoming"
+    },
+    {
+      "id": "paper-2",
+      "title": "Granular Echoes: How Item-Level Feedback Recasts Online Consumer Ratings",
+      "authors": "Xiaowei (Elliott) Zhang, Jing Wang, Zhijie Lin",
+      "venue": "Working Paper",
+      "year": "2026",
+      "type": "working",
+      "location": "",
+      "classification": "",
+      "selected": true,
+      "topics": [
+        "platforms",
+        "feedback"
+      ],
+      "links": [],
+      "tags": [
+        "rating system design",
+        "item-level feedback",
+        "rating informativeness"
+      ],
+      "abstract": "Online platforms increasingly adopt item-level feedback to collect granular information about consumption experiences, yet its effects on overall ratings and their informativeness remain unclear. We develop an item-specific elaboration perspective and examine two sequential rating-system updates on a leading Chinese meal-sharing platform, introducing item-level upvoting followed by item-level downvoting. Exploiting staggered user adoption through difference-in-differences and event-study analyses, we find that upvoting reduces average ratings by 0.019 points, while adding downvoting produces a further decline of 0.038 points. These effects are stronger among users whose prior reviews exhibit less elaboration. Additional evidence supports a distinction in how elaboration is organized. Upvoting encourages selective processing focused on whether individual items merit endorsement, whereas adding downvoting encourages comparative processing of the grounds for endorsement and criticism. Despite both reducing ratings, the designs have contrasting implications for rating informativeness. Upvoting produces larger rating declines among higher-quality merchants and reduces informativeness, whereas downvoting produces larger declines among lower-quality merchants and improves informativeness, with merchant quality proxied by customer repurchase rates. Both rating effects attenuate over time, although they persist longer when evaluations follow consumption promptly. These dynamics are consistent with an automaticity account in which repeated use weakens renewed scrutiny even as familiar evaluative orientations remain influential. Our findings show how granular feedback design can shape both the extent and organization of cognitive elaboration, highlighting that reducing rating inflation and improving rating informativeness are distinct design objectives.",
+      "status": "In preparation to submit to Management Science"
+    },
+    {
+      "id": "paper-3",
+      "title": "The Role of Intrinsic Interest in the Gig Economy: Field Evidence on Strategic Orientations and Market Outcomes",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin, Jing Wang, Jason Chan",
+      "venue": "Working Paper",
+      "year": "2026",
+      "type": "working",
+      "location": "",
+      "classification": "",
+      "selected": true,
+      "topics": [
+        "platforms"
+      ],
+      "overview": "Using two years of data from a meal-sharing platform, this study examines providers whose entrepreneurial activity is motivated by intrinsic interest. Interest accelerates entry, while stronger market performance supports retention. These providers combine imitation with new product introduction, but entirely novel component innovation declines over time. Alternating between imitative and independent innovation offers a pattern associated with sustained innovation and persistence.",
+      "links": [
+        [
+          "SSRN record",
+          "https://ssrn.com/abstract=5121493"
+        ]
+      ],
+      "tags": [
+        "gig economy",
+        "intrinsic interest",
+        "lifestyle entrepreneurship",
+        "entrepreneurial passion"
+      ],
+      "note": "The SSRN record is also associated with the earlier title “Follow Your Heart: The Role of Interest in the Sharing Economy.”",
+      "abstract": "Gig economy platforms have catalyzed a unique form of entrepreneurship characterized by providers with an intrinsic interest towards the gig work. Rooted in different goals and values, their entrepreneurial behaviors and outcomes diverge from those of conventional profit-driven entrepreneurs. Yet, most platforms prioritize extrinsic rewards in their operations while non-monetary strategies receive less attention. Guided by entrepreneurial passion theory, this study conceptualizes identity centrality and positive affect as the behavioral drivers of interest-driven providers. We empirically examine their strategic orientations and market outcomes using a comprehensive two-year dataset from a major meal-sharing platform. Results indicate that intrinsic interest accelerates market entry but does not sustain a long-term commitment; however, interest-driven providers achieve higher retention via superior market performance. They tend to imitate competitors' product positioning while introducing more new products to pursue secondary differentiation. Over time, while they remain stable in competitive imitation and new product introduction via recombining existing components, their elementary innovation (by introducing entirely novel components) declines sharply. Finally, we identify a temporal pattern that reduces passion erosion, showing that alternating between imitative and independent innovation empowers interest-driven providers to sustain long-term innovation and persistence. This research contributes valuable insights to gig platform management and lifestyle entrepreneurship.",
+      "status": "Under review at MIS Quarterly"
+    },
+    {
+      "id": "paper-4",
+      "title": "Hosts′ Motivations to Forgo Screening Their Guests on Sharing Accommodation Platforms: Based on the Intra-industry Competition",
+      "authors": "Yi Wu, Xiaowei Zhang, Zhijie Lin",
+      "venue": "Journal of Management Science (管理科学)",
+      "year": "2022",
+      "type": "journal",
+      "location": "",
+      "classification": "FMS-T1;NFSC-A",
+      "selected": false,
+      "topics": [
+        "platforms"
+      ],
+      "links": [
+        [
+          "Read the paper",
+          "https://glkx.hit.edu.cn/__local/4/75/D7/16432A2FE6EB426CC8E5FD425A8_CDC50C5D_F8161.pdf"
+        ]
+      ],
+      "tags": [
+        "sharing economy",
+        "intra-industry competition",
+        "screening"
+      ],
+      "abstract": "In recent years, Airbnb and other sharing platforms have introduced and actively promoted the “booking” function for the purpose of increasing platform revenue and reducing discriminatory screening. However, this has led to considerable social controversy and little success in some regions. Meanwhile, it is interesting to note that some bilateral market providers have voluntarily chosen to waive their right to screen the demand side. Thus, understanding on the motivations of these supplyside users for voluntarily forgoing of screening is essential for platforms to increase user adoption of the function.\n\nFocusing on online sharing accommodation platforms, we integrate the related researches of sharing accommodation, screening mechanism, social influence, as well as leader effects. From the perspective of the intra-industry competition on Airbnb platform, this research discusses which intra-industry competitive factors will lead hosts to forgo screening their guests and what underlying mechanisms are. Specifically, we use an unbalanced panel dataset of the Airbnb in Hong Kong from January 2019 - December 2019 to perform a panel Logit fixed effect model to empirically test the influence of competitors′ behavior on the Airbnb hosts′ forgoing screening behavior. We certify the robustness of conclusions by a series of robust tests, and further discuss the heterogeneity of competitor influence in terms of whether the host is a superhost.\n\nThe results show that the proportion of competitors who opted out of screening increases the likelihood of an Airbnb listing host′s forgoing of screening behavior, and this impact is strengthened by the proportion of superhosts among the Airbnb competitors who forwent screening, i.e. the superhosts′ forgoing screening decision has a leadership effect. Furthermore, the facilitative effect of competitors and the leader effect of superhost competitors vary depending on whether the host themselves as superhost or not. The decision of Airbnb competitors has a significant contribution to the forgoing screening behavior by nonsuperhosts and this positive effect is significantly moderated by decision of opinion leaders who are the superhost competitors, while there has no similar significant effect on superhosts.\n\nTheoretically, the study enriches understanding on users′ behavior in the supply-side market of the online platform, which has received little academic attention, and it reveals the antecedents for screening forgoing behavior among Airbnb hosts from the perspective of intra-industry competition, broadening the theoretical horizon for the study of screening theory. The findings also have practical implications for the strategic selection of sharing platform and the market mechanism design of regulatory authorities.",
+      "title_zh": "共享住宿平台房东放弃筛选房客的动因−基于行业内竞争",
+      "language_label": "in Chinese"
+    },
+    {
+      "id": "paper-5",
+      "title": "Item-level Feedback and Overall Ratings: Evidence of a Temporary Granularity Penalty",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin, Jing Wang, Jason Chan",
+      "venue": "The 22nd Symposium on Statistical Challenges in Electronic Commerce Research (SCECR 2026)",
+      "year": "2026",
+      "type": "conference",
+      "location": "Tokyo",
+      "classification": "",
+      "selected": false,
+      "topics": [
+        "platforms",
+        "feedback"
+      ],
+      "links": [],
+      "tags": [
+        "rating system design",
+        "item-level feedback",
+        "rating informativeness"
+      ],
+      "flag": "🇯🇵",
+      "country": "Japan"
+    },
+    {
+      "id": "paper-6",
+      "title": "Follow Your Heart: The Role of Interest in the Sharing Economy",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin, Jing Wang, Jason Chan",
+      "venue": "The 45th International Conference on Information Systems (ICIS 2024)",
+      "year": "2024",
+      "type": "conference",
+      "location": "Bangkok",
+      "classification": "",
+      "selected": false,
+      "topics": [
+        "platforms"
+      ],
+      "links": [
+        [
+          "Paper",
+          "https://aisel.aisnet.org/icis2024/sharing_econ/sharing_econ/13/"
+        ]
+      ],
+      "tags": [
+        "gig economy",
+        "intrinsic interest",
+        "lifestyle entrepreneurship",
+        "entrepreneurial passion"
+      ],
+      "flag": "🇹🇭",
+      "country": "Thailand"
+    },
+    {
+      "id": "paper-7",
+      "title": "Helmsman of the Masses? Evaluate the Opinion Leadership of Large Language Models in the Werewolf Game",
+      "abstract": "Large language models (LLMs) have exhibited memorable strategic behaviors in social deductive games. However, the significance of opinion leadership exhibited by LLM-based agents has been largely overlooked, which is crucial for practical applications in multi-agent and human-AI interaction settings. Opinion leaders are individuals who have a noticeable impact on the beliefs and behaviors of others within a social group. In this work, we employ the Werewolf game as a simulation platform to assess the opinion leadership of LLMs. The game includes the role of the Sheriff, tasked with summarizing arguments and recommending decision options, and therefore serves as a credible proxy for an opinion leader. We develop a framework integrating the Sheriff role and devise two novel metrics based on the critical characteristics of opinion leaders. The first metric measures the reliability of the opinion leader, and the second assesses the influence of the opinion leader on other players' decisions. We conduct extensive experiments to evaluate LLMs of different scales. In addition, we collect a Werewolf question-answering dataset (WWQA) to assess and enhance LLM's grasp of the game rules, and we also incorporate human participants for further analysis. The results suggest that the Werewolf game is a suitable test bed to evaluate the opinion leadership of LLMs, and few LLMs possess the capacity for opinion leadership.",
+      "authors": "Silin Du, Xiaowei Zhang",
+      "venue": "The First Conference on Language Modeling (COLM 2024)",
+      "year": "2024",
+      "type": "conference",
+      "location": "Philadelphia",
+      "classification": "",
+      "selected": true,
+      "topics": [
+        "ai"
+      ],
+      "links": [
+        [
+          "Read on arXiv",
+          "https://arxiv.org/abs/2404.01602"
+        ],
+        [
+          "Code & data",
+          "https://github.com/doslim/Evaluate-the-Opinion-Leadership-of-LLMs"
+        ]
+      ],
+      "tags": [
+        "large language models",
+        "opinion leadership",
+        "machine behavior"
+      ],
+      "flag": "🇺🇸",
+      "country": "United States"
+    },
+    {
+      "id": "paper-8",
+      "title": "All that Glitters is not Gold: Understanding the Impacts of Platform Recommendation Algorithm Changes on Complementors in the Sharing Economy",
+      "authors": "Siliang (Jack) Tong, Xiaowei (Elliott) Zhang, Xueming Luo, Zhijie Lin, Jing (Aaron) Li",
+      "venue": "The 44th International Conference on Information Systems (ICIS 2023)",
+      "year": "2023",
+      "type": "conference",
+      "location": "Hyderabad",
+      "classification": "",
+      "selected": false,
+      "topics": [
+        "platforms",
+        "ai"
+      ],
+      "links": [
+        [
+          "Paper",
+          "https://aisel.aisnet.org/icis2023/sharing_econ/sharing_econ/12/"
+        ]
+      ],
+      "tags": [
+        "recommendation algorithms",
+        "sharing economy"
+      ],
+      "flag": "🇮🇳",
+      "country": "India",
+      "equal_contributors": [
+        "Xiaowei (Elliott) Zhang"
+      ]
+    },
+    {
+      "id": "paper-10",
+      "title": "No Change, No Growth? The Role of Competition in the Effectiveness of Airbnb Hosts’ Dynamic Strategies",
+      "authors": "Xiaowei Zhang, Zhijie Lin",
+      "venue": "The 15th China Summer Workshop on Information Management (CSWIM 2022)",
+      "year": "2022",
+      "type": "conference",
+      "location": "Ningbo",
+      "classification": "",
+      "selected": false,
+      "topics": [
+        "platforms"
+      ],
+      "links": [],
+      "tags": [
+        "competition",
+        "dynamic strategies"
+      ],
+      "flag": "🇨🇳",
+      "country": "China"
+    }
+  ],
+  "ongoing_projects": [
+    {
+      "title": "Conversational AI and Professional Expertise: Evidence from Online Mental Health Services",
+      "collaborators": "Junjie Zhou, Zhijie Lin"
+    },
+    {
+      "title": "AI-Enabled Healthcare Transformation: Clinical Practice and Hospital Operations",
+      "collaborators": "Junjie Zhou, Zhijie Lin, Jiachun Zheng"
+    },
+    {
+      "title": "Algorithmic Serendipity and Consumer Variety Seeking: A Large-scale Field Experiment",
+      "collaborators": "Zhijie Lin, Danyang Huang"
+    }
+  ],
+  "education": [
+    {
+      "years": "2021 — Present",
+      "institution": "Tsinghua University",
+      "degree": "Ph.D. in Management Science and Engineering",
+      "detail": "Information Systems",
+      "location": "Beijing, China",
+      "advisor": "Zhijie Lin",
+      "url": "https://www.sem.tsinghua.edu.cn/info/1210/31859.htm",
+      "gpa": "3.94 / 4.00",
+      "coursework": [
+        {
+          "title": "Advanced Econometrics I",
+          "grade": "A+",
+          "instructor": "Liangjun Su",
+          "discipline": "ECON"
+        },
+        {
+          "title": "Advanced Econometrics II",
+          "grade": "A",
+          "instructor": "Yingjie Feng",
+          "discipline": "ECON"
+        },
+        {
+          "title": "Advanced Machine Learning",
+          "grade": "A",
+          "instructor": "Jie Tang",
+          "discipline": "CS"
+        },
+        {
+          "title": "Advanced Micro-Economics II: Game Theory",
+          "grade": "A",
+          "instructor": "Sanxi Li (RUC)",
+          "discipline": "ECON"
+        },
+        {
+          "title": "Advanced Operations Research",
+          "grade": "A",
+          "instructor": "Yong Liang",
+          "discipline": "ISOM"
+        },
+        {
+          "title": "Advanced Applied Mathematical Statistics",
+          "grade": "A−",
+          "instructor": "Liu Yang",
+          "discipline": "STAT"
+        },
+        {
+          "title": "Applied Stochastic Processes",
+          "grade": "A−",
+          "instructor": "Daquan Jiang (PKU)",
+          "discipline": "STAT"
+        },
+        {
+          "title": "Advanced Information Systems",
+          "grade": "A−",
+          "instructor": "Guoqing Chen",
+          "discipline": "ISOM"
+        },
+        {
+          "title": "Big Data Analysis",
+          "grade": "A−",
+          "instructor": "Wenwu Zhu",
+          "discipline": "CS"
+        },
+        {
+          "title": "Business Intelligence",
+          "grade": "A",
+          "instructor": "Hongyan Liu",
+          "discipline": "ISOM"
+        },
+        {
+          "title": "Digital Intelligence Security and Standardization",
+          "grade": "A−",
+          "instructor": "Tao Jin",
+          "discipline": "CS"
+        },
+        {
+          "title": "IT & Organization",
+          "grade": "A−",
+          "instructor": "Xunhua Guo",
+          "discipline": "ISOM"
+        },
+        {
+          "title": "Management Science and Engineering Seminar I: Information Systems",
+          "grade": "A",
+          "instructor": "Sean Xin Xu",
+          "discipline": "ISOM"
+        },
+        {
+          "title": "Management Science and Engineering Seminar II: Operation Management",
+          "grade": "A",
+          "instructor": "Qing Ye, Liu Yang",
+          "discipline": "ISOM"
+        },
+        {
+          "title": "Marketing Models I: Quantitative Modeling",
+          "grade": "A",
+          "instructor": "Yitian (Sky) Liang",
+          "discipline": "MKT"
+        },
+        {
+          "title": "Marketing Models II: Empirical IO",
+          "grade": "A",
+          "instructor": "Yitian (Sky) Liang",
+          "discipline": "MKT"
+        },
+        {
+          "title": "Spatial Analysis for Social Sciences",
+          "grade": "A",
+          "instructor": "Chong Chen",
+          "discipline": "ECON"
+        }
+      ]
+    },
+    {
+      "years": "2025 — 2026",
+      "institution": "Hong Kong University of Science and Technology",
+      "degree": "PG Visiting Student in Information Systems",
+      "location": "Hong Kong SAR, China",
+      "advisor": "Jing Wang",
+      "url": "https://isom.hkust.edu.hk/faculty-and-staff/directory/jwang"
+    },
+    {
+      "years": "2018 — 2021",
+      "institution": "Nankai University",
+      "degree": "B.A. in Finance",
+      "location": "Tianjin, China"
+    },
+    {
+      "years": "2017 — 2021",
+      "institution": "Tianjin University",
+      "degree": "B.A. in Electronic Commerce",
+      "location": "Tianjin, China",
+      "advisor": "Yi Wu",
+      "url": "https://come.tju.edu.cn/info/1089/3755.htm",
+      "gpa": "3.92 / 4.00",
+      "note": "Ranked 1st for four consecutive years"
+    }
+  ],
+  "honors": [
+    {
+      "title": "Innovative Research Paper Award",
+      "source": "China Information Economics Society",
+      "date": "2026"
+    },
+    {
+      "title": "Weimin Zheng Scholarship",
+      "source": "Tsinghua University",
+      "date": "2026"
+    },
+    {
+      "title": "Greenberg Academic Fellowship",
+      "source": "Tsinghua University",
+      "date": "2025"
+    },
+    {
+      "title": "China National Scholarship (国家奖学金) (Doctoral)",
+      "source": "Ministry of Education, China",
+      "date": "2025"
+    },
+    {
+      "title": "Comprehensive Scholarship",
+      "source": "Tsinghua University",
+      "date": "2024, 2023"
+    },
+    {
+      "title": "Outstanding Teaching Assistant Award",
+      "source": "Tsinghua University",
+      "date": "2022"
+    },
+    {
+      "title": "Outstanding Graduate",
+      "source": "Tianjin University",
+      "date": "2021"
+    },
+    {
+      "title": "Outstanding Undergraduate Thesis",
+      "source": "Tianjin University",
+      "date": "2021"
+    },
+    {
+      "title": "China National Scholarship (国家奖学金) (Undergraduate)",
+      "source": "Ministry of Education, China",
+      "date": "2020"
+    },
+    {
+      "title": "Student Science and Technology Talent Award",
+      "source": "Tianjin University",
+      "date": "2020"
+    },
+    {
+      "title": "Outstanding Undergraduate Student Award",
+      "source": "Tianjin University",
+      "date": "2019"
+    },
+    {
+      "title": "Outstanding Student Scholarship",
+      "source": "Tianjin University",
+      "date": "2019"
+    },
+    {
+      "title": "NITORI International Scholarship",
+      "source": "NITORI International Scholarship Foundation",
+      "date": "2018"
+    }
+  ],
+  "courses": [
+    {
+      "title": "Computer Language and Programming (C & Python)",
+      "level": "UGRD",
+      "language": "MOI: English",
+      "location": "Tsinghua University",
+      "role": "Teaching Assistant",
+      "instructor": "Zhijie Lin",
+      "time": "Fall 2024, 2023, 2022; Spring 2025, 2024, 2023, 2022",
+      "extra": "",
+      "instructor_links": [
+        {
+          "name": "Zhijie Lin",
+          "url": "https://www.sem.tsinghua.edu.cn/info/1210/31859.htm"
+        }
+      ],
+      "role_tag": "Head"
+    },
+    {
+      "title": "Probability and Mathematical Statistics",
+      "level": "UGRD",
+      "location": "Tsinghua University",
+      "role": "Teaching Assistant",
+      "instructor": "Xiaojie Mao, Bo Li",
+      "time": "Fall 2026, 2024, 2023, 2022",
+      "extra": "",
+      "instructor_links": [
+        {
+          "name": "Xiaojie Mao",
+          "url": "https://www.sem.tsinghua.edu.cn/info/1210/31876.htm"
+        },
+        {
+          "name": "Bo Li",
+          "url": "https://www.sem.tsinghua.edu.cn/info/1210/31951.htm"
+        }
+      ],
+      "role_tag": "Head"
+    },
+    {
+      "title": "Digital Transformation",
+      "level": "MBA",
+      "language": "MOI: English",
+      "location": "Tsinghua University",
+      "role": "Teaching Assistant",
+      "instructor": "Ting Li (RSM, Erasmus)",
+      "time": "Spring 2026, 2025",
+      "extra": "",
+      "instructor_links": [
+        {
+          "name": "Ting Li",
+          "url": "https://www.eur.nl/en/people/ting-li"
+        }
+      ],
+      "role_tag": "Sole"
+    },
+    {
+      "title": "Artificial Intelligence and Industrial Upgrading",
+      "level": "MBA",
+      "location": "Tsinghua University (Shenzhen)",
+      "role": "Teaching Assistant",
+      "instructor": "Yujie Zhu",
+      "time": "Fall 2025",
+      "extra": "",
+      "instructor_links": [],
+      "role_tag": "Sole"
+    },
+    {
+      "title": "China's Institutional Environment and Business Law",
+      "level": "MBA",
+      "location": "Tsinghua University",
+      "role": "Teaching Assistant",
+      "instructor": "Yong-Jun Jin",
+      "time": "Spring 2026, 2025, 2024",
+      "extra": "",
+      "instructor_links": [
+        {
+          "name": "Yong-Jun Jin",
+          "url": "https://www.sem.tsinghua.edu.cn/info/1208/31899.htm"
+        }
+      ],
+      "role_tag": "Head"
+    },
+    {
+      "title": "McKinsey: Global Leadership in A New Era",
+      "level": "MBA",
+      "language": "MOI: English",
+      "location": "Tsinghua University",
+      "role": "Teaching Assistant",
+      "instructor": "Jasmine Hu, McKinsey partners",
+      "time": "Fall 2024",
+      "extra": "",
+      "instructor_links": [
+        {
+          "name": "Jasmine Hu",
+          "url": "https://www.sem.tsinghua.edu.cn/info/1209/35666.htm"
+        }
+      ],
+      "role_tag": ""
+    },
+    {
+      "title": "Integrative Practical Projects (IPP): Management Innovation in a Digital Era",
+      "level": "MBA",
+      "location": "Tsinghua University",
+      "role": "Teaching Assistant",
+      "instructor": "Zhijie Lin; Partnering companies",
+      "time": "Spring 2025, 2024",
+      "extra": "2025 Projects: BJ Ent Urban (北控城市服务), Yonyou (用友), Yunan Baiyao (云南白药), Ningbo Lianhe (宁波联河)\n2024 Projects: BJ Ent Urban (北控城市服务), Lenovo (联想), Weiquan (味全)",
+      "instructor_links": [
+        {
+          "name": "Zhijie Lin",
+          "url": "https://www.sem.tsinghua.edu.cn/info/1210/31859.htm"
+        }
+      ],
+      "role_tag": "Sole"
+    },
+    {
+      "title": "Management Science and Engineering Seminar",
+      "level": "PhD",
+      "location": "Tsinghua University",
+      "role": "Teaching Assistant",
+      "instructor": "Qing Ye, Liu Yang",
+      "time": "Spring 2024",
+      "extra": "",
+      "instructor_links": [
+        {
+          "name": "Qing Ye",
+          "url": "https://www.sem.tsinghua.edu.cn/info/1210/31896.htm"
+        },
+        {
+          "name": "Liu Yang",
+          "url": "https://www.sem.tsinghua.edu.cn/info/1210/32036.htm"
+        }
+      ],
+      "role_tag": "Sole"
+    }
+  ],
+  "service": [
+    {
+      "title": "Information & Management",
+      "role": "Ad hoc reviewer",
+      "time": "2024",
+      "category": "journal-review"
+    },
+    {
+      "title": "Technovation",
+      "role": "Ad hoc reviewer",
+      "time": "2025",
+      "category": "journal-review"
+    },
+    {
+      "title": "International Conference on Information Systems (ICIS)",
+      "role": "Ad hoc reviewer",
+      "time": "2026, 2025, 2024, 2023, 2022",
+      "category": "conference-review"
+    },
+    {
+      "title": "Pacific Asia Conference on Information Systems (PACIS)",
+      "role": "Ad hoc reviewer",
+      "time": "2025, 2024",
+      "category": "conference-review"
+    },
+    {
+      "title": "International FLINS Conference on Computational Intelligence - International Conference on Intelligent Systems and Knowledge Engineering (FLINS-ISKE)",
+      "role": "Ad hoc reviewer",
+      "time": "2026",
+      "category": "conference-review"
+    },
+    {
+      "title": "China Summer Workshop on Information Management (CSWIM)",
+      "role": "Ad hoc reviewer",
+      "time": "2024, 2022",
+      "category": "conference-review"
+    },
+    {
+      "title": "Annual Conference of China Information Economics Society (CIES)",
+      "role": "Ad hoc reviewer",
+      "time": "2024",
+      "category": "conference-review"
+    },
+    {
+      "title": "Annual Conference of China Association for Information Systems (CNAIS)",
+      "role": "Ad hoc reviewer",
+      "time": "2022",
+      "category": "conference-review"
+    },
+    {
+      "title": "Journal of Systems Science and Systems Engineering",
+      "role": "Editorial Assistant",
+      "time": "2022 — Present",
+      "category": "editorial"
+    },
+    {
+      "title": "MIS Quarterly",
+      "special_issue": "Indigenous Theory Development",
+      "role": "Editorial Assistant",
+      "time": "2026 — Present",
+      "category": "editorial"
+    },
+    {
+      "title": "Pacific Asia Conference on Information Systems (PACIS)",
+      "role": "Associate Editor",
+      "time": "2027",
+      "category": "associate",
+      "track": "Human-Computer Interaction (HCI) Track"
+    },
+    {
+      "title": "Electronic Commerce Research and Applications (ECRA)",
+      "role": "Ad hoc reviewer",
+      "category": "journal-review"
+    }
+  ],
+  "talks": [
+    {
+      "year": "June 2026",
+      "source": "The 19th China Summer Workshop on Information Management (CSWIM 2026)",
+      "location": "Haikou",
+      "title": "Item-level Feedback and Overall Rating: Evidence of a Temporary Granularity Penalty",
+      "authors": "Xiaowei (Elliott) Zhang, Jing Wang, Zhijie Lin",
+      "flag": "🇨🇳",
+      "country": "China",
+      "category": "workshop"
+    },
+    {
+      "year": "June 2026",
+      "source": "The 22nd Symposium on Statistical Challenges in Electronic Commerce Research (SCECR 2026)",
+      "location": "Tokyo",
+      "title": "Item-level Feedback and Overall Rating: Evidence of a Temporary Granularity Penalty",
+      "authors": "Xiaowei (Elliott) Zhang, Jing Wang, Zhijie Lin",
+      "flag": "🇯🇵",
+      "country": "Japan",
+      "category": "workshop"
+    },
+    {
+      "year": "Dec 2024",
+      "source": "The 45th International Conference on Information Systems (ICIS 2024)",
+      "location": "Bangkok",
+      "title": "Follow Your Heart: The Role of Interest in the Sharing Economy",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin, Jing Wang, Jason Chan",
+      "flag": "🇹🇭",
+      "country": "Thailand",
+      "category": "conference"
+    },
+    {
+      "year": "Oct 2024",
+      "source": "The First Conference on Language Modeling (COLM 2024)",
+      "location": "Philadelphia",
+      "title": "Helmsman of the Masses? Evaluate the Opinion Leadership of Large Language Models in the Werewolf Game",
+      "authors": "Silin Du, Xiaowei Zhang",
+      "flag": "🇺🇸",
+      "country": "United States",
+      "category": "conference"
+    },
+    {
+      "year": "July 2024",
+      "source": "2024 CNAIS-UNNC Paper Development Workshop",
+      "location": "Ningbo",
+      "title": "Follow Your Heart: The Role of Interest in the Sharing Economy",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin, Jing Wang, Jason Chan",
+      "flag": "🇨🇳",
+      "country": "China",
+      "category": "workshop"
+    },
+    {
+      "year": "July 2024",
+      "source": "The 28th Pacific Asia Conference on Information Systems (PACIS 2024): ISR Paper Development Workshop",
+      "location": "Ho Chi Minh City",
+      "title": "Follow Your Heart: The Role of Interest in the Sharing Economy",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin, Jing Wang, Jason Chan",
+      "flag": "🇻🇳",
+      "country": "Vietnam",
+      "category": "workshop"
+    },
+    {
+      "year": "Apr 2024",
+      "source": "2024 Tsinghua 'Jing Lun Bo Yan' Doctoral Academic Forum",
+      "location": "Beijing",
+      "title": "Follow Your Heart: The Role of Interest in the Sharing Economy",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin, Jing Wang, Jason Chan",
+      "flag": "🇨🇳",
+      "country": "China",
+      "category": "consortium"
+    },
+    {
+      "year": "Dec 2023",
+      "source": "The 44th International Conference on Information Systems (ICIS 2023)",
+      "location": "Hyderabad",
+      "title": "All that Glitters is not Gold: Understanding the Impacts of Platform Recommendation Algorithm Changes on Complementors in the Sharing Economy",
+      "authors": "Siliang (Jack) Tong, Xiaowei (Elliott) Zhang, Xueming Luo, Zhijie Lin, Jing (Aaron) Li",
+      "flag": "🇮🇳",
+      "country": "India",
+      "category": "conference"
+    },
+    {
+      "year": "Nov 2023",
+      "source": "2023 Annual Conference of China Information Economics Society",
+      "location": "Hangzhou",
+      "title": "Complementor-Side Ecology on Sharing Economy Platforms: The Economic Impacts of Recommender Systems",
+      "authors": "Siliang (Jack) Tong, Xiaowei (Elliott) Zhang, Xueming Luo, Zhijie Lin, Jing (Aaron) Li",
+      "flag": "🇨🇳",
+      "country": "China",
+      "category": "consortium"
+    },
+    {
+      "year": "Oct 2023",
+      "source": "2023 Academic Annual Conference on Big Data and Business: Doctoral Consortium",
+      "location": "Dalian",
+      "title": "All that Glitters is not Gold: Understanding the Impacts of Platform Recommendation Algorithm Changes on Complementors in the Sharing Economy",
+      "authors": "Siliang (Jack) Tong, Xiaowei (Elliott) Zhang, Xueming Luo, Zhijie Lin, Jing (Aaron) Li",
+      "flag": "🇨🇳",
+      "country": "China",
+      "category": "consortium"
+    },
+    {
+      "year": "July 2023",
+      "source": "The third POMS International Conference in China (POMS-CN 2023)",
+      "location": "Hangzhou",
+      "title": "A Good Neighbor, A Found Treasure? Examining the Spatial Determinants on Airbnb Listings Prices",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin",
+      "flag": "🇨🇳",
+      "country": "China",
+      "category": "conference"
+    },
+    {
+      "year": "Apr 2023",
+      "source": "2023 Tsinghua 'Jing Lun Bo Yan' Doctoral Academic Forum",
+      "location": "Beijing",
+      "title": "Helmsman of the Masses? Evaluate the Opinion Leadership of Large Language Models in the Werewolf Game",
+      "authors": "Silin Du, Xiaowei Zhang",
+      "flag": "🇨🇳",
+      "country": "China",
+      "category": "consortium"
+    },
+    {
+      "year": "Aug 2022",
+      "source": "The 15th China Summer Workshop on Information Management (CSWIM 2022)",
+      "location": "Ningbo",
+      "title": "No Change, No Growth? The Role of Competition in the Effectiveness of Airbnb Hosts’ Dynamic Strategies",
+      "authors": "Xiaowei (Elliott) Zhang, Zhijie Lin",
+      "flag": "🇨🇳",
+      "country": "China",
+      "category": "workshop"
+    },
+    {
+      "year": "Oct 2021",
+      "source": "2021 Annual Conference of China Association for Information Systems (CNAIS 2021)",
+      "location": "Changsha",
+      "title": "Hosts′ Motivations to Forgo Screening Their Guests on Sharing Accommodation Platforms: Based on the Intra-industry Competition",
+      "authors": "Yi Wu, Xiaowei Zhang, Zhijie Lin",
+      "flag": "🇨🇳",
+      "country": "China",
+      "title_zh": "共享住宿平台房东放弃筛选房客的动因−基于行业内竞争",
+      "category": "workshop"
+    }
+  ]
+}
