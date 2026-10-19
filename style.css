@@ -398,7 +398,7 @@
 .contact-motto blockquote{line-height:1.55}
 
 /* A bilingual title turns in place; the journal language note stays distinct from rankings. */
-.publication-language{display:inline-flex;align-items:center;vertical-align:middle;white-space:nowrap;margin-left:10px;padding:3px 7px;border:1px solid #d5deca;border-left:2px solid #819a61;border-radius:2px;background:#f4f7ee;color:#68775a;font-size:9px;font-weight:400;line-height:1.3;letter-spacing:.015em}
+.publication-language{display:inline-flex;align-items:center;vertical-align:middle;white-space:nowrap;margin-left:10px;padding:3px 7px;border:1px solid #d5deca;border-left:2px solid #819a61;border-radius:999px;background:#f4f7ee;color:#68775a;font-size:9px;font-weight:400;line-height:1.3;letter-spacing:.015em}
 .publication-heading:has(.publication-language){flex-wrap:wrap;gap:10px 14px}
 .title-flip{display:block;width:100%;padding:0;text-align:left;font:inherit;letter-spacing:inherit;color:inherit}
 .title-flip-scene{display:block;perspective:1100px}
