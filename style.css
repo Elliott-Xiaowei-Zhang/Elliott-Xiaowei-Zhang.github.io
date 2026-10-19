@@ -219,6 +219,11 @@
 @media(max-width:380px){.profile-portrait{width:116px;margin-left:14px}}
 @media print{.profile-portrait{width:120px}}
 
+/* Metadata labels share a baseline without inheriting course-body paragraph spacing. */
+.instructor .instructor-meta{align-items:baseline}
+.instructor .instructor-meta>p{margin:0;align-items:baseline}
+.instructor .instructor-meta .course-level{align-self:baseline}
+
 .instructor-details{margin-top:15px}
 .instructor-details>summary{display:flex;align-items:center;justify-content:space-between;gap:22px;width:max-content;padding:3px 0 5px;border-bottom:1px solid #ccd5bf;font-size:11px;line-height:1.5;color:#59634d}
 .instructor-details>summary>span{font-size:16px;line-height:1;transition:transform .18s}
