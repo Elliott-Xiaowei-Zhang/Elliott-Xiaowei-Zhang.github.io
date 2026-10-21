@@ -1,8 +1,24 @@
 const one = (selector, root = document) => root.querySelector(selector);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
 const safe = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+const researchAuthorLinks = new Map([
+  ['Zhijie Lin', 'https://www.sem.tsinghua.edu.cn/info/1210/31859.htm'],
+  ['Jing Wang', 'https://isom.hkust.edu.hk/faculty-and-staff/directory/jwang'],
+  ['Siliang (Jack) Tong', 'https://dr.ntu.edu.sg/entities/person/Jack-Tong'],
+  ['Siliang Tong', 'https://dr.ntu.edu.sg/entities/person/Jack-Tong'],
+  ['Xueming Luo', 'https://www.fox.temple.edu/directory/xueming-luo-tuf35198'],
+  ['Jing (Aaron) Li', 'https://neoma-bs.com/professors/li-jing'],
+  ['Jing Li', 'https://neoma-bs.com/professors/li-jing'],
+  ['Jason Chan', 'https://carlsonschool.umn.edu/faculty/jason-chan'],
+  ['Yi Wu', 'https://come.tju.edu.cn/info/1089/3755.htm'],
+  ['吴懿', 'https://come.tju.edu.cn/info/1089/3755.htm'],
+]);
+const researchCoauthorText = value => String(value ?? '').split(/(,\s*)/).map(name => {
+  const url = researchAuthorLinks.get(name);
+  return url ? `<a class="research-author-link" href="${safe(url)}" target="_blank" rel="noopener noreferrer">${safe(name)}</a>` : safe(name);
+}).join('');
 const authorText = (value, equalContributors = []) => {
-  let text = safe(value).replace(/Xiaowei \(Elliott\) Zhang|Xiaowei Zhang/g, '<strong>$&</strong>');
+  let text = researchCoauthorText(value).replace(/Xiaowei \(Elliott\) Zhang|Xiaowei Zhang/g, '<strong>$&</strong>');
   for (const name of equalContributors) text = text.replace(safe(name), safe(name)+'<sup class="equal-contribution" aria-label="Equal contribution">†</sup>');
   return text;
 };
@@ -56,7 +72,7 @@ function paperMarkup(p) {
 function ongoingProjectsMarkup() {
   const projects = data.ongoing_projects || [];
   if (!projects.length) return '';
-  return '<section class="ongoing-projects" aria-labelledby="ongoing-projects-heading"><div class="ongoing-heading"><h3 id="ongoing-projects-heading">Ongoing projects</h3><span class="eyebrow">'+String(projects.length).padStart(2,'0')+' PROJECTS</span></div><div class="ongoing-list">'+projects.map((project,index)=>'<article class="ongoing-project"><span class="project-index" aria-hidden="true">'+String(index+1).padStart(2,'0')+'</span><div><h4>'+safe(project.title)+'</h4><p class="project-collaborators">with '+safe(project.collaborators)+'</p></div></article>').join('')+'</div></section>';
+  return '<section class="ongoing-projects" aria-labelledby="ongoing-projects-heading"><div class="ongoing-heading"><h3 id="ongoing-projects-heading">Ongoing projects</h3><span class="eyebrow">'+String(projects.length).padStart(2,'0')+' PROJECTS</span></div><div class="ongoing-list">'+projects.map((project,index)=>'<article class="ongoing-project"><span class="project-index" aria-hidden="true">'+String(index+1).padStart(2,'0')+'</span><div><h4>'+safe(project.title)+'</h4><p class="project-collaborators">with '+researchCoauthorText(project.collaborators)+'</p></div></article>').join('')+'</div></section>';
 }
 function showPapers() {
   const papers=data.papers.filter(p=>activeCategory==='selected'?p.selected:p.type===activeCategory);
