@@ -1,6 +1,6 @@
-import { visitorStatistics } from './site-settings.js?v=20261021-visitor-refresh';
+import { visitorStatistics } from './site-settings.js?v=20261021-supabase-visitors';
 import { visitorRequest } from './visitor-client.js?v=20261018-visitor-api';
-import { loadVisitorStatistics, startVisitorRefresh } from './visitor-data.js?v=20261021-visitor-refresh';
+import { loadVisitorStatistics, startVisitorRefresh } from './visitor-data.js?v=20261021-supabase-visitors';
 
 const container = document.querySelector('#visitor-map');
 const caption = document.querySelector('#visitor-map-caption');

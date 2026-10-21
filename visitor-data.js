@@ -41,7 +41,7 @@ async function readJson(fetcher, url, options, timeoutMs) {
 // The same-origin snapshot loads independently of the cross-origin counter.
 // A blocked counter must neither delay the saved totals nor erase them.
 export async function loadVisitorStatistics({ request, snapshotUrl, publishedSnapshotUrl, storage,
-  onUpdate, fetcher = fetch, now = Date.now, timeoutMs = 5000 }) {
+  onUpdate, fetcher = fetch, now = Date.now, timeoutMs = 12000 }) {
   let current;
   function publish(next) {
     if (current?.mode === 'live' && next.mode !== 'live') return;

@@ -1,0 +1,5 @@
+[functions.visitors]
+# The existing counter is intentionally anonymous; only aggregate reads are public.
+# Counting still requires an allowed homepage Origin, explicit intent and a UUID.
+verify_jwt = false
+entrypoint = "./functions/visitors/index.ts"

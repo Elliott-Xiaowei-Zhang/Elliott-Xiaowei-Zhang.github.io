@@ -52,14 +52,15 @@ Google Search Console 的 HTML 验证文件直接保存在仓库根目录。发�
 
 ## 访客地图的区别
 
-GitHub Pages 版本已接入独立统计 API：`https://xiaowei-visitor-stats.aqua-plum-8641.chatgpt.site/api/visitors`。这个接口由 Sites 管理，网页继续部署在 GitHub Pages，无需 Cloudflare 账号或 GitHub secrets。
+GitHub Pages 和 Sites 版本共用 Supabase Free 统计 API：`https://ozaakbkoskdwpwumgaad.supabase.co/functions/v1/visitors`。该项目属于主页所有者的免费组织，无需银行卡、单独域名或 GitHub secrets。更新通过浏览器直接读取统计接口，不依赖 GitHub 定时发布。
 
 - `site-settings.js` 的 `enabled: true` 和 `endpoint` 控制统计；常规 GitHub Pages 工作流会保留这项配置，不再关闭统计。
 - 随机浏览器 ID 保存在主页自身的 localStorage，最长一年；刷新页面不会重复计数，不使用跨站 Cookie，不发送账户凭据。
 - API 只返回总人数及国家/地区汇总；国家/地区由服务器边缘节点提供，不记录 IP 地址、精确坐标、浏览器指纹或访问者账户。
 - Do Not Track / Global Privacy Control、可识别爬虫不计数；`localhost` 和 `127.0.0.1` 本地预览只读取线上总数，不污染正式计数。
-- 真实统计从这次接口启用后开始，不包含早先关闭统计期间的访问，也没有导入原 Sites 私有数据库的历史记录。
-- `hosting/visitor-service/` 保存接口契约、后端源代码和服务标识。完整可部署的 Sites 服务源码在旁边的 `xiaowei-visitor-service` 文件夹中。
+- 2026-10-21 已迁移独立 Sites 统计服务的 19 条真实匿名记录，保留原标识和首次访问时间；迁移数据未放入 Git。早先关闭统计期间的访问无法补计。
+- `hosting/supabase/` 保存当前数据库结构、函数源代码和部署说明。`hosting/visitor-service/` 为旧统计服务的源代码存档。
+- Supabase Free 项目可能在一周无活动后暂停；超出免费额度会受限，不配置付费自动扩容。服务规则以 Supabase 控制台为准。
 - 如将来改用自己的 Cloudflare 账号，可使用 [可选自托管说明](hosting/cloudflare/README.md)。该模式部署网页与 API 到同一 Worker，并使用自己的数据库。
 
 ### 统计接口连接失败时
@@ -68,7 +69,7 @@ GitHub Pages 版本已接入独立统计 API：`https://xiaowei-visitor-stats.aq
 
 GitHub Actions 每 5 分钟尝试从 API 读取汇总并重新发布快照。刷新失败时，脚本会保留源码和上次已发布快照中较新的有效数据，不会重置为零。发布只需要现有 Pages 权限，无需额外 secrets。GitHub 的定时工作流是尽力调度，可能延迟或跳过，不能保证每五分钟发布；公开仓库连续 60 天无活动时可能被自动停用，届时可在 Actions 中重新启用（[官方说明](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)）。
 
-这解决了统计域名在某些网络不可达时数量和地图一起消失的问题，但**快照不能收集被网络阻断的新访问**。此类访问要实时计入，仍需将 API 部署到该网络可访问的域名/服务，再更新 `site-settings.js`。不会将其他网站的计数混入，也不会编造历史访问。
+快照用于实时接口临时不可达时展示上次汇总，不能代替新访问的计数。新接口保留该容错机制，网络请求超时放宽到 12 秒，以容纳跨境连接和函数冷启动。不会将其他网站的计数混入，也不会编造历史访问。
 
 本地更新快照可运行 `python3 scripts/update-visitor-snapshot.py`；本地预览仍只读取统计，不计数。验证命令：
 

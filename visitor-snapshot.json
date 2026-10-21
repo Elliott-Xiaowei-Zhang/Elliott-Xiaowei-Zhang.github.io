@@ -1,6 +1,6 @@
 {
-  "total": 15,
-  "since": "2026-10-18T15:34:05.388Z",
+  "total": 19,
+  "since": "2026-10-18T15:34:05.388+00:00",
   "countries": [
     {
       "country": "JP",
@@ -8,7 +8,11 @@
     },
     {
       "country": "US",
-      "visitors": 5
+      "visitors": 6
+    },
+    {
+      "country": "NL",
+      "visitors": 3
     },
     {
       "country": "EE",
@@ -23,5 +27,5 @@
       "visitors": 1
     }
   ],
-  "updatedAt": "2026-10-21T03:39:03Z"
+  "updatedAt": "2026-10-21T05:51:03Z"
 }
