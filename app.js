@@ -15,7 +15,7 @@ const researchAuthorLinks = new Map([
 ]);
 const researchCoauthorText = value => String(value ?? '').split(/(,\s*)/).map(name => {
   const url = researchAuthorLinks.get(name);
-  return url ? `<a class="research-author-link" href="${safe(url)}" target="_blank" rel="noopener noreferrer">${safe(name)} <span class="research-author-arrow" aria-hidden="true">↗</span></a>` : safe(name);
+  return url ? `<a class="research-author-link" href="${safe(url)}" target="_blank" rel="noopener noreferrer">${safe(name)}<span class="research-author-arrow" aria-hidden="true">↗</span></a>` : safe(name);
 }).join('');
 const authorText = (value, equalContributors = []) => {
   let text = researchCoauthorText(value).replace(/Xiaowei \(Elliott\) Zhang|Xiaowei Zhang/g, '<strong>$&</strong>');
