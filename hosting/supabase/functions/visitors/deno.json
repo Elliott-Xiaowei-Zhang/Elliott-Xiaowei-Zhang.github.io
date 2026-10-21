@@ -1,0 +1,3 @@
+{
+  "imports": { "mmdb-lib": "npm:mmdb-lib@3.0.3" }
+}

@@ -6,12 +6,18 @@ import { countryFromGateway } from '../functions/visitors/country.mjs';
 const origin = 'https://elliott-xiaowei-zhang.github.io';
 const id = '6af2a21a-1612-45a3-a36a-ad5507692301';
 
-test('country uses only coarse gateway metadata and ignores client IP fields', () => {
-  assert.equal(countryFromGateway(request('GET', { headers: { 'cf-ipcountry': 'CN' } })), 'CN');
-  for (const country of ['', 'XX', 'ZZ', 'T1', 'China', 'cn']) {
-    assert.equal(countryFromGateway(request('GET', { headers: { 'cf-ipcountry': country,
-      'X-Forwarded-For': '203.0.113.1', 'X-Real-IP': '203.0.113.2' } })), 'ZZ');
-  }
+test('country is resolved offline for IPv4 and IPv6 and never calls a lookup service', () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = () => assert.fail('Country lookup must not send network requests');
+  try {
+    for (const [address, country] of [['114.114.114.114', 'CN'], ['8.8.8.8', 'US'], ['2001:4860:4860::8888', 'US']]) {
+      assert.equal(countryFromGateway(request('GET', { headers: { 'X-Forwarded-For': address,
+        'cf-ipcountry': 'ZZ' } })), country);
+    }
+    for (const address of ['', 'invalid', '203.0.113.1', '127.0.0.1', '192.168.1.1', '::1']) {
+      assert.equal(countryFromGateway(request('GET', { headers: { 'X-Forwarded-For': address } })), 'ZZ');
+    }
+  } finally { globalThis.fetch = originalFetch; }
 });
 
 function fixture({ resolve = async () => 'CN', initial = [] } = {}) {

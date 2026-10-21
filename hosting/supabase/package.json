@@ -1,0 +1,7 @@
+{
+  "name": "xiaowei-homepage-visitor-backend",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test tests/visitors.test.mjs" },
+  "dependencies": { "mmdb-lib": "3.0.3" }
+}
