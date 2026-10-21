@@ -481,9 +481,11 @@
 .publication-note{font-size:10px;font-weight:400;color:#7c8175;line-height:1.5;margin-top:7px;letter-spacing:0}
 .publication-note sup{font-size:9px;line-height:0;vertical-align:super}
 .paper-authors .equal-contribution{font-size:.72em;line-height:0;vertical-align:super;margin-left:1px;font-weight:500}
-#research .research-author-link{color:inherit;transition:color .18s ease}
-#research .research-author-link:hover,#research .research-author-link:focus-visible{color:#527c21}
-@media(prefers-reduced-motion:reduce){#research .research-author-link{transition:none}}
+#research .research-author-link{white-space:nowrap;color:inherit;transition:color .18s ease}
+#research .research-author-arrow{display:inline-block;margin-left:1px;font-size:.95em;opacity:0;transform:translate(-2px,2px);transition:opacity .18s ease,transform .18s ease}
+#research .research-author-link:hover,#research .research-author-link:focus-visible{color:#5b8424}
+#research .research-author-link:hover .research-author-arrow,#research .research-author-link:focus-visible .research-author-arrow{opacity:1;transform:translate(0,0)}
+@media(prefers-reduced-motion:reduce){#research .research-author-link,#research .research-author-arrow{transition:none}}
 @media(max-width:700px){.publication-note{font-size:9px;margin-top:6px}.publication-note sup{font-size:8px}.publications-heading>.small-link{padding-top:4px}}
 @media(prefers-reduced-motion:reduce){.research-prose .partnership-link{transition:none}}
 
