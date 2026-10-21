@@ -5,8 +5,8 @@ on:
     branches: [main, master]
   workflow_dispatch:
   schedule:
-    # Refresh the same-origin aggregate snapshot without source commits.
-    - cron: '17 * * * *'
+    # Refresh every five minutes, offset from the busy start of each hour.
+    - cron: '2-57/5 * * * *'
 
 permissions:
   contents: read
