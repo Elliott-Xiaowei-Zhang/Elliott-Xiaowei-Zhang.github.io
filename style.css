@@ -501,3 +501,10 @@
 /* Saved totals retain a quiet timestamp when the live counter is unreachable. */
 .visitor-status{margin:6px 0 0;font-size:10px;line-height:1.5;color:var(--muted,#626a4f);font-variant-numeric:tabular-nums}
 .visitor-status[hidden]{display:none}
+
+.visitor-update{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:6px}
+.visitor-update .visitor-status{margin:0}
+.visitor-refresh{flex-shrink:0;margin-left:auto;padding:0;font-size:10px;line-height:1.5;color:#405326;border:0;border-bottom:1px solid #40532650;background:none;cursor:pointer;transition:color .2s,border-color .2s}
+.visitor-refresh:hover{color:#101010;border-color:#101010}
+.visitor-refresh:disabled{cursor:wait;opacity:.45}
+.visitor-refresh[hidden]{display:none}

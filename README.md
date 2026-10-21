@@ -64,9 +64,9 @@ GitHub Pages 版本已接入独立统计 API：`https://xiaowei-visitor-stats.aq
 
 ### 统计接口连接失败时
 
-页面会并行读取同域的 `visitor-snapshot.json` 和实时 API，优先显示已有真实汇总。实时 API 成功后自动更新；POST 或预检失败时还会尝试只读 GET。失败的实时请求不会清空已显示的数量。浏览器也会缓存最近一次成功取得的匿名汇总，且页面会标出非实时数据的更新时间。
+页面会并行读取同域的 `visitor-snapshot.json` 和实时 API，优先显示已有真实汇总。实时 API 成功后自动更新；POST 或预检失败时还会尝试只读 GET。失败的实时请求不会清空已显示的数量。浏览器也会缓存最近一次成功取得的匿名汇总，且页面会标出非实时数据的真实更新时间。打开的可见页面每分钟重试一次，切回页面或网络恢复时也会重试；可用 Refresh 按钮立即检查。相同浏览器保持去重，失败的刷新保留已显示数据，不会伪造新的更新时间。Sites 版本也会读取 GitHub 上最新发布的公开快照，避免永久停留在打包时的快照；两份快照取有效且较新的数据。
 
-GitHub Actions 每 5 分钟尝试从 API 读取汇总并重新发布快照（每小时第 2、7、12…57 分钟，避开整点高峰）。刷新失败时，脚本会保留源码和上次已发布快照中较新的有效数据，不会重置为零。发布只需要现有 Pages 权限，无需额外 secrets。GitHub 的定时工作流可能延迟；公开仓库连续 60 天无活动时可能被自动停用，届时可在 Actions 中重新启用（[官方说明](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)）。
+GitHub Actions 每 5 分钟尝试从 API 读取汇总并重新发布快照。刷新失败时，脚本会保留源码和上次已发布快照中较新的有效数据，不会重置为零。发布只需要现有 Pages 权限，无需额外 secrets。GitHub 的定时工作流是尽力调度，可能延迟或跳过，不能保证每五分钟发布；公开仓库连续 60 天无活动时可能被自动停用，届时可在 Actions 中重新启用（[官方说明](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)）。
 
 这解决了统计域名在某些网络不可达时数量和地图一起消失的问题，但**快照不能收集被网络阻断的新访问**。此类访问要实时计入，仍需将 API 部署到该网络可访问的域名/服务，再更新 `site-settings.js`。不会将其他网站的计数混入，也不会编造历史访问。
 

@@ -40,7 +40,7 @@ async function readJson(fetcher, url, options, timeoutMs) {
 
 // The same-origin snapshot loads independently of the cross-origin counter.
 // A blocked counter must neither delay the saved totals nor erase them.
-export async function loadVisitorStatistics({ request, snapshotUrl, storage,
+export async function loadVisitorStatistics({ request, snapshotUrl, publishedSnapshotUrl, storage,
   onUpdate, fetcher = fetch, now = Date.now, timeoutMs = 5000 }) {
   let current;
   function publish(next) {
@@ -55,12 +55,14 @@ export async function loadVisitorStatistics({ request, snapshotUrl, storage,
     publish({ ...checkedSnapshot(cached, now()), mode: 'cached' });
   } catch { /* Storage is optional, including for first-time visitors. */ }
 
-  const snapshot = (async () => {
-    const value = await readJson(fetcher, snapshotUrl, {
+  const urls = [snapshotUrl];
+  if (publishedSnapshotUrl && String(publishedSnapshotUrl) !== String(snapshotUrl)) urls.push(publishedSnapshotUrl);
+  const snapshots = urls.map(async url => {
+    const value = await readJson(fetcher, url, {
       method: 'GET', credentials: 'omit', cache: 'no-cache', referrerPolicy: 'no-referrer',
     }, timeoutMs);
     publish({ ...checkedSnapshot(value, now()), mode: 'snapshot' });
-  })();
+  });
 
   const live = (async () => {
     let value;
@@ -80,7 +82,37 @@ export async function loadVisitorStatistics({ request, snapshotUrl, storage,
     publish({ stats: value, updatedAt, mode: 'live' });
   })();
 
-  await Promise.allSettled([snapshot, live]);
+  await Promise.allSettled([...snapshots, live]);
   if (!current) throw new Error('No visitor statistics available');
   return current;
+}
+
+// Refresh visible pages and reconnecting browsers without overlapping requests.
+export function startVisitorRefresh({ refresh, document: doc, window: win,
+  intervalMs = 60000, setTimer = setInterval, clearTimer = clearInterval, now = Date.now }) {
+  let running = false, stopped = false, lastAttempt = -Infinity;
+  async function attempt(force = false) {
+    if (stopped || running || doc.visibilityState === 'hidden' ||
+        (!force && now() - lastAttempt < 15000)) return;
+    running = true;
+    lastAttempt = now();
+    try { await refresh(); }
+    finally { running = false; }
+  }
+  const retry = () => { void attempt().catch(() => {}); };
+  doc.addEventListener('visibilitychange', retry);
+  win.addEventListener('focus', retry);
+  win.addEventListener('online', retry);
+  const timer = setTimer(retry, intervalMs);
+  retry();
+  return {
+    refresh: () => attempt(true),
+    stop() {
+      stopped = true;
+      clearTimer(timer);
+      doc.removeEventListener('visibilitychange', retry);
+      win.removeEventListener('focus', retry);
+      win.removeEventListener('online', retry);
+    },
+  };
 }

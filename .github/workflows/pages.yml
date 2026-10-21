@@ -5,8 +5,8 @@ on:
     branches: [main, master]
   workflow_dispatch:
   schedule:
-    # Refresh every five minutes, offset from the busy start of each hour.
-    - cron: '2-57/5 * * * *'
+    # GitHub schedules are best-effort; verify schedule-triggered runs separately.
+    - cron: '*/5 * * * *'
 
 permissions:
   contents: read

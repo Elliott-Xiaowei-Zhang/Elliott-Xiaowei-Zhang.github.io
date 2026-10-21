@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkedStats, loadVisitorStatistics } from '../visitor-data.js';
+import { checkedStats, loadVisitorStatistics, startVisitorRefresh } from '../visitor-data.js';
 
 const now = Date.parse('2026-10-21T10:00:00Z');
 const totals = { total: 15, since: '2026-10-18T15:34:05Z', countries: [
@@ -87,4 +87,72 @@ test('blocked browser storage does not prevent snapshot display', async () => {
   });
   assert.equal(result.stats.total, 15);
   assert.equal(result.mode, 'snapshot');
+});
+
+test('open pages retry every minute and when returning online, but hidden pages stay quiet', async () => {
+  const doc = new EventTarget(), win = new EventTarget();
+  doc.visibilityState = 'visible';
+  let ticks, calls = 0, time = 0, cleared = false;
+  const refresher = startVisitorRefresh({ refresh: async () => { calls++; }, document: doc, window: win,
+    now: () => time,
+    setTimer(callback, interval) { ticks = callback; assert.equal(interval, 60000); return 123; },
+    clearTimer(id) { assert.equal(id, 123); cleared = true; },
+  });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(calls, 1);
+  time = 60000;
+  ticks();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(calls, 2);
+  doc.visibilityState = 'hidden';
+  time = 120000;
+  ticks();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(calls, 2);
+  doc.visibilityState = 'visible';
+  win.dispatchEvent(new Event('online'));
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(calls, 3);
+  refresher.stop();
+  assert.equal(cleared, true);
+  time = 180000;
+  ticks();
+  win.dispatchEvent(new Event('focus'));
+  assert.equal(calls, 3);
+});
+
+test('manual refresh works immediately and concurrent retries never duplicate the request', async () => {
+  const doc = new EventTarget(), win = new EventTarget();
+  doc.visibilityState = 'visible';
+  let calls = 0, finish;
+  const refresher = startVisitorRefresh({
+    refresh: () => { calls++; return new Promise(resolve => { finish = resolve; }); },
+    document: doc, window: win, setTimer: () => 1, clearTimer() {}, now: () => 0,
+  });
+  await refresher.refresh();
+  win.dispatchEvent(new Event('online'));
+  assert.equal(calls, 1);
+  finish();
+  await new Promise(resolve => setImmediate(resolve));
+  const next = refresher.refresh();
+  assert.equal(calls, 2);
+  finish();
+  await next;
+  refresher.stop();
+});
+
+test('a Sites page can read a newer published snapshot while retaining its bundled offline copy', async () => {
+  const publishedSnapshotUrl = 'https://published.example/visitor-snapshot.json';
+  const newer = { total: 16, countries: [{ country: 'CN', visitors: 9 }, { country: 'JP', visitors: 7 }],
+    updatedAt: '2026-10-21T09:30:00Z' };
+  const result = await loadVisitorStatistics({ request, snapshotUrl, publishedSnapshotUrl,
+    storage: storage(), now: () => now, onUpdate() {},
+    fetcher: async url => {
+      if (url === publishedSnapshotUrl) return response(newer);
+      if (url === snapshotUrl) return response(saved);
+      throw new TypeError('Network blocked');
+    },
+  });
+  assert.equal(result.stats.total, 16);
+  assert.equal(result.updatedAt, '2026-10-21T09:30:00.000Z');
 });

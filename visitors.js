@@ -1,6 +1,6 @@
-import { visitorStatistics } from './site-settings.js?v=20261021-resilient-visitors';
+import { visitorStatistics } from './site-settings.js?v=20261021-visitor-refresh';
 import { visitorRequest } from './visitor-client.js?v=20261018-visitor-api';
-import { loadVisitorStatistics } from './visitor-data.js?v=20261021-resilient-visitors';
+import { loadVisitorStatistics, startVisitorRefresh } from './visitor-data.js?v=20261021-visitor-refresh';
 
 const container = document.querySelector('#visitor-map');
 const caption = document.querySelector('#visitor-map-caption');
@@ -8,11 +8,12 @@ const totalNode = document.querySelector('#visitor-total');
 const regionsNode = document.querySelector('#visitor-regions');
 const list = document.querySelector('#visitor-country-list');
 const statusNode = document.querySelector('#visitor-status');
+const refreshButton = document.querySelector('#visitor-refresh');
 const ns = 'http://www.w3.org/2000/svg';
 const names = new Intl.DisplayNames(['en'], { type: 'region' });
 const number = new Intl.NumberFormat('en');
 const regionLabels = { CN: 'Mainland China', TW: 'Taiwan, China', HK: 'Hong Kong, China', MO: 'Macau, China' };
-let geometry = [], stats = null, svg;
+let geometry = [], stats = null, svg, lastResult;
 const countries = new Map();
 function element(tag, attrs = {}) {
   const node = document.createElementNS(ns, tag);
@@ -89,6 +90,7 @@ async function loadStats() {
     document.querySelector('.visitor-details').hidden = true;
     return;
   }
+  refreshButton.disabled = true;
   try {
     const optedOut = navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true;
     const storage = { getItem: key => localStorage.getItem(key), setItem: (key, value) => localStorage.setItem(key, value) };
@@ -96,24 +98,43 @@ async function loadStats() {
       baseUrl: import.meta.url, pageUrl: location.href, optedOut,
       storage,
       randomUUID: () => crypto.randomUUID() });
-    await loadVisitorStatistics({ request, storage,
-      snapshotUrl: new URL(visitorStatistics.snapshot || './visitor-snapshot.json', import.meta.url),
+    const snapshotUrl = new URL(visitorStatistics.snapshot || './visitor-snapshot.json', import.meta.url);
+    // A new cache key each minute avoids serving an older Pages CDN response.
+    snapshotUrl.searchParams.set('refresh', Math.floor(Date.now() / 60000));
+    const publishedSnapshotUrl = visitorStatistics.publishedSnapshot
+      ? new URL(visitorStatistics.publishedSnapshot, import.meta.url) : undefined;
+    publishedSnapshotUrl?.searchParams.set('refresh', Math.floor(Date.now() / 60000));
+    await loadVisitorStatistics({ request, storage, snapshotUrl, publishedSnapshotUrl,
       onUpdate(result) {
         document.querySelector('.visitor-details').hidden = false;
-        stats = result.stats; renderStats();
+        const changed = JSON.stringify(stats) !== JSON.stringify(result.stats);
+        stats = result.stats;
+        lastResult = result;
+        if (changed) renderStats();
         statusNode.hidden = result.mode === 'live';
         if (!statusNode.hidden) {
           const date = new Intl.DateTimeFormat('en-GB', {
             dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC',
           }).format(new Date(result.updatedAt));
-          statusNode.textContent = `Updated ${date} UTC`;
+          statusNode.textContent = `Saved totals · ${date} UTC`;
           statusNode.title = 'Latest saved totals. Live updates resume when the counter is reachable.';
         }
       },
     });
   } catch {
-    totalNode.textContent = '—';
-    caption.textContent = 'The visitor map is taking a little break. Please check back soon.';
+    if (!stats) {
+      totalNode.textContent = '—';
+      caption.textContent = 'The visitor map is taking a little break. Please check back soon.';
+    }
+    statusNode.hidden = false;
+    statusNode.textContent = lastResult
+      ? `Saved totals · ${new Intl.DateTimeFormat('en-GB', {
+        dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC',
+      }).format(new Date(lastResult.updatedAt))} UTC`
+      : 'Waiting for a connection · Retrying automatically';
+    statusNode.title = 'The last available totals are kept while the connection is unavailable.';
+  } finally {
+    refreshButton.disabled = false;
   }
 }
 fetch(new URL('./assets/world-map.json', import.meta.url)).then(response => {
@@ -122,4 +143,10 @@ fetch(new URL('./assets/world-map.json', import.meta.url)).then(response => {
 }).then(data => { geometry = data; drawMap(); }).catch(() => {
   container.textContent = 'Visitor locations are listed below.';
 });
-loadStats();
+if (visitorStatistics.enabled) {
+  const refresher = startVisitorRefresh({ refresh: loadStats, document, window });
+  refreshButton.addEventListener('click', () => { void refresher.refresh(); });
+} else {
+  refreshButton.hidden = true;
+  loadStats();
+}
