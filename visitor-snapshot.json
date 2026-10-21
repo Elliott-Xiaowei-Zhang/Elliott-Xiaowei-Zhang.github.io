@@ -1,0 +1,27 @@
+{
+  "total": 15,
+  "since": "2026-10-18T15:34:05.388Z",
+  "countries": [
+    {
+      "country": "JP",
+      "visitors": 6
+    },
+    {
+      "country": "US",
+      "visitors": 5
+    },
+    {
+      "country": "EE",
+      "visitors": 2
+    },
+    {
+      "country": "NZ",
+      "visitors": 1
+    },
+    {
+      "country": "ZZ",
+      "visitors": 1
+    }
+  ],
+  "updatedAt": "2026-10-21T02:54:33Z"
+}

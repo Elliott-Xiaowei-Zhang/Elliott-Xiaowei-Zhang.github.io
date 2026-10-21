@@ -4,6 +4,9 @@ on:
   push:
     branches: [main, master]
   workflow_dispatch:
+  schedule:
+    # Refresh the same-origin aggregate snapshot without source commits.
+    - cron: '17 * * * *'
 
 permissions:
   contents: read
@@ -25,6 +28,8 @@ jobs:
         uses: actions/checkout@v6
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Refresh public visitor totals
+        run: python3 scripts/update-visitor-snapshot.py
       - name: Prepare website files
         run: |
           touch .nojekyll
@@ -32,7 +37,10 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
           path: dist
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}

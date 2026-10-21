@@ -18,7 +18,7 @@ def main():
         shutil.rmtree(output)
     output.mkdir()
     files = ["index.html", "style.css", "app.js", "data.json", "visitors.js", "visitor-client.js",
-             "site-settings.js", "favicon.svg", ".nojekyll"]
+             "visitor-data.js", "visitor-snapshot.json", "site-settings.js", "favicon.svg", ".nojekyll"]
     for name in files:
         shutil.copy2(root / name, output / name)
     # Search Console verifies ownership at the original root URL and filename.

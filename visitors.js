@@ -1,11 +1,13 @@
-import { visitorStatistics } from './site-settings.js?v=20261018-visitor-api';
+import { visitorStatistics } from './site-settings.js?v=20261021-resilient-visitors';
 import { visitorRequest } from './visitor-client.js?v=20261018-visitor-api';
+import { loadVisitorStatistics } from './visitor-data.js?v=20261021-resilient-visitors';
 
 const container = document.querySelector('#visitor-map');
 const caption = document.querySelector('#visitor-map-caption');
 const totalNode = document.querySelector('#visitor-total');
 const regionsNode = document.querySelector('#visitor-regions');
 const list = document.querySelector('#visitor-country-list');
+const statusNode = document.querySelector('#visitor-status');
 const ns = 'http://www.w3.org/2000/svg';
 const names = new Intl.DisplayNames(['en'], { type: 'region' });
 const number = new Intl.NumberFormat('en');
@@ -89,23 +91,26 @@ async function loadStats() {
   }
   try {
     const optedOut = navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true;
+    const storage = { getItem: key => localStorage.getItem(key), setItem: (key, value) => localStorage.setItem(key, value) };
     const request = visitorRequest({ endpoint: visitorStatistics.endpoint,
       baseUrl: import.meta.url, pageUrl: location.href, optedOut,
-      storage: { getItem: key => localStorage.getItem(key), setItem: (key, value) => localStorage.setItem(key, value) },
+      storage,
       randomUUID: () => crypto.randomUUID() });
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-    let response;
-    try { response = await fetch(request.url, { ...request.options, signal: controller.signal }); }
-    finally { clearTimeout(timeout); }
-    if (!response.ok) throw new Error('Unavailable');
-    const result = await response.json();
-    if (!Number.isSafeInteger(result.total) || result.total < 0 || !Array.isArray(result.countries) ||
-        !result.countries.every(row => /^[A-Z]{2}$/.test(row.country) && Number.isSafeInteger(row.visitors) && row.visitors >= 0)) {
-      throw new Error('Invalid statistics');
-    }
-    document.querySelector('.visitor-details').hidden = false;
-    stats = result; renderStats();
+    await loadVisitorStatistics({ request, storage,
+      snapshotUrl: new URL(visitorStatistics.snapshot || './visitor-snapshot.json', import.meta.url),
+      onUpdate(result) {
+        document.querySelector('.visitor-details').hidden = false;
+        stats = result.stats; renderStats();
+        statusNode.hidden = result.mode === 'live';
+        if (!statusNode.hidden) {
+          const date = new Intl.DateTimeFormat('en-GB', {
+            dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC',
+          }).format(new Date(result.updatedAt));
+          statusNode.textContent = `Updated ${date} UTC`;
+          statusNode.title = 'Latest saved totals. Live updates resume when the counter is reachable.';
+        }
+      },
+    });
   } catch {
     totalNode.textContent = '—';
     caption.textContent = 'The visitor map is taking a little break. Please check back soon.';

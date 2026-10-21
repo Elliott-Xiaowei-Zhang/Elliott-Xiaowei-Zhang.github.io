@@ -1,6 +1,6 @@
 # Xiaowei (Elliott) Zhang — Personal Homepage
 
-这是截至 **2026-10-18** 的完整、可编辑网站导出，包含目前确认的内容、设计、字体、彩色头像和交互。页面无需安装前端依赖或编译即可部署到 GitHub Pages；访客统计的可选服务器代码也已附上。
+这是截至 **2026-10-21** 的完整、可编辑网站导出，包含目前确认的内容、设计、字体、彩色头像和交互。页面无需安装前端依赖或编译即可部署到 GitHub Pages；访客统计的可选服务器代码也已附上。
 
 ## 修改哪些文件
 
@@ -10,8 +10,10 @@
 | `data.json` | 论文、ongoing projects、教育、课程、教学、奖项、talks、service |
 | `style.css` | 字体、颜色、字号、留白、移动端布局和鼠标悬停效果 |
 | `app.js` | 论文分类、自动计数、摘要展开、课程折叠、中英文题名切换等交互 |
-| `visitors.js` / `visitor-client.js` | 世界地图、跨域统计请求与匿名浏览器去重 |
-| `site-settings.js` | 已启用的独立统计接口地址 |
+| `visitors.js` / `visitor-client.js` / `visitor-data.js` | 世界地图、匿名浏览器去重与统计容错加载 |
+| `site-settings.js` | 已启用的独立统计接口地址与同域快照路径 |
+| `visitor-snapshot.json` | 真实访客总数与国家/地区汇总的发布快照 |
+| `scripts/update-visitor-snapshot.py` | 发布时只读获取真实汇总；不新增访问记录 |
 | `assets/` | 彩色头像、Inter 字体及其许可证、世界地图数据及来源 |
 | `hosting/cloudflare/` | 可选的访客统计服务器、数据库建表文件和部署说明 |
 | `scripts/prepare-site.py` | 将网页资源整理到 `dist/`，用于自动部署 |
@@ -42,7 +44,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 可以选择以下任一种部署方式：
 
 1. **直接部署文件：**在仓库的 Settings → Pages 中，选择 Deploy from a branch，再选择相应分支和 `/ (root)`。根目录已有 `.nojekyll`。
-2. **GitHub Actions：**上传时同时包含隐藏的 `.github/workflows/pages.yml`，在 Settings → Pages 中将 Source 设为 GitHub Actions。工作流会在 `main` 或 `master` 分支更新时整理网页文件并部署，也可手动运行。
+2. **GitHub Actions：**上传时同时包含隐藏的 `.github/workflows/pages.yml`，在 Settings → Pages 中将 Source 设为 GitHub Actions。工作流会在 `main` 或 `master` 分支更新时整理网页文件并部署，也可手动运行；还会每小时尝试刷新访客汇总并发布，不产生额外源码提交。
 
 所有本地资源均已改为相对路径，因此也适用于 `https://用户名.github.io/仓库名/` 这种项目网站地址。
 
@@ -60,11 +62,24 @@ GitHub Pages 版本已接入独立统计 API：`https://xiaowei-visitor-stats.aq
 - `hosting/visitor-service/` 保存接口契约、后端源代码和服务标识。完整可部署的 Sites 服务源码在旁边的 `xiaowei-visitor-service` 文件夹中。
 - 如将来改用自己的 Cloudflare 账号，可使用 [可选自托管说明](hosting/cloudflare/README.md)。该模式部署网页与 API 到同一 Worker，并使用自己的数据库。
 
-运行 `node --test tests/visitor-client.test.mjs` 可验证跨域请求、刷新去重和隐私选项。
+### 统计接口连接失败时
+
+页面会并行读取同域的 `visitor-snapshot.json` 和实时 API，优先显示已有真实汇总。实时 API 成功后自动更新；POST 或预检失败时还会尝试只读 GET。失败的实时请求不会清空已显示的数量。浏览器也会缓存最近一次成功取得的匿名汇总，且页面会标出非实时数据的更新时间。
+
+GitHub Actions 每小时在第 17 分钟尝试从 API 读取汇总并重新发布快照。刷新失败时，脚本会保留源码和上次已发布快照中较新的有效数据，不会重置为零。发布只需要现有 Pages 权限，无需额外 secrets。GitHub 的定时工作流可能延迟；公开仓库连续 60 天无活动时可能被自动停用，届时可在 Actions 中重新启用（[官方说明](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)）。
+
+这解决了统计域名在某些网络不可达时数量和地图一起消失的问题，但**快照不能收集被网络阻断的新访问**。此类访问要实时计入，仍需将 API 部署到该网络可访问的域名/服务，再更新 `site-settings.js`。不会将其他网站的计数混入，也不会编造历史访问。
+
+本地更新快照可运行 `python3 scripts/update-visitor-snapshot.py`；本地预览仍只读取统计，不计数。验证命令：
+
+```sh
+node --test tests/visitor-client.test.mjs tests/visitor-data.test.mjs
+python3 -m unittest discover -s tests -p 'test_visitor_snapshot.py'
+```
 
 ## 来源与部署参考
 
-- 当前设计来自本次重新设计的网站；`MyHomepage/` 没有被修改，旧设计代码没有被复制。
+- 当前设计来自本次重新设计的网站；旧版源文件位于旁边的 `MyHomepage-old/`，没有修改或复用旧设计。
 - `export-manifest.json` 记录当前导出的源码提交和导出日期。
 - Inter 字体的许可证在 `assets/fonts/OFL.txt`；地图数据来源在 `assets/world-map-source.txt`。
 - [GitHub Pages 官方工作流说明](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
