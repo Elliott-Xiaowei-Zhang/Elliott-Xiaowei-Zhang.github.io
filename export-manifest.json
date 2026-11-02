@@ -1,10 +1,10 @@
 {
-  "exported_on": "2026-10-18",
-  "source_commit": "42c07381b550cd597113fa5b5b70413beec526ee",
-  "source_site": "https://xiaowei-zhang-academic.aqua-plum-8641.chatgpt.site/",
+  "exported_on": "2026-11-02",
+  "source_commit": "28835198f35f4b712f2bbc17b62c07b580f09b1e",
+  "source_site": "https://xiaowei-zhang-academic.elliottzhang13.chatgpt.site/",
   "format": "editable-static-website",
   "visitor_statistics": "Shared anonymous cross-origin API; first-party random browser ID; local previews are read-only",
   "includes_visitor_database": false,
-  "visitor_statistics_api": "https://xiaowei-visitor-stats.aqua-plum-8641.chatgpt.site/api/visitors",
-  "visitor_statistics_updated_on": "2026-10-18"
+  "visitor_statistics_api": "https://ozaakbkoskdwpwumgaad.supabase.co/functions/v1/visitors",
+  "visitor_statistics_updated_on": "2026-10-21"
 }

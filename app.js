@@ -57,17 +57,25 @@ function abstractMarkup(p) {
   return content.split(/\n\s*\n/).map(paragraph=>'<p>'+safe(paragraph).replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')+'</p>').join('');
 }
 const paperLinkLabels = {'Journal article':'Paper','Read the paper':'Paper','Read on arXiv':'Paper','SSRN record':'SSRN','Related working paper':'Related paper','Related journal article':'Related paper'};
+function paperAwardsMarkup(awards) {
+  if (!awards?.length) return '';
+  const medal = '<svg viewBox="0 0 24 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 16-2 10 7-4 7 4-2-10"/><circle cx="12" cy="10" r="8" fill="#edf5e3"/><path d="m12 5.5 1.4 2.9 3.2.5-2.3 2.2.5 3.2-2.8-1.5-2.8 1.5.5-3.2-2.3-2.2 3.2-.5Z" fill="currentColor" stroke="none"/></svg>';
+  return '<div class="paper-awards"><ul class="paper-award-list" aria-label="Awards for this paper">'+awards.map(award=>'<li class="paper-award"><span class="paper-award-emblem">'+medal+'<time datetime="'+safe(award.year)+'">'+safe(award.year)+'</time></span><span class="paper-award-copy"><strong>'+safe(award.name)+'</strong><span class="paper-award-organization">'+safe(award.organization)+'</span></span></li>').join('')+'</ul></div>';
+}
 function paperMarkup(p) {
   const ranks = p.classification ? '<span class="journal-ranks" aria-label="Journal rankings">'+p.classification.split(';').map(r=>'<span>'+safe(r.trim())+'</span>').join('')+'</span>' : '';
   const source = p.type === 'working' ? p.status : p.venue;
   const statusParts = p.type === 'working' ? source?.match(/^(In preparation to submit to|Under review at|Reject & Resubmit at) (.+)$/) : null;
   const sourceMarkup = statusParts ? '<span class="status-prefix">'+safe(statusParts[1])+'</span> <span class="status-journal">'+safe(statusParts[2])+'</span>' : safe(source)+(p.type==='journal' && p.status ? ' <span class="status-prefix publication-outcome">· '+safe(p.status)+'</span>' : '');
-  const language = p.language_label ? '<span class="publication-language">'+safe(p.language_label)+'</span>' : '';
+  const language = p.language_label ? '<span class="publication-language"><svg viewBox="0 0 16 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 1.5h5.5l3.5 3.5v11.5h-9z"/><path d="M9 1.5V5h3.5M6 8.5h4M6 11.5h3"/></svg><span>'+safe(p.language_label)+'</span></span>' : '';
   const venue = source ? '<div class="publication-heading"><div class="publication-venue'+(p.type==='working'?' publication-status':'')+'"><span class="venue-label">'+sourceMarkup+'</span>'+language+'</div>'+ranks+'</div>' : '';
   const caption = p.abstract ? 'Abstract' : 'Research summary';
   const disclosure = (p.abstract || (p.type !== 'conference' && p.overview)) ? '<div class="paper-actions"><details class="paper-abstract"><summary><span class="abstract-label">'+caption+'</span><span class="abstract-toggle" aria-hidden="true">＋</span></summary><div class="abstract-content">'+abstractMarkup(p)+(p.note?'<p class="paper-note">'+safe(p.note)+'</p>':'')+'</div></details></div>' : '';
   const links = p.links.map(([label,url])=>outlink(paperLinkLabels[label] || label,url)).join('');
-  return '<article class="paper '+(p.id==='paper-1'?'featured':'')+'" id="'+p.id+'"><div class="paper-margin"><span class="paper-year">'+safe(p.year)+'</span><span class="publication-type type-'+p.type+'">'+typeNames[p.type]+'</span>'+locationMarkup(p)+'</div><div class="paper-body">'+venue+titleMarkup(p,'paper-title')+'<p class="paper-authors">'+authorText(p.authors,p.equal_contributors)+'</p><div class="paper-topics">'+p.tags.map(t=>'<span>'+safe(t)+'</span>').join('')+'</div>'+disclosure+'</div><div class="paper-links" aria-label="Resources for '+safe(p.title)+'">'+links+'</div></article>';
+  const awards = paperAwardsMarkup(p.awards);
+  const metadata = '<p class="paper-authors">'+authorText(p.authors,p.equal_contributors)+'</p><div class="paper-topics">'+p.tags.map(t=>'<span>'+safe(t)+'</span>').join('')+'</div>'+disclosure;
+  const resources = '<div class="paper-links" aria-label="Resources for '+safe(p.title)+'">'+links+'</div>';
+  return '<article class="paper '+(p.id==='paper-1'?'featured':'')+(awards?' has-awards':'')+'" id="'+p.id+'"><div class="paper-margin"><span class="paper-year">'+safe(p.year)+'</span><span class="publication-type type-'+p.type+'">'+typeNames[p.type]+'</span>'+locationMarkup(p)+'</div><div class="paper-body">'+venue+titleMarkup(p,'paper-title')+(awards?'<div class="paper-details">'+metadata+'</div>':metadata)+'</div>'+(awards?'<aside class="paper-resources" aria-label="Paper resources and awards">'+resources+awards+'</aside>':resources)+'</article>';
 }
 function ongoingProjectsMarkup() {
   const projects = data.ongoing_projects || [];
