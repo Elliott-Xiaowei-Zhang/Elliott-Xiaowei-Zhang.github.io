@@ -60,7 +60,7 @@ const paperLinkLabels = {'Journal article':'Paper','Read the paper':'Paper','Rea
 function paperMarkup(p) {
   const ranks = p.classification ? '<span class="journal-ranks" aria-label="Journal rankings">'+p.classification.split(';').map(r=>'<span>'+safe(r.trim())+'</span>').join('')+'</span>' : '';
   const source = p.type === 'working' ? p.status : p.venue;
-  const statusParts = p.type === 'working' ? source?.match(/^(In preparation to submit to|Under review at) (.+)$/) : null;
+  const statusParts = p.type === 'working' ? source?.match(/^(In preparation to submit to|Under review at|Reject & Resubmit at) (.+)$/) : null;
   const sourceMarkup = statusParts ? '<span class="status-prefix">'+safe(statusParts[1])+'</span> <span class="status-journal">'+safe(statusParts[2])+'</span>' : safe(source)+(p.type==='journal' && p.status ? ' <span class="status-prefix publication-outcome">· '+safe(p.status)+'</span>' : '');
   const language = p.language_label ? '<span class="publication-language">'+safe(p.language_label)+'</span>' : '';
   const venue = source ? '<div class="publication-heading"><div class="publication-venue'+(p.type==='working'?' publication-status':'')+'"><span class="venue-label">'+sourceMarkup+'</span>'+language+'</div>'+ranks+'</div>' : '';
