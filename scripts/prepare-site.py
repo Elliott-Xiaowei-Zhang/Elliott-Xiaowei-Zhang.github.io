@@ -17,7 +17,8 @@ def main():
     if output.exists():
         shutil.rmtree(output)
     output.mkdir()
-    files = ["index.html", "style.css", "app.js", "data.json", "visitors.js", "visitor-client.js",
+    files = ["index.html", "style.css", "cover.css", "cover.js", "navigation.js",
+             "app.js", "data.json", "visitors.js", "visitor-client.js",
              "visitor-data.js", "visitor-snapshot.json", "site-settings.js", "favicon.svg", ".nojekyll"]
     for name in files:
         shutil.copy2(root / name, output / name)
