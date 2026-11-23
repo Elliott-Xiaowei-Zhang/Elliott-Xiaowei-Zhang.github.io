@@ -467,6 +467,9 @@
     background: var(--lime);
     vertical-align: baseline;
   }
+  :is(.uc-print, .uc-stairs, .uc-letter) .uc-square-stop {
+    background-color: var(--accent);
+  }
   .uc-surname .uc-alias {
     margin-block-start: .21em;
     color: var(--ink);
