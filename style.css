@@ -212,6 +212,99 @@
 .profile-portrait{width:min(100%,204px);margin:24px 0 0}
 .profile-portrait img{display:block;width:100%;height:auto}
 .profile-intro>p{margin-top:23px}
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 24px;
+}
+.profile-links a:hover, .profile-links a:focus-visible { color: var(--lime); }
+.profile-education {
+  position: relative;
+  align-self: start;
+  min-width: 0;
+  overflow: clip;
+  scroll-margin-top: 48px;
+}
+.profile-cv {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(101%);
+  border: 1px solid #3d4236;
+  background: #151714;
+  transition: transform .42s cubic-bezier(.22,.75,.25,1), visibility 0s linear .42s;
+}
+.profile-education[data-cv-open] .profile-cv {
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition-delay: 0s;
+}
+.profile-cv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  padding: 9px clamp(12px, 2vw, 25px);
+  border-bottom: 1px solid #3d4236;
+}
+.profile-cv-header h3 {
+  color: #f4f5f0;
+  font-size: clamp(14px, 1.45vw, 20px);
+  font-weight: 550;
+  letter-spacing: -.025em;
+}
+.profile-cv-controls, .profile-cv-zoom { display: flex; align-items: center; }
+.profile-cv-controls { gap: 10px; }
+.profile-cv-zoom {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: #d0d4c6;
+}
+.profile-cv-zoom output { min-width: 37px; text-align: center; }
+.profile-cv-zoom button { width: 28px; min-height: 32px; font-size: 16px; }
+.profile-cv-zoom button:disabled { color: #777c71; cursor: default; }
+#profile-cv-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-left: 1px solid #454b3d;
+  min-height: 31px;
+  padding: 0 0 0 10px;
+  color: #d0d4c6;
+  font-size: 11px;
+  line-height: 1;
+}
+#profile-cv-close span { color: var(--lime); font-size: 16px; line-height: 1; }
+.profile-cv-controls button:not(:disabled):hover { color: var(--lime); }
+.profile-cv :focus-visible { outline: 1px solid var(--lime); outline-offset: -2px; }
+.profile-cv-pages {
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: clamp(9px, 1.35vw, 18px);
+  color-scheme: dark;
+  background: #242721;
+  user-select: none;
+}
+.profile-cv-pages img {
+  display: block;
+  width: var(--cv-width, 100%);
+  max-width: none;
+  height: auto;
+  margin-inline: auto;
+  background: white;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.profile-cv-pages img + img { margin-top: 12px; }
+@media print { .profile-cv { display: none; } }
 @media(max-width:700px){
   .profile-portrait{float:right;width:134px;margin:19px 0 0 18px}
   .profile-intro>p{margin-top:22px}
@@ -339,9 +432,27 @@
 .map-marker:hover,.map-marker:focus-visible,.map-marker.active{stroke:#fff;stroke-width:2.4}
 .visitor-map-caption{font-size:9px;line-height:1.7;min-height:31px;margin-top:5px;color:#35461e}
 .visitor-details{border-top:1px solid #10101030;margin-top:8px;padding-top:8px}
-.visitor-details summary{display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:9px;font-weight:500}
-.visitor-details summary>span{font-size:14px;line-height:1}
-.visitor-details[open] summary>span{transform:rotate(45deg)}
+.visitor-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 clamp(12px, 1.4vw, 21px);
+}
+.visitor-tab {
+  padding: 3px 0 6px;
+  border-bottom: 1px solid transparent;
+  color: #34451e;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+}
+.visitor-tab:hover, .visitor-tab[aria-expanded="true"] { color: var(--ink); }
+.visitor-tab[aria-expanded="true"] { border-bottom-color: currentColor; }
+.visitor-tab:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+.visitor-tab-panel { margin-top: 5px; }
+.visitor-recent-status { margin: 6px 0 2px; font-size: 10px; line-height: 1.55; color: #34451e; }
+.visitor-recent-status a { text-decoration: underline; text-underline-offset: .18em; }
+.visitor-recent-status a:hover { color: var(--ink); }
 #visitor-country-list{list-style:none;padding:0;margin:12px 0 0;max-height:180px;overflow:auto}
 #visitor-country-list:empty{display:none}
 #visitor-country-list li+li{border-top:1px solid #1010101a}
@@ -349,7 +460,7 @@
 #visitor-country-list button:hover{color:#344d12}
 .visitor-privacy{font-size:9px;color:#405326;line-height:1.7;margin-top:12px}
 @media(max-width:1100px) and (min-width:701px){.contact-layout{gap:22px;grid-template-columns:1fr 1fr;grid-template-areas:"email office" "motto visitors"}.contact-layout>.office,.contact-layout>.visitor-widget{padding-left:22px}.contact-layout>.visitor-widget{border-top:1px solid #10101030;padding-top:22px}.contact-motto{padding-top:22px}.contact-motto blockquote{font-size:20px}.contact .emails>div>a{font-size:15px}}
-@media(max-width:700px){.contact-layout{grid-template-columns:1fr;grid-template-areas:"email" "office" "motto" "visitors";gap:25px;padding-top:26px}.contact-layout>.office,.contact-layout>.visitor-widget{border-left:0;border-top:1px solid #10101030;padding:23px 0 0}.contact-motto{padding-top:23px}.contact-motto blockquote{font-size:21px;line-height:1.45}.contact .emails>div>a{font-size:16px;max-width:340px}.contact .emails>p,.contact .office address{font-size:12px}.visitor-widget{max-width:100%}.visitor-statline strong{font-size:37px}.visitor-map{max-width:420px}.visitor-map-caption{font-size:10px;min-height:18px}.visitor-details summary{font-size:10px}.visitor-privacy{font-size:10px}}
+@media(max-width:700px){.contact-layout{grid-template-columns:1fr;grid-template-areas:"email" "office" "motto" "visitors";gap:25px;padding-top:26px}.contact-layout>.office,.contact-layout>.visitor-widget{border-left:0;border-top:1px solid #10101030;padding:23px 0 0}.contact-motto{padding-top:23px}.contact-motto blockquote{font-size:21px;line-height:1.45}.contact .emails>div>a{font-size:16px;max-width:340px}.contact .emails>p,.contact .office address{font-size:12px}.visitor-widget{max-width:100%}.visitor-statline strong{font-size:37px}.visitor-map{max-width:420px}.visitor-map-caption{font-size:10px;min-height:18px}.visitor-privacy{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.map-country,.map-marker,.contact .emails button{transition:none}}
 
 /* Tighter service labels leave more room for the publication and conference names. */

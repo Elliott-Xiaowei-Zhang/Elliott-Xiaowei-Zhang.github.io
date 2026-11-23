@@ -89,3 +89,66 @@ addEventListener('resize', () => {
 reducedMotion.addEventListener('change', queueNavigationUpdate);
 new ResizeObserver(queueNavigationUpdate).observe(document.getElementById('main'));
 updateNavigation();
+
+const profile = document.getElementById('profile');
+const educationColumn = profile.querySelector('.profile-education');
+const educationList = document.getElementById('education-list');
+const cvPanel = document.getElementById('profile-cv');
+const cvPages = cvPanel.querySelector('.profile-cv-pages');
+const cvClose = document.getElementById('profile-cv-close');
+const cvScale = document.getElementById('profile-cv-scale');
+const zoomOut = cvPanel.querySelector('[data-cv-zoom="-1"]');
+const zoomIn = cvPanel.querySelector('[data-cv-zoom="1"]');
+const stackedProfile = matchMedia('(max-width: 700px)');
+const cvZoomLevels = [10, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300];
+let cvZoomIndex = cvZoomLevels.indexOf(100);
+
+function setCvOpen(open) {
+  educationColumn.toggleAttribute('data-cv-open', open);
+  cvPanel.inert = !open;
+  cvPanel.setAttribute('aria-hidden', String(!open));
+  educationList.inert = open;
+  for (const link of document.querySelectorAll('[data-open-cv]')) {
+    link.setAttribute('aria-expanded', String(open));
+  }
+}
+
+function closeCv() {
+  setCvOpen(false);
+  profile.querySelector('[data-open-cv]').focus({preventScroll: true});
+}
+
+document.addEventListener('click', event => {
+  if (!(event.target instanceof Element)) return;
+  const trigger = event.target.closest('[data-open-cv]');
+  if (!trigger || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  setCvOpen(true);
+  for (const page of cvPages.querySelectorAll('[data-cv-src]')) {
+    page.src = page.dataset.cvSrc;
+    page.removeAttribute('data-cv-src');
+  }
+  const fromCover = Boolean(trigger.closest('#home'));
+  if (fromCover && location.hash !== '#profile') history.pushState(history.state, '', '#profile');
+  if (stackedProfile.matches) educationColumn.scrollIntoView({block: 'start'});
+  else if (fromCover) profile.scrollIntoView({block: 'start'});
+  cvClose.focus({preventScroll: true});
+});
+cvClose.addEventListener('click', closeCv);
+cvPanel.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeCv();
+  }
+});
+for (const button of [zoomOut, zoomIn]) {
+  button.addEventListener('click', () => {
+    cvZoomIndex += Number(button.dataset.cvZoom);
+    const cvZoom = cvZoomLevels[cvZoomIndex];
+    cvScale.value = `${cvZoom}%`;
+    cvPages.style.setProperty('--cv-width', `${cvZoom}%`);
+    zoomOut.disabled = cvZoomIndex === 0;
+    zoomIn.disabled = cvZoomIndex === cvZoomLevels.length - 1;
+    if (button.disabled) (button === zoomOut ? zoomIn : zoomOut).focus({preventScroll: true});
+  });
+}

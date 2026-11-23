@@ -5,14 +5,14 @@
   <title>Xiaowei (Elliott) Zhang | Information Systems</title>
   <meta name="description" content="Xiaowei (Elliott) Zhang, Ph.D. candidate in Information Systems at Tsinghua University. Research on digital platforms and artificial intelligence.">
   <meta name="theme-color" content="#101010"><meta property="og:title" content="Xiaowei (Elliott) Zhang | Information Systems"><meta property="og:description" content="Digital platforms. Artificial intelligence. Research, teaching, and academic service."><meta property="og:type" content="website"><meta property="og:url" content="https://elliott-xiaowei-zhang.github.io/">
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./assets/fonts.css"><link rel="stylesheet" href="./style.css?v=20261122-open-navigation">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./assets/fonts.css"><link rel="stylesheet" href="./style.css?v=20261123-cv-zoom">
   <link rel="preload" as="image" href="./assets/home-cover/steps-upper-frost.png" fetchpriority="low">
   <link rel="preload" as="image" href="./assets/home-cover/steps-lower-frost.png" fetchpriority="low">
-  <link rel="stylesheet" href="./cover.css?v=20261123-beijing-cover">
-  <script type="module" src="./cover.js?v=20261123-beijing-cover"></script>
-  <script type="module" src="./navigation.js?v=20261122-flat-navigation"></script>
+  <link rel="stylesheet" href="./cover.css?v=20261123-cover-type">
+  <script type="module" src="./cover.js?v=20261123-swipe"></script>
+  <script type="module" src="./navigation.js?v=20261123-cv-zoom"></script>
   <script type="module" src="./app.js?v=20261122-cover"></script>
-  <script type="module" src="./visitors.js?v=20261021-supabase-visitors"></script>
+  <script type="module" src="./visitors.js?v=20261123-pages-visitor-views"></script>
 </head>
 <body>
   <a class="skip" href="#profile">Skip to content</a>
@@ -30,7 +30,7 @@
     </nav>
     <div class="uc-actions">
     <a href="mailto:xw-zhang21@mails.tsinghua.edu.cn">Email <span aria-hidden="true">↗</span></a>
-    <span aria-disabled="true" aria-label="CV, coming soon" class="uc-cv" role="link" title="CV coming soon">CV</span>
+    <a href="#profile" data-open-cv aria-controls="profile-cv" aria-expanded="false">CV <span aria-hidden="true">↗</span></a>
     </div>
     </div>
     <p class="uc-market"><strong>I am on the <span class="uc-market-topic">academic job market</span></strong> this year (2026/27)!</p>
@@ -53,7 +53,7 @@
     <button aria-controls="uc-stairs" aria-label="阶梯" aria-pressed="false" class="cursor-interaction" data-scene="uc-stairs" type="button"></button>
     <button aria-controls="uc-moire" aria-label="暗色莫尔纹" aria-pressed="false" class="cursor-interaction" data-scene="uc-moire" type="button"></button>
     <button aria-controls="uc-letter" aria-label="字母切面" aria-pressed="false" class="cursor-interaction" data-scene="uc-letter" type="button"></button>
-    <button aria-controls="uc-flow" aria-label="粒子双流" aria-pressed="false" class="cursor-interaction" data-scene="uc-flow" type="button"></button>
+    <button aria-controls="uc-fins" aria-label="黑色鳍片" aria-pressed="false" class="cursor-interaction" data-scene="uc-fins" type="button"></button>
     </div>
     <section aria-label="绿光断层" class="uc-design uc-stone" id="uc-stone" lang="en" data-artwork="./assets/home-cover/stone.webp">
     <div class="uc-page">
@@ -81,7 +81,7 @@
       </nav>
       <div class="uc-actions">
       <a href="mailto:xw-zhang21@mails.tsinghua.edu.cn">Email <span aria-hidden="true">↗</span></a>
-      <span aria-disabled="true" aria-label="CV, coming soon" class="uc-cv" role="link" title="CV coming soon">CV</span>
+      <a href="#profile" data-open-cv aria-controls="profile-cv" aria-expanded="false">CV <span aria-hidden="true">↗</span></a>
       </div>
       </div>
       <p class="uc-market"><strong>I am on the <span class="uc-market-topic">academic job market</span></strong> this year (2026/27)!</p>
@@ -176,12 +176,13 @@
     <div aria-label="Introduction and links" class="uc-bio"></div>
     </div>
     </section>
-    <section aria-label="粒子双流" class="uc-design uc-flow" hidden="" id="uc-flow" lang="en" data-artwork="./assets/home-cover/flow.webp">
+    <section aria-label="黑色鳍片" class="uc-design uc-fins" hidden="" id="uc-fins" lang="en" data-artwork="./assets/home-cover/fins.webp">
     <div class="uc-page">
-    <figure aria-label="荧绿颗粒形成两道相向的波面" class="uc-art">
-    <div aria-hidden="true" class="uc-picture"></div>
-    <div aria-hidden="true" class="uc-shine"></div>
-    <canvas aria-hidden="true" class="uc-specks"></canvas>
+    <figure aria-label="Green light travels over a curved row of black metal fins" class="uc-art">
+    <div aria-hidden="true" class="uc-fins-crop">
+    <div class="uc-fins-lit"></div>
+    <div class="uc-fins-reflection"></div>
+    </div>
     </figure>
     <header class="uc-header">
     <a aria-label="Overview" class="uc-mark" href="#home">XZ</a>
@@ -201,7 +202,44 @@
       <aside class="sidebar" aria-label="Site index"><a class="identity" href="#home" aria-label="Xiaowei Zhang, home"><span class="identity-mark">XZ<span aria-hidden="true">↗</span></span><span class="identity-name">Xiaowei<br>Zhang<span class="identity-alias">(Elliott)</span></span></a><div class="index-caption">SITE INDEX</div><nav id="site-navigation" class="site-index-links" aria-label="Main navigation"><a href="#home" data-section="home" class="current" aria-current="location"><span class="nav-number">00</span><span>Overview</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#profile" data-section="profile"><span class="nav-number">01</span><span>Profile</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#research" data-section="research"><span class="nav-number">02</span><span>Research</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#talks" data-section="talks"><span class="nav-number">03</span><span>Talks</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#teaching" data-section="teaching"><span class="nav-number">04</span><span>Teaching</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#service" data-section="service"><span class="nav-number">05</span><span>Service</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#gallery" data-section="gallery"><span class="nav-number">06</span><span>Gallery</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#contact" data-section="contact"><span class="nav-number">07</span><span>Contact</span><span class="nav-arrow" aria-hidden="true">↗</span></a></nav><div class="sidebar-bottom"><a href="https://scholar.google.com/citations?user=K7uOUW0AAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">↗</span></a><a href="mailto:xw-zhang21@mails.tsinghua.edu.cn">Drop Me a Line <span aria-hidden="true">↗</span></a><div class="reading-progress" aria-hidden="true"><span></span></div></div></aside>
     </div>
     <div class="site-sections">
-<section id="profile" class="profile dark page-section" aria-labelledby="profile-heading"><div class="container"><div class="section-kicker"><span class="eyebrow">01 / PROFILE</span><a href="#honors" class="small-link">Selected honors & awards <span aria-hidden="true">↘</span></a></div><div class="profile-layout"><div class="profile-intro"><h2 id="profile-heading">Curiosity,<br>with<br><span>direction.</span></h2><figure class="profile-portrait"><img src="./assets/xiaowei-portrait.png" width="1024" height="1024" alt="Color illustration of Xiaowei Zhang" loading="lazy" decoding="async"></figure><p>My academic path brings together Information Systems, electronic commerce, and finance.</p><a class="underlined" href="https://orcid.org/0009-0006-0650-5140" target="_blank" rel="noopener noreferrer">View ORCID <span aria-hidden="true">↗</span></a></div><div id="education-list" class="education-list"></div></div><div class="honors" id="honors"><div class="honors-heading"><h3>Selected honors & awards<span>.</span></h3><span class="eyebrow">RECOGNITION / 2018—2026</span></div><div id="honor-grid" class="honor-grid"></div></div></div></section>
+<section id="profile" class="profile dark page-section" aria-labelledby="profile-heading">
+  <div class="container">
+    <div class="section-kicker"><span class="eyebrow">01 / PROFILE</span><a href="#honors" class="small-link">Selected honors & awards <span aria-hidden="true">↘</span></a></div>
+    <div class="profile-layout">
+      <div class="profile-intro">
+        <h2 id="profile-heading">Curiosity,<br>with<br><span>direction.</span></h2>
+        <figure class="profile-portrait"><img src="./assets/xiaowei-portrait.png" width="1024" height="1024" alt="Color illustration of Xiaowei Zhang" loading="lazy" decoding="async"></figure>
+        <p>My background in information systems and finance sparked my interest in emerging business trends, new business models, and technology adoption.</p>
+        <div class="profile-links">
+          <a class="underlined" href="https://orcid.org/0009-0006-0650-5140" target="_blank" rel="noopener noreferrer">View ORCID <span aria-hidden="true">↗</span></a>
+          <a class="underlined" href="#profile" data-open-cv aria-controls="profile-cv" aria-expanded="false">CV <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="profile-education">
+        <div id="education-list" class="education-list"></div>
+        <section id="profile-cv" class="profile-cv" aria-labelledby="profile-cv-heading" aria-hidden="true" inert>
+          <header class="profile-cv-header">
+            <h3 id="profile-cv-heading">Curriculum vitae</h3>
+            <div class="profile-cv-controls">
+              <div class="profile-cv-zoom" role="group" aria-label="CV zoom">
+                <button type="button" data-cv-zoom="-1" aria-label="Zoom out">−</button>
+                <output id="profile-cv-scale" aria-label="Zoom level">100%</output>
+                <button type="button" data-cv-zoom="1" aria-label="Zoom in">+</button>
+              </div>
+              <button type="button" id="profile-cv-close" aria-label="Close CV">Close <span aria-hidden="true">×</span></button>
+            </div>
+          </header>
+          <div class="profile-cv-pages" tabindex="0" role="region" aria-label="Curriculum vitae pages">
+            <img data-cv-src="./assets/cv/page-1.webp" width="1522" height="2152" alt="Curriculum vitae, page 1 of 3" loading="lazy" decoding="async" draggable="false">
+            <img data-cv-src="./assets/cv/page-2.webp" width="1522" height="2152" alt="Curriculum vitae, page 2 of 3" loading="lazy" decoding="async" draggable="false">
+            <img data-cv-src="./assets/cv/page-3.webp" width="1522" height="2152" alt="Curriculum vitae, page 3 of 3" loading="lazy" decoding="async" draggable="false">
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="honors" id="honors"><div class="honors-heading"><h3>Selected honors & awards<span>.</span></h3><span class="eyebrow">RECOGNITION / 2018—2026</span></div><div id="honor-grid" class="honor-grid"></div></div>
+  </div>
+</section>
 <section id="research" class="research page-section" aria-labelledby="research-heading"><div class="container"><div class="section-kicker"><span class="eyebrow">02 / RESEARCH</span><span class="eyebrow">THREE RESEARCH THEMES</span></div>
 <div class="research-introduction"><h2 id="research-heading">Research<span class="punctuation">.</span></h2><div class="research-prose"><p>I study how <strong>digital platforms</strong> and <strong>artificial intelligence</strong> reshape economic activity and organizational decision-making. My research asks how platform design, market mechanisms, and emerging intelligent technologies influence the creation, distribution and evaluation of value. I examine how these changes shape individual behavior and social interactions, organizational strategies and practices, and the distribution of market opportunities, with broader implications for societal welfare. I also study how AI transforms professional expertise, judgment, and influence, and how market and human outcomes inform platform design.</p><p>My empirical work draws on <strong>large-scale field data</strong>, <strong>econometrics and causal inference</strong>, <strong>field experiments</strong>, <strong>machine learning</strong>, and <strong>LLM-based methods</strong>. I am also interested in using game-theoretic analytics and structural modeling.</p><p>My work is centered on digital platforms across the <strong>gig and sharing economy</strong>, <strong>on-demand delivery</strong>, <strong>digital health</strong>, <strong>e-commerce</strong>, etc. I have established research collaborations with leading digital platform enterprises, and continue to <a class="partnership-link" href="mailto:xw-zhang21@mails.tsinghua.edu.cn">seek new partnerships</a> with platform enterprises and AI firms to help address pressing challenges in frontline management practice and develop novel theoretical insights from these practical contexts. I am also beginning to explore related settings beyond platforms, including how AI and other emerging technologies may reshape clinical and operational practices in traditional healthcare organizations.</p></div></div>
 <div class="research-directions"><article><span class="direction-number">01</span><h3>Platform governance<br> & design</h3><p>I study how platform governance and algorithmic design shape the strategies of complementors within platform ecosystems. My work examines how platforms orchestrate value creation, influence complementors’ incentives to innovate and adapt, and shape value capture and competitive dynamics across the ecosystem.</p><span class="direction-caption">PLATFORM STRATEGY · ECOSYSTEM GOVERNANCE · VALUE CAPTURE</span></article><article><span class="direction-number">02</span><h3>Digital market<br> dynamics</h3><p>What brings people into digital markets, how do they interact and respond to one another, and what sustains their participation? I study entrepreneurial motivation, innovation, peer interactions, and the ways consumers adapt their behavior and assess the value that providers create.</p><span class="direction-caption">PARTICIPATION · INNOVATION · INTERACTION</span></article><article><span class="direction-number">03</span><h3>AI & human<br> agency</h3><p>How does AI change expertise, judgment, and influence? I study how people decide alongside AI, how conversational systems reshape professional expertise and the division of work, and how AI influences collective interaction. Across healthcare and organizations, I examine the implications for human judgment, decision authority, and agency.</p><span class="direction-caption">HUMAN–AI COLLABORATION · HUMAN EXPERTISE · ALGORITHMIC JUDGMENT</span></article></div>
@@ -235,7 +273,19 @@
     <div class="gallery-empty"><div class="gallery-frame" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M8 22V8h14M42 8h14v14M56 42v14H42M22 56H8V42"/><circle cx="24" cy="27" r="1.5" fill="currentColor" stroke="none"/><circle cx="40" cy="27" r="1.5" fill="currentColor" stroke="none"/><path d="M23 37c4 7 14 7 18 0"/></svg></div><div><h3>A little empty for now.</h3><p>Saving this spot for snapshots and little adventures.</p></div></div>
   </div>
 </div></section>
-<section id="contact" class="contact page-section" aria-labelledby="contact-heading"><div class="container"><div class="section-kicker"><span class="eyebrow">07 / CONTACT</span><span class="eyebrow">RESEARCH & COLLABORATION</span></div><div class="contact-heading"><h2 id="contact-heading">Drop Me<span class="contact-break"><br></span> a Line<span class="punctuation">.</span></h2><a href="mailto:xw-zhang21@mails.tsinghua.edu.cn" class="contact-arrow" aria-label="Email Xiaowei Zhang">↗</a></div><div class="contact-layout"><div class="emails"><span class="eyebrow">EMAIL</span><div><a href="mailto:xw-zhang21@mails.tsinghua.edu.cn">xw-zhang21 [at] mails [dot] tsinghua [dot] edu [dot] cn</a><button data-copy="xw-zhang21@mails.tsinghua.edu.cn" aria-label="Copy Tsinghua email">Copy</button></div></div><div class="office"><span class="eyebrow">OFFICE</span><address>Room 431, Lihua Building<br>School of Economics and Management<br>Tsinghua University<br>30 Shuangqing Road, Haidian<br>Beijing, China</address></div><figure class="contact-motto"><blockquote>“Nothing in life is as important as you think it is when you are thinking about it.”</blockquote></figure><div class="visitor-widget" aria-labelledby="visitor-heading"><span class="eyebrow" id="visitor-heading">HELLO, WORLD</span><div class="visitor-statline"><div><strong id="visitor-total">—</strong><span id="visitor-noun">visitors</span></div><span id="visitor-regions">From near &amp; far</span></div><div class="visitor-map" id="visitor-map" aria-label="Visitor locations on a world map"></div><p id="visitor-map-caption" class="visitor-map-caption" aria-live="polite">Loading our little corner of the world…</p><div class="visitor-update"><p id="visitor-status" class="visitor-status" hidden></p><button class="visitor-refresh" id="visitor-refresh" type="button" aria-label="Refresh visitor statistics">Refresh <span aria-hidden="true">↻</span></button></div><details class="visitor-details"><summary>Explore visitor origins <span aria-hidden="true">＋</span></summary><ul id="visitor-country-list"></ul><p class="visitor-privacy">Approximate unique browsers since October 2026. Country/region estimates only; no IP addresses or precise locations are stored.</p></details></div></div><div class="contact-socials"><a href="https://scholar.google.com/citations?user=K7uOUW0AAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a><a href="https://www.linkedin.com/in/xiaowei-elliott-zhang-a07a851b3/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://orcid.org/0009-0006-0650-5140" target="_blank" rel="noopener noreferrer">ORCID ↗</a><a href="https://www.researchgate.net/profile/Xiaowei-Zhang-51?ev=hdr_xprf" target="_blank" rel="noopener noreferrer">ResearchGate ↗</a></div><footer><span>© 2026 Xiaowei (Elliott) Zhang</span><a href="#home">Back to top ↑</a></footer></div></section>
+<section id="contact" class="contact page-section" aria-labelledby="contact-heading"><div class="container"><div class="section-kicker"><span class="eyebrow">07 / CONTACT</span><span class="eyebrow">RESEARCH & COLLABORATION</span></div><div class="contact-heading"><h2 id="contact-heading">Drop Me<span class="contact-break"><br></span> a Line<span class="punctuation">.</span></h2><a href="mailto:xw-zhang21@mails.tsinghua.edu.cn" class="contact-arrow" aria-label="Email Xiaowei Zhang">↗</a></div><div class="contact-layout"><div class="emails"><span class="eyebrow">EMAIL</span><div><a href="mailto:xw-zhang21@mails.tsinghua.edu.cn">xw-zhang21 [at] mails [dot] tsinghua [dot] edu [dot] cn</a><button data-copy="xw-zhang21@mails.tsinghua.edu.cn" aria-label="Copy Tsinghua email">Copy</button></div></div><div class="office"><span class="eyebrow">OFFICE</span><address>Room 431, Lihua Building<br>School of Economics and Management<br>Tsinghua University<br>30 Shuangqing Road, Haidian<br>Beijing, China</address></div><figure class="contact-motto"><blockquote>“Nothing in life is as important as you think it is when you are thinking about it.”</blockquote></figure><div class="visitor-widget" aria-labelledby="visitor-heading"><span class="eyebrow" id="visitor-heading">HELLO, WORLD</span><div class="visitor-statline"><div><strong id="visitor-total">—</strong><span id="visitor-noun">visitors</span></div><span id="visitor-regions">From near &amp; far</span></div><div class="visitor-map" id="visitor-map" aria-label="Visitor locations on a world map"></div><p id="visitor-map-caption" class="visitor-map-caption" aria-live="polite">Loading our little corner of the world…</p><div class="visitor-update"><p id="visitor-status" class="visitor-status" hidden></p><button class="visitor-refresh" id="visitor-refresh" type="button" aria-label="Refresh visitor statistics">Refresh <span aria-hidden="true">↻</span></button></div><div class="visitor-details">
+  <div class="visitor-tabs" role="group" aria-label="Visitor statistics views">
+    <button type="button" class="visitor-tab" aria-controls="visitor-origins" aria-expanded="false">Explore visitor origins</button>
+    <button type="button" class="visitor-tab" aria-controls="visitor-recent" aria-expanded="false">Recent visits</button>
+  </div>
+  <div id="visitor-origins" class="visitor-tab-panel" hidden>
+    <ul id="visitor-country-list"></ul>
+    <p class="visitor-privacy">Approximate unique browsers since October 2026. Country/region estimates only.</p>
+  </div>
+  <div id="visitor-recent" class="visitor-tab-panel" role="region" aria-label="Recent visitors" hidden>
+    <p class="visitor-recent-status"><a href="https://xiaowei-zhang-academic.elliottzhang13.chatgpt.site/#contact" target="_blank" rel="noopener noreferrer">View recent visits on Sites <span aria-hidden="true">↗</span></a></p>
+  </div>
+</div></div></div><div class="contact-socials"><a href="https://scholar.google.com/citations?user=K7uOUW0AAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a><a href="https://www.linkedin.com/in/xiaowei-elliott-zhang-a07a851b3/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://orcid.org/0009-0006-0650-5140" target="_blank" rel="noopener noreferrer">ORCID ↗</a><a href="https://www.researchgate.net/profile/Xiaowei-Zhang-51?ev=hdr_xprf" target="_blank" rel="noopener noreferrer">ResearchGate ↗</a></div><footer><span>© 2026 Xiaowei (Elliott) Zhang</span><a href="#home">Back to top ↑</a></footer></div></section>
     </div>
   </div>
   </main>

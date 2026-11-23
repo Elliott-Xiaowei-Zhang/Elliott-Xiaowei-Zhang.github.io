@@ -9,6 +9,10 @@ const regionsNode = document.querySelector('#visitor-regions');
 const list = document.querySelector('#visitor-country-list');
 const statusNode = document.querySelector('#visitor-status');
 const refreshButton = document.querySelector('#visitor-refresh');
+const details = document.querySelector('.visitor-details');
+const views = [...details.querySelectorAll('.visitor-tab')].map(button => ({
+  button, panel: document.getElementById(button.getAttribute('aria-controls')),
+}));
 const ns = 'http://www.w3.org/2000/svg';
 const names = new Intl.DisplayNames(['en'], { type: 'region' });
 const number = new Intl.NumberFormat('en');
@@ -24,6 +28,16 @@ function regionName(code) {
   if (code === 'ZZ') return 'Location unavailable';
   if (regionLabels[code]) return regionLabels[code];
   try { return names.of(code) || code; } catch { return code; }
+}
+for (const view of views) {
+  view.button.addEventListener('click', () => {
+    const open = view.panel.hidden;
+    for (const other of views) {
+      const active = open && other === view;
+      other.button.setAttribute('aria-expanded', String(active));
+      other.panel.hidden = !active;
+    }
+  });
 }
 function describe(code) {
   if (!stats) return;
@@ -87,7 +101,7 @@ async function loadStats() {
     totalNode.textContent = '—';
     regionsNode.textContent = 'From near & far';
     caption.textContent = 'More little hellos to come.';
-    document.querySelector('.visitor-details').hidden = true;
+    details.hidden = true;
     return;
   }
   refreshButton.disabled = true;
@@ -106,7 +120,7 @@ async function loadStats() {
     publishedSnapshotUrl?.searchParams.set('refresh', Math.floor(Date.now() / 60000));
     await loadVisitorStatistics({ request, storage, snapshotUrl, publishedSnapshotUrl,
       onUpdate(result) {
-        document.querySelector('.visitor-details').hidden = false;
+        details.hidden = false;
         const changed = JSON.stringify(stats) !== JSON.stringify(result.stats);
         stats = result.stats;
         lastResult = result;

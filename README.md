@@ -16,7 +16,7 @@
 | `site-settings.js` | 已启用的独立统计接口地址与同域快照路径 |
 | `visitor-snapshot.json` | 真实访客总数与国家/地区汇总的发布快照 |
 | `scripts/update-visitor-snapshot.py` | 发布时只读获取真实汇总；不新增访问记录 |
-| `assets/` | 彩色头像、Inter 字体及其许可证、世界地图数据及来源 |
+| `assets/` | 彩色头像、七款首屏的图形、CV 阅读页、Inter 字体及其许可证、世界地图数据及来源 |
 | `hosting/cloudflare/` | 可选的访客统计服务器、数据库建表文件和部署说明 |
 | `scripts/prepare-site.py` | 将网页资源整理到 `dist/`，用于自动部署 |
 | `google*.html` | Google Search Console 验证文件；发布时原样复制到网站根目录 |
@@ -59,6 +59,7 @@ GitHub Pages 和 Sites 版本共用 Supabase Free 统计 API：`https://ozaakbko
 - `site-settings.js` 的 `enabled: true` 和 `endpoint` 控制统计；常规 GitHub Pages 工作流会保留这项配置，不再关闭统计。
 - 随机浏览器 ID 保存在主页自身的 localStorage，最长一年；刷新页面不会重复计数，不使用跨站 Cookie，不发送账户凭据。
 - API 只返回总人数及国家/地区汇总；国家/地区由服务器边缘节点提供，不记录 IP 地址、精确坐标、浏览器指纹或访问者账户。
+- GitHub Pages 的 **Recent visits** 页签提供私有 Sites 的访问记录入口，查看需要登录。
 - Do Not Track / Global Privacy Control、可识别爬虫不计数；`localhost` 和 `127.0.0.1` 本地预览只读取线上总数，不污染正式计数。
 - 2026-10-21 已迁移独立 Sites 统计服务的 19 条真实匿名记录，保留原标识和首次访问时间；迁移数据未放入 Git。早先关闭统计期间的访问无法补计。
 - `hosting/supabase/` 保存当前数据库结构、函数源代码和部署说明。`hosting/visitor-service/` 为旧统计服务的源代码存档。

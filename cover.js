@@ -10,8 +10,6 @@
     const lerp = (a, b, t) => (1 - t) * a + t * b;
     const wave = (time, period) => .5 - .5 * Math.cos(Math.PI * 2 * time / period);
     const fraction = n => n - Math.floor(n);
-    const upper = [[0, .265], [.18, .18], [.36, .16], [.44, .19], [.55, .29], [.65, .38], [.74, .40]];
-    const lower = [[.18, .64], [.30, .57], [.39, .61], [.51, .72], [.61, .72], [.76, .56], [1, .32]];
 
     function prepareArtwork(scene, priority = 'low') {
       const existing = preloaded.get(scene);
@@ -40,32 +38,64 @@
       return asset;
     }
 
-    function showScene(choice) {
+    let slide;
+    function finishSlide() {
+      if (!slide) return;
+      const {outgoing, animations} = slide;
+      slide = undefined;
+      outgoing.hidden = true;
+      outgoing.inert = false;
+      outgoing.removeAttribute('data-cover-leaving');
+      gallery.removeAttribute('data-cover-sliding');
+      for (const animation of animations) animation.cancel();
+    }
+
+    function showScene(choice, direction = 0) {
+      finishSlide();
       const scene = choice.dataset.scene;
+      const outgoing = views.find(view => !view.hidden && view.id !== scene);
+      const incoming = document.getElementById(scene);
+      const shouldSlide = direction && outgoing && !reduced.matches && incoming.animate;
       gallery.dataset.active = scene;
       for (const view of views) {
-        view.hidden = view.id !== scene;
-        if (!view.hidden) gallery.dataset.surface = view.classList.contains('uc-light') ? 'light' : 'dark';
+        view.hidden = view !== incoming && !(shouldSlide && view === outgoing);
       }
+      gallery.dataset.surface = incoming.classList.contains('uc-light') ? 'light' : 'dark';
       for (const option of choices) {
         option.setAttribute('aria-pressed', String(option === choice));
       }
+      if (!shouldSlide) return;
+
+      gallery.setAttribute('data-cover-sliding', '');
+      outgoing.setAttribute('data-cover-leaving', '');
+      outgoing.inert = true;
+      const motion = {duration: 420, easing: 'cubic-bezier(.25,.72,.22,1)', fill: 'both'};
+      const animations = [
+        outgoing.animate([{transform: 'translateX(0)'}, {transform: `translateX(${-direction * 100}%)`}], motion),
+        incoming.animate([{transform: `translateX(${direction * 100}%)`}, {transform: 'translateX(0)'}], motion),
+      ];
+      const current = slide = {outgoing, animations};
+      void Promise.allSettled(animations.map(animation => animation.finished)).then(() => {
+        if (slide === current) finishSlide();
+      });
     }
 
     let selection = 0;
-    function selectScene(choice) {
+    function selectScene(choice, direction) {
       const request = ++selection;
       switcher.querySelector('[data-loading]')?.removeAttribute('data-loading');
       switcher.removeAttribute('aria-busy');
       const scene = choice.dataset.scene;
       if (gallery.dataset.active === scene) return;
+      const current = choices.findIndex(option => option.dataset.scene === gallery.dataset.active);
+      direction ??= Math.sign(choices.indexOf(choice) - current);
       if (!artwork.has(scene)) {
-        showScene(choice);
+        showScene(choice, direction);
         return;
       }
       const asset = prepareArtwork(scene, 'high');
       if (asset.ready) {
-        showScene(choice);
+        showScene(choice, direction);
         return;
       }
       choice.setAttribute('data-loading', '');
@@ -74,8 +104,13 @@
         if (request !== selection) return;
         choice.removeAttribute('data-loading');
         switcher.removeAttribute('aria-busy');
-        if (ready) showScene(choice);
+        if (ready) showScene(choice, direction);
       });
+    }
+
+    function stepScene(direction) {
+      const current = choices.findIndex(option => option.dataset.scene === gallery.dataset.active);
+      selectScene(choices[(current + direction + choices.length) % choices.length], direction);
     }
 
     for (const choice of choices) {
@@ -84,7 +119,10 @@
     switcher.addEventListener('keydown', event => {
       const current = choices.indexOf(event.target);
       if (current === -1) return;
+      const direction = {ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1}[event.key];
       const next = {
+        ArrowLeft: (current + choices.length - 1) % choices.length,
+        ArrowRight: (current + 1) % choices.length,
         ArrowUp: (current + choices.length - 1) % choices.length,
         ArrowDown: (current + 1) % choices.length,
         Home: 0,
@@ -92,9 +130,47 @@
       }[event.key];
       if (next === undefined) return;
       event.preventDefault();
-      selectScene(choices[next]);
+      selectScene(choices[next], direction);
       choices[next].focus({preventScroll: true});
     });
+    reduced.addEventListener('change', finishSlide);
+
+    let drag;
+    gallery.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || event.button !== 0 || event.target.closest('a, button') ||
+          (event.pointerType === 'mouse' && event.target.closest('.uc-title, .uc-bio'))) return;
+      drag = {id: event.pointerId, x: event.clientX, y: event.clientY};
+      gallery.setPointerCapture(event.pointerId);
+    });
+    gallery.addEventListener('pointerup', event => {
+      if (drag?.id !== event.pointerId) return;
+      const x = event.clientX - drag.x;
+      const y = event.clientY - drag.y;
+      drag = undefined;
+      if (Math.abs(x) >= 56 && Math.abs(x) > Math.abs(y) * 1.4) stepScene(x < 0 ? 1 : -1);
+    });
+    gallery.addEventListener('pointercancel', event => {
+      if (drag?.id === event.pointerId) drag = undefined;
+    });
+
+    let lastWheel = 0, wheelDistance = 0, wheelSelected = false;
+    gallery.addEventListener('wheel', event => {
+      if (event.ctrlKey || Math.abs(event.deltaX) <= Math.abs(event.deltaY) * 1.4) return;
+      event.preventDefault();
+      const now = performance.now();
+      if (now - lastWheel > 190) {
+        wheelSelected = false;
+        wheelDistance = 0;
+      }
+      lastWheel = now;
+      if (wheelSelected) return;
+      const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 16 : 1;
+      wheelDistance += event.deltaX * unit;
+      if (Math.abs(wheelDistance) < 60) return;
+      wheelSelected = true;
+      stepScene(wheelDistance > 0 ? 1 : -1);
+    }, {passive: false});
+
     const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const beijingDay = new Intl.DateTimeFormat('en-US', {
       timeZone: 'Asia/Shanghai',
@@ -137,35 +213,6 @@
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
       ctx.clearRect(0, 0, w, h);
       return true;
-    }
-
-    function flow(art) {
-      const canvas = art.querySelector('.uc-specks');
-      const ctx = canvas.getContext('2d');
-      const dots = Array.from({length: 342}, (_, i) => ({
-        at: fraction((i + 1) * .618034),
-        radius: .34 + fraction(i * .732) * .93,
-        lane: fraction(i * .569) - .5,
-        speed: .021 + fraction(i * .297) * .017,
-        line: i % 2 ? upper : lower
-      }));
-      return ({time, w, h, aspect, gain, still}) => {
-        const t = wave(time + 1.6, 12.4);
-        art.style.setProperty('--tide', still ? '0px' : (Math.sin(time * .53) * 3.2 * gain).toFixed(2) + 'px');
-        glint(art, sample(upper, .25 + .58 * t), sample(lower, .78 - .57 * t), w, h, still ? 0 : (.16 + .2 * t) * gain, aspect);
-        if (!prepareCanvas(canvas, ctx, w, h) || still) return;
-        ctx.fillStyle = '#d5ff7c';
-        for (const dot of dots) {
-          const along = fraction(dot.at + dot.speed * time);
-          const [x, y] = sample(dot.line, along);
-          const [px, py] = artPoint([x, y + dot.lane * .12], w, h, aspect);
-          ctx.globalAlpha = Math.min(.7, Math.sin(along * Math.PI) * (.24 + .28 * t) * gain);
-          ctx.beginPath();
-          ctx.arc(px, py, dot.radius, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.globalAlpha = 1;
-      };
     }
 
     function visibleCut(a, b, w, h) {
@@ -354,7 +401,6 @@
     }
 
     const painters = {
-      'uc-flow': flow,
       'uc-stone': stoneReflection,
       'uc-print': print,
       'uc-fold': art => cutLights(art, [{start:[.334, .204], end:[.844, .435], cycle:7.3, offset:.31}]),
@@ -363,11 +409,14 @@
       'uc-letter': letterCut
     };
     for (const variant of views) {
-      const art = variant.querySelector('.uc-art');
       const intro = variant.querySelector('.uc-bio');
       if (!intro.firstElementChild) intro.append(bioTemplate.content.cloneNode(true));
 
-      const paint = painters[variant.id](art);
+      const createPainter = painters[variant.id];
+      if (!createPainter) continue;
+
+      const art = variant.querySelector('.uc-art');
+      const paint = createPainter(art);
       let w = 0, h = 0, aspect = 2, visible = !('IntersectionObserver' in window), handle = 0, previous = 0, time = 0;
       const render = still => { if (w && h) paint({time, w, h, aspect, gain: 1, still}); };
       const active = () => w > 0 && h > 0 && visible && !variant.hidden && !document.hidden && !reduced.matches;
