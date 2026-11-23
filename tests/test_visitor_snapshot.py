@@ -36,6 +36,25 @@ class SnapshotTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 snapshot.checked_stats(value)
 
+    def test_recent_snapshot_keeps_only_public_visit_hours_and_survives_outage(self):
+        now = datetime(2026, 10, 21, 10, tzinfo=timezone.utc)
+        totals = {"total": 1, "since": None, "countries": [{"country": "CN", "visitors": 1}]}
+        visits = {"visits": [{"country": "CN", "hour": "2026-10-21T09:00:00Z", "id": "private"}]}
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "visitor-snapshot.json"
+            first = snapshot.refresh_snapshot(
+                output, "totals", "published",
+                lambda url: {"totals": totals, "recent": visits}[url], now, recent_endpoint="recent",
+            )
+            self.assertEqual(first["recent"]["visits"], [{"country": "CN", "hour": "2026-10-21T09:00:00Z"}])
+            later = snapshot.refresh_snapshot(
+                output, "totals", "published", lambda url: {"totals": totals}[url],
+                now.replace(hour=11), recent_endpoint="recent",
+            )
+            self.assertEqual(later["recent"], first["recent"])
+        with self.assertRaises(ValueError):
+            snapshot.checked_visit_hours({"visits": [{"country": "CN", "hour": "2026-10-21T09:42:00Z"}]})
+
 
 if __name__ == "__main__":
     unittest.main()

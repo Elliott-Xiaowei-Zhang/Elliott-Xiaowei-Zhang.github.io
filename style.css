@@ -450,9 +450,28 @@
 .visitor-tab[aria-expanded="true"] { border-bottom-color: currentColor; }
 .visitor-tab:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
 .visitor-tab-panel { margin-top: 5px; }
+#visitor-recent { max-block-size: 225px; overflow: auto; overscroll-behavior: contain; }
 .visitor-recent-status { margin: 6px 0 2px; font-size: 10px; line-height: 1.55; color: #34451e; }
-.visitor-recent-status a { text-decoration: underline; text-underline-offset: .18em; }
-.visitor-recent-status a:hover { color: var(--ink); }
+.visitor-recent-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 10px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+.visitor-recent-table th {
+  position: sticky;
+  top: 0;
+  color: #34451e;
+  background: var(--lime);
+  font-weight: 600;
+}
+.visitor-recent-table :is(th, td) {
+  padding: 5px 9px 5px 0;
+  border-bottom: 1px solid #10101024;
+}
+.visitor-recent-table :is(th, td):last-child { padding-right: 4px; text-align: right; white-space: nowrap; }
 #visitor-country-list{list-style:none;padding:0;margin:12px 0 0;max-height:180px;overflow:auto}
 #visitor-country-list:empty{display:none}
 #visitor-country-list li+li{border-top:1px solid #1010101a}

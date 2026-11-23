@@ -3,3 +3,7 @@
 # Counting still requires an allowed homepage Origin, explicit intent and a UUID.
 verify_jwt = false
 entrypoint = "./functions/visitors/index.ts"
+
+[functions.homepage-public-recent-visitors]
+verify_jwt = false
+entrypoint = "./functions/homepage-public-recent-visitors/index.ts"

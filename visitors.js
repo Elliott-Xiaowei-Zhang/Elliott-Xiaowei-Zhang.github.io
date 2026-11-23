@@ -1,6 +1,6 @@
-import { visitorStatistics } from './site-settings.js?v=20261021-supabase-visitors';
+import { visitorStatistics } from './site-settings.js?v=20261123-inline-visits';
 import { visitorRequest } from './visitor-client.js?v=20261018-visitor-api';
-import { loadVisitorStatistics, startVisitorRefresh } from './visitor-data.js?v=20261021-supabase-visitors';
+import { loadRecentVisitorActivity, loadVisitorStatistics, startVisitorRefresh } from './visitor-data.js?v=20261123-inline-visits';
 
 const container = document.querySelector('#visitor-map');
 const caption = document.querySelector('#visitor-map-caption');
@@ -13,6 +13,14 @@ const details = document.querySelector('.visitor-details');
 const views = [...details.querySelectorAll('.visitor-tab')].map(button => ({
   button, panel: document.getElementById(button.getAttribute('aria-controls')),
 }));
+const recentPanel = document.getElementById('visitor-recent');
+const recentStatus = document.getElementById('visitor-recent-status');
+const recentTable = document.getElementById('visitor-recent-table');
+const recentDate = new Intl.DateTimeFormat('en-US', {
+  month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+  hourCycle: 'h23', timeZone: 'Asia/Shanghai',
+});
+document.querySelector('.visitor-tab[aria-controls="visitor-recent"]').hidden = !visitorStatistics.recentEndpoint;
 const ns = 'http://www.w3.org/2000/svg';
 const names = new Intl.DisplayNames(['en'], { type: 'region' });
 const number = new Intl.NumberFormat('en');
@@ -29,6 +37,56 @@ function regionName(code) {
   if (regionLabels[code]) return regionLabels[code];
   try { return names.of(code) || code; } catch { return code; }
 }
+function freshSnapshotUrl(path = visitorStatistics.snapshot || './visitor-snapshot.json') {
+  const url = new URL(path, import.meta.url);
+  url.searchParams.set('refresh', Math.floor(Date.now() / 60000));
+  return url;
+}
+
+function showRecentStatus(message) {
+  recentStatus.textContent = message;
+  recentStatus.hidden = !message;
+}
+
+let recentRequest;
+let latestRecent;
+function loadRecent() {
+  if (recentRequest) return recentRequest;
+  if (!latestRecent) showRecentStatus('Loading recent visits…');
+  recentRequest = loadRecentVisitorActivity({
+    endpoint: visitorStatistics.recentEndpoint,
+    snapshotUrl: freshSnapshotUrl(),
+    onUpdate(result) {
+      if (result.mode === 'snapshot' && latestRecent?.mode === 'live') return;
+      latestRecent = result;
+      const rows = result.visits.map(({ country, hour }, index) => {
+        const row = document.createElement('tr');
+        row.insertCell().textContent = String(index + 1);
+        row.insertCell().textContent = regionName(country);
+        const time = document.createElement('time');
+        time.dateTime = hour;
+        time.textContent = recentDate.format(new Date(hour));
+        row.insertCell().append(time);
+        return row;
+      });
+      recentTable.tBodies[0].replaceChildren(...rows);
+      recentTable.hidden = !rows.length;
+      if (result.mode === 'snapshot') {
+        showRecentStatus(`Saved visits · ${recentDate.format(new Date(result.updatedAt))} UTC+8`);
+      } else {
+        showRecentStatus(rows.length ? '' : 'No recent visits yet.');
+      }
+    },
+  }).then(result => {
+    if (result.mode === 'snapshot' && latestRecent.mode === 'live') {
+      showRecentStatus(`Saved visits · ${recentDate.format(new Date(latestRecent.updatedAt))} UTC+8`);
+    }
+  }).catch(() => {
+    showRecentStatus(latestRecent ? 'Showing the last available visits.' : 'Recent visits are temporarily unavailable.');
+  }).finally(() => { recentRequest = undefined; });
+  return recentRequest;
+}
+
 for (const view of views) {
   view.button.addEventListener('click', () => {
     const open = view.panel.hidden;
@@ -37,6 +95,7 @@ for (const view of views) {
       other.button.setAttribute('aria-expanded', String(active));
       other.panel.hidden = !active;
     }
+    if (!recentPanel.hidden) void loadRecent();
   });
 }
 function describe(code) {
@@ -112,12 +171,9 @@ async function loadStats() {
       baseUrl: import.meta.url, pageUrl: location.href, optedOut,
       storage,
       randomUUID: () => crypto.randomUUID() });
-    const snapshotUrl = new URL(visitorStatistics.snapshot || './visitor-snapshot.json', import.meta.url);
-    // A new cache key each minute avoids serving an older Pages CDN response.
-    snapshotUrl.searchParams.set('refresh', Math.floor(Date.now() / 60000));
+    const snapshotUrl = freshSnapshotUrl();
     const publishedSnapshotUrl = visitorStatistics.publishedSnapshot
-      ? new URL(visitorStatistics.publishedSnapshot, import.meta.url) : undefined;
-    publishedSnapshotUrl?.searchParams.set('refresh', Math.floor(Date.now() / 60000));
+      ? freshSnapshotUrl(visitorStatistics.publishedSnapshot) : undefined;
     await loadVisitorStatistics({ request, storage, snapshotUrl, publishedSnapshotUrl,
       onUpdate(result) {
         details.hidden = false;
@@ -158,7 +214,9 @@ fetch(new URL('./assets/world-map.json', import.meta.url)).then(response => {
   container.textContent = 'Visitor locations are listed below.';
 });
 if (visitorStatistics.enabled) {
-  const refresher = startVisitorRefresh({ refresh: loadStats, document, window });
+  const refresher = startVisitorRefresh({ async refresh() {
+    await Promise.all([loadStats(), recentPanel.hidden ? undefined : loadRecent()]);
+  }, document, window });
   refreshButton.addEventListener('click', () => { void refresher.refresh(); });
 } else {
   refreshButton.hidden = true;

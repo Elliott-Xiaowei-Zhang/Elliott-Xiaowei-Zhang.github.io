@@ -1,18 +1,22 @@
 {
-  "total": 19,
+  "total": 51,
   "since": "2026-10-18T15:34:05.388+00:00",
   "countries": [
     {
-      "country": "JP",
-      "visitors": 6
+      "country": "US",
+      "visitors": 28
     },
     {
-      "country": "US",
-      "visitors": 6
+      "country": "JP",
+      "visitors": 7
     },
     {
       "country": "NL",
-      "visitors": 3
+      "visitors": 4
+    },
+    {
+      "country": "CN",
+      "visitors": 2
     },
     {
       "country": "EE",
@@ -20,12 +24,77 @@
     },
     {
       "country": "NZ",
-      "visitors": 1
+      "visitors": 2
+    },
+    {
+      "country": "PT",
+      "visitors": 2
     },
     {
       "country": "ZZ",
+      "visitors": 2
+    },
+    {
+      "country": "AL",
+      "visitors": 1
+    },
+    {
+      "country": "FR",
       "visitors": 1
     }
   ],
-  "updatedAt": "2026-10-21T05:51:03Z"
+  "updatedAt": "2026-11-23T08:20:00Z",
+  "recent": {
+    "updatedAt": "2026-11-23T08:20:00Z",
+    "visits": [
+      {
+        "country": "JP",
+        "hour": "2026-11-23T02:00:00Z"
+      },
+      {
+        "country": "US",
+        "hour": "2026-11-22T03:00:00Z"
+      },
+      {
+        "country": "US",
+        "hour": "2026-11-17T15:00:00Z"
+      },
+      {
+        "country": "US",
+        "hour": "2026-11-16T07:00:00Z"
+      },
+      {
+        "country": "US",
+        "hour": "2026-11-09T13:00:00Z"
+      },
+      {
+        "country": "NZ",
+        "hour": "2026-11-09T13:00:00Z"
+      },
+      {
+        "country": "US",
+        "hour": "2026-11-09T01:00:00Z"
+      },
+      {
+        "country": "US",
+        "hour": "2026-11-06T04:00:00Z"
+      },
+      {
+        "country": "US",
+        "hour": "2026-11-06T03:00:00Z"
+      },
+      {
+        "country": "AL",
+        "hour": "2026-11-04T00:00:00Z"
+      },
+      {
+        "country": "CN",
+        "hour": "2026-10-31T13:00:00Z"
+      },
+      {
+        "country": "FR",
+        "hour": "2026-10-28T12:00:00Z"
+      }
+    ]
+  }
 }
