@@ -439,7 +439,7 @@
   }
   .uc-fins .uc-title {
     --name-center: 89.3%;
-    --name-weight: 900;
+    --name-weight: 800;
     --name-tracking: -.015em;
     inset-inline-start: calc(50% + .22cqw);
   }
@@ -490,6 +490,7 @@
     font-size: clamp(11px, 1.38cqw, 16px);
     font-weight: 600;
     letter-spacing: -.037em;
+    transform: translateX(clamp(-13px, -.92cqw, -4px));
   }
   .uc-fold .uc-title {
     --name-center: 68%;

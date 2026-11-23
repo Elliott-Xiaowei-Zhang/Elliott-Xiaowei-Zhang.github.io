@@ -5,10 +5,10 @@
   <title>Xiaowei (Elliott) Zhang | Information Systems</title>
   <meta name="description" content="Xiaowei (Elliott) Zhang, Ph.D. candidate in Information Systems at Tsinghua University. Research on digital platforms and artificial intelligence.">
   <meta name="theme-color" content="#101010"><meta property="og:title" content="Xiaowei (Elliott) Zhang | Information Systems"><meta property="og:description" content="Digital platforms. Artificial intelligence. Research, teaching, and academic service."><meta property="og:type" content="website"><meta property="og:url" content="https://elliott-xiaowei-zhang.github.io/">
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./assets/fonts.css"><link rel="stylesheet" href="./style.css?v=20261123-inline-visits">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./assets/fonts.css"><link rel="stylesheet" href="./style.css?v=20261123-profile-hover">
   <link rel="preload" as="image" href="./assets/home-cover/steps-upper-frost.png" fetchpriority="low">
   <link rel="preload" as="image" href="./assets/home-cover/steps-lower-frost.png" fetchpriority="low">
-  <link rel="stylesheet" href="./cover.css?v=20261123-cover-marks">
+  <link rel="stylesheet" href="./cover.css?v=20261123-name-detail">
   <script type="module" src="./cover.js?v=20261123-swipe"></script>
   <script type="module" src="./navigation.js?v=20261123-cv-zoom"></script>
   <script type="module" src="./app.js?v=20261122-cover"></script>
@@ -217,24 +217,26 @@
       </div>
       <div class="profile-education">
         <div id="education-list" class="education-list"></div>
-        <section id="profile-cv" class="profile-cv" aria-labelledby="profile-cv-heading" aria-hidden="true" inert>
-          <header class="profile-cv-header">
-            <h3 id="profile-cv-heading">Curriculum vitae</h3>
-            <div class="profile-cv-controls">
-              <div class="profile-cv-zoom" role="group" aria-label="CV zoom">
-                <button type="button" data-cv-zoom="-1" aria-label="Zoom out">−</button>
-                <output id="profile-cv-scale" aria-label="Zoom level">100%</output>
-                <button type="button" data-cv-zoom="1" aria-label="Zoom in">+</button>
+        <div class="profile-cv-viewport">
+          <section id="profile-cv" class="profile-cv" aria-labelledby="profile-cv-heading" aria-hidden="true" inert>
+            <header class="profile-cv-header">
+              <h3 id="profile-cv-heading">Curriculum vitae</h3>
+              <div class="profile-cv-controls">
+                <div class="profile-cv-zoom" role="group" aria-label="CV zoom">
+                  <button type="button" data-cv-zoom="-1" aria-label="Zoom out">−</button>
+                  <output id="profile-cv-scale" aria-label="Zoom level">100%</output>
+                  <button type="button" data-cv-zoom="1" aria-label="Zoom in">+</button>
+                </div>
+                <button type="button" id="profile-cv-close" aria-label="Close CV">Close <span aria-hidden="true">×</span></button>
               </div>
-              <button type="button" id="profile-cv-close" aria-label="Close CV">Close <span aria-hidden="true">×</span></button>
+            </header>
+            <div class="profile-cv-pages" tabindex="0" role="region" aria-label="Curriculum vitae pages">
+              <img data-cv-src="./assets/cv/page-1.webp" width="1522" height="2152" alt="Curriculum vitae, page 1 of 3" loading="lazy" decoding="async" draggable="false">
+              <img data-cv-src="./assets/cv/page-2.webp" width="1522" height="2152" alt="Curriculum vitae, page 2 of 3" loading="lazy" decoding="async" draggable="false">
+              <img data-cv-src="./assets/cv/page-3.webp" width="1522" height="2152" alt="Curriculum vitae, page 3 of 3" loading="lazy" decoding="async" draggable="false">
             </div>
-          </header>
-          <div class="profile-cv-pages" tabindex="0" role="region" aria-label="Curriculum vitae pages">
-            <img data-cv-src="./assets/cv/page-1.webp" width="1522" height="2152" alt="Curriculum vitae, page 1 of 3" loading="lazy" decoding="async" draggable="false">
-            <img data-cv-src="./assets/cv/page-2.webp" width="1522" height="2152" alt="Curriculum vitae, page 2 of 3" loading="lazy" decoding="async" draggable="false">
-            <img data-cv-src="./assets/cv/page-3.webp" width="1522" height="2152" alt="Curriculum vitae, page 3 of 3" loading="lazy" decoding="async" draggable="false">
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
     <div class="honors" id="honors"><div class="honors-heading"><h3>Selected honors & awards<span>.</span></h3><span class="eyebrow">RECOGNITION / 2018—2026</span></div><div id="honor-grid" class="honor-grid"></div></div>

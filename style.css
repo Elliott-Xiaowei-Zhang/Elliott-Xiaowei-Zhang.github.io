@@ -223,13 +223,18 @@
   position: relative;
   align-self: start;
   min-width: 0;
-  overflow: clip;
   scroll-margin-top: 48px;
+}
+.profile-cv-viewport {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: clip;
+  pointer-events: none;
 }
 .profile-cv {
   position: absolute;
   inset: 0;
-  z-index: 1;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   overflow: hidden;
