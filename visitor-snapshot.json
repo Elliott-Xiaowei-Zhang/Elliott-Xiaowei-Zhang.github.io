@@ -43,58 +43,5 @@
       "visitors": 1
     }
   ],
-  "updatedAt": "2026-11-23T08:20:00Z",
-  "recent": {
-    "updatedAt": "2026-11-23T08:20:00Z",
-    "visits": [
-      {
-        "country": "JP",
-        "hour": "2026-11-23T02:00:00Z"
-      },
-      {
-        "country": "US",
-        "hour": "2026-11-22T03:00:00Z"
-      },
-      {
-        "country": "US",
-        "hour": "2026-11-17T15:00:00Z"
-      },
-      {
-        "country": "US",
-        "hour": "2026-11-16T07:00:00Z"
-      },
-      {
-        "country": "US",
-        "hour": "2026-11-09T13:00:00Z"
-      },
-      {
-        "country": "NZ",
-        "hour": "2026-11-09T13:00:00Z"
-      },
-      {
-        "country": "US",
-        "hour": "2026-11-09T01:00:00Z"
-      },
-      {
-        "country": "US",
-        "hour": "2026-11-06T04:00:00Z"
-      },
-      {
-        "country": "US",
-        "hour": "2026-11-06T03:00:00Z"
-      },
-      {
-        "country": "AL",
-        "hour": "2026-11-04T00:00:00Z"
-      },
-      {
-        "country": "CN",
-        "hour": "2026-10-31T13:00:00Z"
-      },
-      {
-        "country": "FR",
-        "hour": "2026-10-28T12:00:00Z"
-      }
-    ]
-  }
+  "updatedAt": "2026-11-23T08:20:00Z"
 }

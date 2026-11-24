@@ -91,44 +91,6 @@ export async function loadVisitorStatistics({ request, snapshotUrl, publishedSna
   return current;
 }
 
-function checkedVisitHours(payload) {
-  if (!Array.isArray(payload?.visits) || payload.visits.length > 12) {
-    throw new Error('Invalid recent visits');
-  }
-  return payload.visits.map(({ country, hour }) => {
-    if (!/^[A-Z]{2}$/.test(country) || !/^\d{4}-\d{2}-\d{2}T\d{2}:00:00Z$/.test(hour) ||
-        !Number.isFinite(Date.parse(hour))) {
-      throw new Error('Invalid visit hour');
-    }
-    return { country, hour };
-  });
-}
-
-export async function loadRecentVisitorActivity({ endpoint, snapshotUrl, onUpdate,
-  fetcher = fetch, now = Date.now, timeoutMs = 12000 }) {
-  const options = { credentials: 'omit', cache: 'no-cache', referrerPolicy: 'no-referrer' };
-  let current;
-  function publish(result) {
-    current = result;
-    onUpdate(result);
-  }
-  const saved = (async () => {
-    const payload = await readJson(fetcher, snapshotUrl, options, timeoutMs);
-    if (current?.mode === 'live') return;
-    const visits = checkedVisitHours(payload.recent);
-    const updatedAt = snapshotTimestamp(payload.recent.updatedAt, now());
-    publish({ visits, updatedAt, mode: 'snapshot' });
-  })();
-  const live = (async () => {
-    const payload = await readJson(fetcher, endpoint, options, timeoutMs);
-    const visits = checkedVisitHours(payload);
-    publish({ visits, updatedAt: new Date(now()).toISOString(), mode: 'live' });
-  })();
-  await Promise.allSettled([saved, live]);
-  if (!current) throw new Error('No recent visits available');
-  return current;
-}
-
 // Refresh visible pages and reconnecting browsers without overlapping requests.
 export function startVisitorRefresh({ refresh, document: doc, window: win,
   intervalMs = 60000, setTimer = setInterval, clearTimer = clearInterval, now = Date.now }) {

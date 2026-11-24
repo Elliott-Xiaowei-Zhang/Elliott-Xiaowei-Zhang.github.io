@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkedStats, loadRecentVisitorActivity, loadVisitorStatistics, startVisitorRefresh } from '../visitor-data.js';
+import { checkedStats, loadVisitorStatistics, startVisitorRefresh } from '../visitor-data.js';
 
 const now = Date.parse('2026-10-21T10:00:00Z');
 const totals = { total: 15, since: '2026-10-18T15:34:05Z', countries: [
@@ -15,26 +15,6 @@ function storage() {
   return { getItem: key => entries.get(key) || null, setItem: (key, value) => entries.set(key, value) };
 }
 const response = value => new Response(JSON.stringify(value), { headers: { 'Content-Type': 'application/json' } });
-
-test('recent activity uses saved hour groups, then shows fresh data with public fields only', async () => {
-  const endpoint = 'https://counter.example/visits';
-  const visits = [{ country: 'CN', hour: '2026-10-21T08:00:00Z' }];
-  const updates = [];
-  let deliverLive;
-  const liveResponse = new Promise(resolve => { deliverLive = resolve; });
-  const result = await loadRecentVisitorActivity({
-    endpoint, snapshotUrl, now: () => now,
-    fetcher: async url => url === snapshotUrl ? response({ recent: { visits, updatedAt: saved.updatedAt } }) : liveResponse,
-    onUpdate(update) {
-      updates.push(update);
-      if (update.mode === 'snapshot') {
-        deliverLive(response({ visits: [{ country: 'JP', hour: '2026-10-21T09:00:00Z', id: 'private' }] }));
-      }
-    },
-  });
-  assert.deepEqual(updates.map(value => value.mode), ['snapshot', 'live']);
-  assert.deepEqual(result.visits, [{ country: 'JP', hour: '2026-10-21T09:00:00Z' }]);
-});
 
 test('blocked counter still displays the same-origin snapshot before the counter times out', async () => {
   const updates = [];

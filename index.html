@@ -12,7 +12,7 @@
   <script type="module" src="./cover.js?v=20261123-swipe"></script>
   <script type="module" src="./navigation.js?v=20261123-cv-zoom"></script>
   <script type="module" src="./app.js?v=20261122-cover"></script>
-  <script type="module" src="./visitors.js?v=20261123-inline-visits"></script>
+  <script type="module" src="./visitors.js?v=20261124-owner-visits"></script>
 </head>
 <body>
   <a class="skip" href="#profile">Skip to content</a>
@@ -285,9 +285,10 @@
     <p class="visitor-privacy">Approximate unique browsers since October 2026. Country/region estimates only.</p>
   </div>
   <div id="visitor-recent" class="visitor-tab-panel" role="region" aria-label="Recent visits" tabindex="0" hidden>
-    <p id="visitor-recent-status" class="visitor-recent-status" role="status" hidden></p>
-    <table id="visitor-recent-table" class="visitor-recent-table" aria-label="Recent visitor activity by location and hour" hidden>
-      <thead><tr><th scope="col">No.</th><th scope="col">Location</th><th scope="col">Hour (UTC+8)</th></tr></thead>
+    <p id="visitor-recent-status" class="visitor-recent-status" role="status">Sign in as the site owner to see exact visit times.</p>
+    <button type="button" class="visitor-refresh" id="visitor-owner-access">Owner sign-in ↗</button>
+    <table id="visitor-recent-table" class="visitor-recent-table" aria-label="First visits by location and time" hidden>
+      <thead><tr><th scope="col">No.</th><th scope="col">Location</th><th scope="col">Time (UTC+8)</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>

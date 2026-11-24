@@ -19,7 +19,8 @@ def main():
     output.mkdir()
     files = ["index.html", "style.css", "cover.css", "cover.js", "navigation.js",
              "app.js", "data.json", "visitors.js", "visitor-client.js",
-             "visitor-data.js", "visitor-snapshot.json", "site-settings.js", "favicon.svg", ".nojekyll"]
+             "visitor-data.js", "visitor-owner.js", "visitor-snapshot.json", "site-settings.js",
+             "favicon.svg", ".nojekyll"]
     for name in files:
         shutil.copy2(root / name, output / name)
     # Search Console verifies ownership at the original root URL and filename.

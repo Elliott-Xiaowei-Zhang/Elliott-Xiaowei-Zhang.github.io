@@ -1,6 +1,7 @@
-import { visitorStatistics } from './site-settings.js?v=20261123-inline-visits';
+import { visitorStatistics } from './site-settings.js?v=20261124-owner-visits';
 import { visitorRequest } from './visitor-client.js?v=20261018-visitor-api';
-import { loadRecentVisitorActivity, loadVisitorStatistics, startVisitorRefresh } from './visitor-data.js?v=20261123-inline-visits';
+import { loadVisitorStatistics, startVisitorRefresh } from './visitor-data.js?v=20261124-owner-visits';
+import { readOwnerVisitReturn, startOwnerVisitSignIn } from './visitor-owner.js?v=20261124-owner-visits';
 
 const container = document.querySelector('#visitor-map');
 const caption = document.querySelector('#visitor-map-caption');
@@ -16,11 +17,13 @@ const views = [...details.querySelectorAll('.visitor-tab')].map(button => ({
 const recentPanel = document.getElementById('visitor-recent');
 const recentStatus = document.getElementById('visitor-recent-status');
 const recentTable = document.getElementById('visitor-recent-table');
+const ownerAccessButton = document.getElementById('visitor-owner-access');
+const recentView = views.find(view => view.panel === recentPanel);
 const recentDate = new Intl.DateTimeFormat('en-US', {
-  month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+  year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit',
   hourCycle: 'h23', timeZone: 'Asia/Shanghai',
 });
-document.querySelector('.visitor-tab[aria-controls="visitor-recent"]').hidden = !visitorStatistics.recentEndpoint;
+recentView.button.hidden = !visitorStatistics.ownerVisitsUrl;
 const ns = 'http://www.w3.org/2000/svg';
 const names = new Intl.DisplayNames(['en'], { type: 'region' });
 const number = new Intl.NumberFormat('en');
@@ -48,54 +51,59 @@ function showRecentStatus(message) {
   recentStatus.hidden = !message;
 }
 
-let recentRequest;
-let latestRecent;
-function loadRecent() {
-  if (recentRequest) return recentRequest;
-  if (!latestRecent) showRecentStatus('Loading recent visits…');
-  recentRequest = loadRecentVisitorActivity({
-    endpoint: visitorStatistics.recentEndpoint,
-    snapshotUrl: freshSnapshotUrl(),
-    onUpdate(result) {
-      if (result.mode === 'snapshot' && latestRecent?.mode === 'live') return;
-      latestRecent = result;
-      const rows = result.visits.map(({ country, hour }, index) => {
-        const row = document.createElement('tr');
-        row.insertCell().textContent = String(index + 1);
-        row.insertCell().textContent = regionName(country);
-        const time = document.createElement('time');
-        time.dateTime = hour;
-        time.textContent = recentDate.format(new Date(hour));
-        row.insertCell().append(time);
-        return row;
-      });
-      recentTable.tBodies[0].replaceChildren(...rows);
-      recentTable.hidden = !rows.length;
-      if (result.mode === 'snapshot') {
-        showRecentStatus(`Saved visits · ${recentDate.format(new Date(result.updatedAt))} UTC+8`);
-      } else {
-        showRecentStatus(rows.length ? '' : 'No recent visits yet.');
-      }
-    },
-  }).then(result => {
-    if (result.mode === 'snapshot' && latestRecent.mode === 'live') {
-      showRecentStatus(`Saved visits · ${recentDate.format(new Date(latestRecent.updatedAt))} UTC+8`);
-    }
-  }).catch(() => {
-    showRecentStatus(latestRecent ? 'Showing the last available visits.' : 'Recent visits are temporarily unavailable.');
-  }).finally(() => { recentRequest = undefined; });
-  return recentRequest;
+function showVisitorView(view) {
+  for (const other of views) {
+    const active = other === view;
+    other.button.setAttribute('aria-expanded', String(active));
+    other.panel.hidden = !active;
+  }
 }
 
 for (const view of views) {
-  view.button.addEventListener('click', () => {
-    const open = view.panel.hidden;
-    for (const other of views) {
-      const active = open && other === view;
-      other.button.setAttribute('aria-expanded', String(active));
-      other.panel.hidden = !active;
-    }
-    if (!recentPanel.hidden) void loadRecent();
+  view.button.addEventListener('click', () => showVisitorView(view.panel.hidden ? view : undefined));
+}
+
+ownerAccessButton.addEventListener('click', async () => {
+  const publishedHome = new URL('/', visitorStatistics.publishedSnapshot);
+  if (location.origin !== publishedHome.origin) {
+    publishedHome.hash = 'contact';
+    location.assign(publishedHome.href);
+    return;
+  }
+  ownerAccessButton.disabled = true;
+  try {
+    location.assign(await startOwnerVisitSignIn(visitorStatistics.ownerVisitsUrl, sessionStorage));
+  } catch {
+    ownerAccessButton.disabled = false;
+    showRecentStatus('Could not start sign-in. Please try again.');
+  }
+});
+window.addEventListener('pageshow', () => { ownerAccessButton.disabled = false; });
+
+const returnPrefix = '#owner-visits=';
+if (visitorStatistics.ownerVisitsUrl && location.hash.startsWith(returnPrefix)) {
+  const result = location.hash.slice(returnPrefix.length);
+  history.replaceState(history.state, '', '#contact');
+  showVisitorView(recentView);
+  requestAnimationFrame(() => document.getElementById('contact').scrollIntoView());
+  showRecentStatus('Loading recent visits…');
+  void Promise.resolve().then(() => readOwnerVisitReturn(result, sessionStorage)).then(visits => {
+    const rows = visits.map(({ country, first_seen }, index) => {
+      const row = document.createElement('tr');
+      row.insertCell().textContent = String(index + 1);
+      row.insertCell().textContent = regionName(country);
+      const time = document.createElement('time');
+      time.dateTime = first_seen;
+      time.textContent = recentDate.format(new Date(first_seen));
+      row.insertCell().append(time);
+      return row;
+    });
+    recentTable.tBodies[0].replaceChildren(...rows);
+    recentTable.hidden = !rows.length;
+    ownerAccessButton.textContent = 'Refresh visits ↻';
+    showRecentStatus(rows.length ? '' : 'No recent visits yet.');
+  }).catch(error => {
+    showRecentStatus(error?.name === 'Error' ? error.message : 'Could not load recent visits. Please try again.');
   });
 }
 function describe(code) {
@@ -215,7 +223,7 @@ fetch(new URL('./assets/world-map.json', import.meta.url)).then(response => {
 });
 if (visitorStatistics.enabled) {
   const refresher = startVisitorRefresh({ async refresh() {
-    await Promise.all([loadStats(), recentPanel.hidden ? undefined : loadRecent()]);
+    await loadStats();
   }, document, window });
   refreshButton.addEventListener('click', () => { void refresher.refresh(); });
 } else {
